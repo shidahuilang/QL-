@@ -283,6 +283,10 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 		echo
 		TIME r "提示：一定要登录管理面板之后再执行下一步操作,或者您输入[N/n]按回车退出!"
 		echo
+		
+		cp -r /opt/qlbak/db/env.db /opt/ql/db
+		cp -r /opt/qlbak/config /opt/ql/config
+		
 	fi
 	case $MENU in
 		[${S}])
