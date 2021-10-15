@@ -292,6 +292,8 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 			echo
 			TIME y "开始安装脚本，请耐心等待..."
 			echo
+			cp -r /opt/qlbak/db/env.db /opt/ql/db
+			cp -r /opt/qlbak/config /opt/ql/config
 			docker exec -it qinglong bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun.sh)"
 			if [[ $? -ne 0 ]];then
 				docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun.sh)"
