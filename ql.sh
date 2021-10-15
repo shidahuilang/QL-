@@ -173,17 +173,19 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 	echo
 	TIME y "检测到已有青龙面板，正在删除旧的青龙容器和镜像，请稍后..."
 	echo
-	docker=$(docker ps -a|grep whyour) && dockerid=$(awk '{print $(1)}' <<<${docker})
-#	images=$(docker images|grep whyour) && imagesid=$(awk '{print $(3)}' <<<${images})
+	if [ -n "$(ls -A "/opt/ql" 2>/dev/null)" ]; then
+		echo
+		TIME y "为避免损失，正在把 /opt/ql 备份到 /opt/qlbak"
+		rm -fr /opt/qlbak
+		mv /opt/ql /opt/qlbak
+		rm -rf /opt/ql
+	fi
+	docker=$(docker ps -a|grep qinglong) && dockerid=$(awk '{print $(1)}' <<<${docker})
+	images=$(docker images|grep qinglong) && imagesid=$(awk '{print $(3)}' <<<${images})
 	docker stop -t=5 "${dockerid}"
 	docker rm "${dockerid}"
-#	docker rmi "${imagesid}"
-        
+	docker rmi "${imagesid}"
 fi
-rm -rf /opt/qlbak
-mkdir -p /opt/qlbak
-mv -f /opt/ql/* /opt/qlbak
-rm -rf /opt/ql
 
 if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
 	Available="$(df -h | grep "/opt/docker" | awk '{print $4}' | awk 'NR==1')"
