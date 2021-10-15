@@ -267,10 +267,6 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 	echo
 	TIME z "青龙面板安装完成，下一步进入安装脚本程序"
 	echo
-        cp -r /opt/qlbak/db/env.db /opt/ql/db
-	cp -r /opt/qlbak/config /opt/ql/config
-	echo
-	echo
 	TIME y " "${IP}":"${QL_PORT}"  (IP检测因数太多，不一定准确，仅供参考)"
 	echo
 	TIME g "请使用 "${IP}":"${QL_PORT}" 在浏览器登录控制面板，然后在环境变量里添加好WSKEY或者PT_KEY，再按Y进入下一步"
