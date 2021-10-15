@@ -44,8 +44,7 @@ fi
 curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/config.sample.sh > $sample_shell_path
 curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun/config.sample.sh > $sample_shell_path
 cp $sample_shell_path $config_shell_path
-cp -r /opt/qlbak/db/env.db /opt/ql/db
-cp -r /opt/qlbak/config /opt/ql/config
+
 # 判断是否下载成功
 config_size=$(ls -l $config_shell_path | awk '{print $5}')
 if (( $(echo "${config_size} < 100" | bc -l) )); then
