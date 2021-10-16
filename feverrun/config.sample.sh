@@ -665,5 +665,8 @@ export NOTIFY_CKTASK="./wskey.py"
 export soy_wx_jysz_token=""
 export soy_wx_jysz_User_Agent=""
 
+### 美丽研究院开关
+export JD_USER_AGENT="true"
+
 ##### 趣星球 JSON格式添加CK  抓包历史找到api.xqustar.com/api/…网址  从host一直复制到cookie
 export qxqhd='{ "Host": "api.xqustar.com", "Accept": "*/*", "version": "2.1.7", "channel": "ios", "plat": "app", "Authorization": "eyJ0ec3MiOiJpbnQiLCJpZCI6ImYwZjAxMmM3LWIzNTMtNDQ1ZS0VkMCIsInR5cGUiOiJhcHAifQ.lPCBCJaEunKDe8NN9S3iuiESrY3YXPg7OJu3sS0MWiQ", "Accept-Language": "zh-cn", "Accept-Encoding": "gzip, deflate, br", "platform": "ios", "Content-Type": "application/json", "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_8 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Html5Plus/1.0 (Immersed/20) uni-app", "Connection": "keep-alive", "JSESSIONID": "", "Cookie": ""}'
