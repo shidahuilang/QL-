@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 0
+# 
 TIME() {
 [[ -z "$1" ]] && {
 	echo -ne " "
@@ -84,7 +84,7 @@ fi
 echo
 echo
 [[ "${QING_PORT}" == "YES" ]] && {
-	TIME g "请设置端口，默认为端口[5700]，不懂设置的话，直接回车跳过"
+	TIME g "请设置端口，默认端口为[5700]，不懂设置的话，直接回车跳过"
 	read -p " 请输入端口：" QL_PORT
 	QL_PORT=${QL_PORT:-"5700"}
 	TIME y "您端口为：${QL_PORT}"
@@ -98,19 +98,19 @@ if [[ "$(. /etc/os-release && echo "$ID")" == "centos" ]]; then
 	TIME g "正在安装宿主机所需要的依赖，请稍后..."
 	QL_PATH="/opt"
 	yum -y update
-	yum -y install sudo curl git
+	yum -y install sudo wget curl git
 	yum -y install net-tools.x86_64
 elif [[ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]]; then
 	TIME g "正在安装宿主机所需要的依赖，请稍后..."
 	QL_PATH="/opt"
 	apt-get -y update
-	apt-get -y install sudo curl git
+	apt-get -y install sudo wget curl git
 	apt-get -y install net-tools
 elif [[ "$(. /etc/os-release && echo "$ID")" == "debian" ]]; then
 	TIME g "正在安装宿主机所需要的依赖，请稍后..."
 	QL_PATH="/opt"
 	apt -y update
-	apt -y install sudo curl git
+	apt -y install sudo wget curl git
 	apt -y install net-tools
 elif [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
 	QL_PATH="/opt"
@@ -167,17 +167,23 @@ else
 		echo
 		sleep 3
 		exit 1
+	else
+		systemctl start docker
+		sleep 8
 	fi
 fi
-if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
+if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	echo
 	TIME y "检测到已有青龙面板，正在删除旧的青龙容器和镜像，请稍后..."
 	echo
-	if [ -n "$(ls -A "/opt/ql" 2>/dev/null)" ]; then
+	if [ -n "$(ls -A "/opt/ql/config" 2>/dev/null)" ]; then
 		echo
-		TIME y "为避免损失，正在把 /opt/ql 备份到 /opt/qlbak"
-		rm -fr /opt/qlbak
-		mv /opt/ql /opt/qlbak
+		TIME g "为避免损失，正在把 /opt/ql/config 备份到 /root/qlconfig"
+		echo
+		TIME y "如有需要备份文件的请到 /root/qlconfig 查看"
+		echo
+		rm -fr /root/qlconfig
+		mv /opt/ql/config /root/qlconfig
 		rm -rf /opt/ql
 	fi
 	docker=$(docker ps -a|grep qinglong) && dockerid=$(awk '{print $(1)}' <<<${docker})
@@ -186,7 +192,6 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 	docker rm "${dockerid}"
 	docker rmi "${imagesid}"
 fi
-
 if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
 	Available="$(df -h | grep "/opt/docker" | awk '{print $4}' | awk 'NR==1')"
 	FINAL=`echo ${Available: -1}`
@@ -212,7 +217,7 @@ else
 fi
 if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
 	Overlay_Available="$(df -h | grep "/opt/docker" | awk '{print $4}' | awk 'NR==1' | sed 's/.$//g')"
-	Kongjian="$(awk -v num1=${Overlay_Available} -v num2=1 'BEGIN{print(num1>num2)?"0":"1"}')"
+	Kongjian="$(awk -v num1=${Overlay_Available} -v num2=2 'BEGIN{print(num1>num2)?"0":"1"}')"
 		echo
 		TIME y "您当前系统可用空间为${Overlay_Available}G"
 		echo
@@ -258,7 +263,10 @@ docker run -dit \
   --restart always \
   whyour/qinglong:latest
 
-if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
+if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
+	docker=$(docker ps -a|grep qinglong) && dockerid=$(awk '{print $(1)}' <<<${docker})
+	curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/281677160/ql/main/feverrun/nginx.conf > /root/nginx.conf
+	docker cp /root/nginx.conf "${dockerid}":/ql/docker/
 	docker restart qinglong
 	sleep 13
 	clear
@@ -269,11 +277,11 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 	echo
 	TIME y " "${IP}":"${QL_PORT}"  (IP检测因数太多，不一定准确，仅供参考)"
 	echo
-	TIME g "请使用 "${IP}":"${QL_PORT}" 在浏览器登录控制面板，然后在环境变量里添加好WSKEY或者PT_KEY，再按Y进入下一步"
+	TIME g "请使用 IP:端口 在浏览器打开控制面板"
 	echo
-	TIME y "您也可以不添加WSKEY或者PT_KEY，但是一定要登录控制面板"
+	TIME y "点击[开始安装]，[通知方式]跳过，设置好[用户名]跟[密码],然后点击[提交]，然后点击[去登录]，输入帐号密码完成登录!"
 	echo
-	TIME g "登录页面，点击[开始安装]，设置好[用户名]跟[密码],然后点击[提交]，[通知方式]跳过，以后再设置，然后点击[去登录]，输入帐号密码完成登录!"
+	TIME g "登录进入后在左侧[环境变量]添加WSKEY或者PT_KEY，不添加也没所谓，以后添加一样，但是一定要登录进入后才继续下一步操作"
 	echo
 	while :; do
 	read -p " [ N/n ]退出程序，[ Y/y ]回车继续安装脚本： " MENU
@@ -283,17 +291,12 @@ if [[ `docker ps -a | grep -c "whyour"` -ge '1' ]]; then
 		echo
 		TIME r "提示：一定要登录管理面板之后再执行下一步操作,或者您输入[N/n]按回车退出!"
 		echo
-		
-
-		
 	fi
 	case $MENU in
 		[${S}])
 			echo
 			TIME y "开始安装脚本，请耐心等待..."
 			echo
-			cp -r /opt/qlbak/db/env.db /opt/ql/db
-			cp -r /opt/qlbak/config /opt/ql
 			docker exec -it qinglong bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun.sh)"
 			if [[ $? -ne 0 ]];then
 				docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun.sh)"
