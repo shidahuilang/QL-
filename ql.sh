@@ -249,7 +249,6 @@ docker run -dit \
   -v $QL_PATH/ql/log:/ql/log \
   -v $QL_PATH/ql/db:/ql/db \
   -v $QL_PATH/ql/scripts:/ql/scripts \
-  -v $QL_PATH/ql/sample:/ql/sample \
   -v $QL_PATH/ql/jbot:/ql/jbot \
   -v $QL_PATH/ql/raw:/ql/raw \
   -v $QL_PATH/ql/repo:/ql/repo \
