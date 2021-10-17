@@ -176,14 +176,14 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	echo
 	TIME y "检测到已有青龙面板，正在删除旧的青龙容器和镜像，请稍后..."
 	echo
-	if [ -n "$(ls -A "/opt/ql/config" 2>/dev/null)" ]; then
+	if [ -n "$(ls -A "/opt/ql" 2>/dev/null)" ]; then
 		echo
-		TIME g "为避免损失，正在把 /opt/ql/config 备份到 /root/qlconfig"
+		TIME g "为避免损失，正在把 /opt/ql/config 备份到 /opt/qlbak"
 		echo
-		TIME y "如有需要备份文件的请到 /root/qlconfig 查看"
+		TIME y "如有需要备份文件的请到 /root/qlbak 查看"
 		echo
-		rm -fr /root/qlconfig
-		mv /opt/ql/config /root/qlconfig
+		rm -fr /opt/qlbak
+		mv /opt/ql /opt/qlbak
 		rm -rf /opt/ql
 	fi
 	docker=$(docker ps -a|grep qinglong) && dockerid=$(awk '{print $(1)}' <<<${docker})
@@ -297,6 +297,8 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 			echo
 			TIME y "开始安装脚本，请耐心等待..."
 			echo
+			cp -r /opt/qlbak/db/env.db /opt/ql/db
+			cp -r /opt/qlbak/config /opt/ql
 			docker exec -it qinglong bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun.sh)"
 			if [[ $? -ne 0 ]];then
 				docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun.sh)"
