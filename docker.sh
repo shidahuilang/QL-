@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-##
+
 TIME() {
 [[ -z "$1" ]] && {
 	echo -ne " "
@@ -27,12 +27,18 @@ TIME() {
 
 if [[ "$(. /etc/os-release && echo "$ID")" == "centos" ]]; then
 	export Aptget="yum"
+	yum -y update
+	yum install -y sudo wget curl
 	export XITONG="cent_os"
 elif [[ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]]; then
 	export Aptget="apt-get"
+	apt-get -y update
+	apt-get install -y sudo wget curl
 	export XITONG="ubuntu_os"
 elif [[ "$(. /etc/os-release && echo "$ID")" == "debian" ]]; then
 	export Aptget="apt"
+	apt-get -y update
+	apt-get install -y sudo wget curl
 	export XITONG="debian_os"
 else
 	echo
@@ -72,6 +78,7 @@ if [[ `docker --version | grep -c "version"` -ge '1' ]]; then
 		[Nn])
 			echo
 			TIME r "您选择了退出程序!"
+			sudo rm -fr docker.sh
 			echo
 			sleep 3
 			exit 1
@@ -87,8 +94,6 @@ if [[ `docker --version | grep -c "version"` -ge '1' ]]; then
 fi
 echo
 TIME y "正在安装docker，请耐心等候..."
-"${Aptget}" -y update
-"${Aptget}" install -y sudo curl
 echo
 if [[ ${XITONG} == "cent_os" ]]; then
 	sudo yum install -y yum-utils device-mapper-persistent-data lvm2
@@ -97,7 +102,6 @@ if [[ ${XITONG} == "cent_os" ]]; then
 	sudo yum install -y docker-ce
 	sudo yum install -y docker-ce-cli
 	sudo yum install -y containerd.io
-	sudo yum install -y docker.io
 fi
 if [[ ${XITONG} == "ubuntu_os" ]]; then
 	sudo apt install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
@@ -117,7 +121,6 @@ if [[ ${XITONG} == "ubuntu_os" ]]; then
 	sudo apt-get install -y docker-ce
 	sudo apt-get install -y docker-ce-cli
 	sudo apt-get install -y containerd.io
-	sudo apt-get install -y docker.io
 fi
 if [[ ${XITONG} == "debian_os" ]]; then
 	sudo apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
@@ -137,7 +140,6 @@ if [[ ${XITONG} == "debian_os" ]]; then
 	sudo apt-get install -y docker-ce
 	sudo apt-get install -y docker-ce-cli
 	sudo apt-get install -y containerd.io
-	sudo apt-get install -y docker.io
 fi
 
 if [[ "${CHONGXIN}" == "YES" ]]; then
