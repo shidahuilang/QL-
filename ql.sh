@@ -187,8 +187,8 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		echo
 		TIME y "如有需要备份文件的请到 /opt/ql 文件夹查看"
 		echo
-		export Beifen_wenjian="YES"
-		rm -fr /opt/qlbak && mkdir -p /opt/qlbak
+
+	        rm -fr /opt/qlbak && mkdir -p /opt/qlbak
 		cp -r /opt/ql/config /opt/qlbak/config > /dev/null 2>&1
 		cp -r /opt/ql/db /opt/qlbak/db > /dev/null 2>&1
 		cp -r /root/ql/config /opt/qlbak/config > /dev/null 2>&1
@@ -273,7 +273,7 @@ docker run -dit \
   whyour/qinglong:latest
 
 if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
-	if [[ "${Beifen_wenjian}" == "YES" ]]; then
+	if [[ -n "$(ls -A "/opt/qlbeifen" 2>/dev/null)" ]]; then
 		docker cp /opt/qlbak/config/env.sh qinglong:/ql/config/env.sh
 		docker cp /opt/qlbak/db/env.db qinglong:/ql/db/env.db
 		docker cp /opt/qlbak/config/auth.json qinglong:/ql/config/auth.json
