@@ -196,10 +196,10 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		rm -rf /opt/ql
 	fi
 	docker=$(docker ps -a|grep qinglong) && dockerid=$(awk '{print $(1)}' <<<${docker})
-	images=$(docker images|grep qinglong) && imagesid=$(awk '{print $(3)}' <<<${images})
+	#images=$(docker images|grep qinglong) && imagesid=$(awk '{print $(3)}' <<<${images})
 	docker stop -t=5 "${dockerid}"
-	docker rm "${dockerid}"
-	docker rmi "${imagesid}"
+        docker rm "${dockerid}"
+	#docker rmi "${imagesid}"
 fi
 if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
 	Available="$(df -h | grep "/opt/docker" | awk '{print $4}' | awk 'NR==1')"
