@@ -37,7 +37,7 @@ wx_jysz_shell_path=$dir_script/wx_jysz.js
 OpenCard_shell_path=$dir_script/raw_jd_OpenCard.py
 task_before_shell_path=$dir_shell/task_before.sh
 sample_shell_path=/ql/sample/config.sample.sh
-git clone https://ghproxy.com/https://github.com/shidahuilang/ql qlwj
+git clone https://ghproxy.com/https://github.com/shidahuilang/QL- qlwj
 if [[ $? -ne 0 ]];then
 	mkdir -p /QL-/qlwj
 	curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/wx_jysz.js > /ql/qlwj/wx_jysz.js
@@ -53,7 +53,7 @@ if [[ $? -ne 0 ]];then
 fi
 
 # 授权
-chmod -R +x /ql/qlwj
+chmod -R +x /QL-/qlwj
 
 cp -Rf /ql/qlwj/feverrun/config.sample.sh /ql/config/config.sh
 cp -Rf /ql/qlwj/feverrun/config.sample.sh /ql/sample/config.sample.sh
