@@ -149,8 +149,8 @@ echo
 TIME g "拉取自动助力脚本任务"
 echo
 echo
-rm -fr /ql/azcg.log
-ql extra |tee azcg.log
+rm -fr /QL-/azcg.log
+QL- extra |tee azcg.log
 rm -rf /QL-/qlwj
 
 echo
