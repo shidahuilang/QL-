@@ -131,9 +131,10 @@ if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]]; then
     TIME g "执行WSKEY转换PT_KEY操作"
     task wskey.py |tee azcg.log
     echo
-    if [[ `ls -a |grep -c "wskey添加成功" /QL-/azcg.log` -ge '1' ]] && [[ `ls -a |grep -c "wskey添加失败" /QL-/azcg.log` = '0' ]] || [[ `ls -a |grep -c "wskey更新成功" /QL-/azcg.log` -ge '1' ]] && [[ `ls -a |grep -c "wskey更新失败" /QL-/azcg.log` = '0' ]]; then
+    if [[ `ls -a |grep -c "wskey转换成功" /ql/azcg.log` -ge '1' ]] && [[ `ls -a |grep -c "wskey状态失效" /ql/azcg.log` = '0' ]] || [[ `ls -a |grep -c "账号启用" /ql/azcg.log` -ge '1' ]] && [[ `ls -a |grep -c "wskey更新失败" /ql/azcg.log` = '0' ]]; then
     	echo
     	TIME g "WSKEY转换PT_KEY成功"
+	echo
 	echo
     else
     	echo
