@@ -193,6 +193,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		cp -r /opt/ql/db /opt/qlbak/db > /dev/null 2>&1
 		cp -r /root/ql/config /opt/qlbak/config > /dev/null 2>&1
 		cp -r /root/ql/db /opt/qlbak/db > /dev/null 2>&1
+		cp -r /opt/qlbak /opt/qlbak1 > /dev/null 2>&1
 		rm -rf /opt/ql
 	fi
 	docker=$(docker ps -a|grep qinglong) && dockerid=$(awk '{print $(1)}' <<<${docker})
@@ -274,17 +275,17 @@ docker run -dit \
 
 if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	if [[ -n "$(ls -A "/opt/qlbeifen" 2>/dev/null)" ]]; then
-		docker cp /opt/qlbak/config/env.sh qinglong:/ql/config/env.sh
-		docker cp /opt/qlbak/db/env.db qinglong:/ql/db/env.db
-		docker cp /opt/qlbak/config/auth.json qinglong:/ql/config/auth.json
-		docker cp /opt/qlbak/db/auth.db qinglong:/ql/db/auth.db
+		docker cp /opt/qlbak1/config/env.sh qinglong:/ql/config/env.sh
+		docker cp /opt/qlbak1/db/env.db qinglong:/ql/db/env.db
+		docker cp /opt/qlbak1/config/auth.json qinglong:/ql/config/auth.json
+		docker cp /opt/qlbak1/db/auth.db qinglong:/ql/db/auth.db
 	fi
-	docker=$(docker ps -a|grep qinglong) && dockerid=$(awk '{print $(1)}' <<<${docker})
-	curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun/nginx.conf > /root/nginx.conf
-	if [[ $? -ne 0 ]];then
-		curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/nginx.conf > /root/nginx.conf
-	fi
-	docker cp /root/nginx.conf "${dockerid}":/ql/docker/
+	#docker=$(docker ps -a|grep qinglong) && dockerid=$(awk '{print $(1)}' <<<${docker})
+	#curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun/nginx.conf > /root/nginx.conf
+	#if [[ $? -ne 0 ]];then
+		#curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/nginx.conf > /root/nginx.conf
+	#fi
+	#docker cp /root/nginx.conf "${dockerid}":/ql/docker/
 	docker restart qinglong
 	sleep 10
 	clear
