@@ -150,13 +150,13 @@ TIME g "拉取自动助力脚本任务"
 echo
 echo
 rm -fr /QL-/azcg.log
-QL- extra |tee azcg.log
+ql extra |tee azcg.log
 rm -rf /QL-/qlwj
 
 echo
-if [[ `ls -a |grep -c "添加成功" /ql/azcg.log` -ge '1' ]] && [[ `ls -a |grep -c "执行结束" /ql/azcg.log` -ge '1' ]] || [[ `ls -a |grep -c "开始更新仓库" /ql/azcg.log` -ge '1' ]]; then
+if [[ `ls -a |grep -c "添加成功" /QL-/azcg.log` -ge '1' ]] && [[ `ls -a |grep -c "执行结束" /QL-/azcg.log` -ge '1' ]] || [[ `ls -a |grep -c "开始更新仓库" /QL-/azcg.log` -ge '1' ]]; then
 	TIME g "脚本安装完成!"
-	rm -fr /ql/azcg.log
+	rm -fr /QL-/azcg.log
 echo
 echo
 TIME g "正在安装依赖，安装依赖需要时间，请耐心等候..."
