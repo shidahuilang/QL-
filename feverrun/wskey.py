@@ -1,3 +1,4 @@
+# cron: 15 */8 * * *
 # -*- coding: utf-8 -*
 '''
 cron: 15 */8 * * * wskey.py
