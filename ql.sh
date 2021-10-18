@@ -286,7 +286,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	fi
 	docker cp /root/nginx.conf "${dockerid}":/ql/docker/
 	docker restart qinglong
-	sleep 13
+	sleep 10
 	clear
 	echo
 	echo
