@@ -39,13 +39,13 @@ task_before_shell_path=$dir_shell/task_before.sh
 sample_shell_path=/ql/sample/config.sample.sh
 git clone https://ghproxy.com/https://github.com/shidahuilang/QL- qlwj
 if [[ $? -ne 0 ]];then
-	mkdir -p /ql/qlwj
-	curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/wx_jysz.js > /ql/qlwj/wx_jysz.js
-	curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/crypto-js.js > /ql/qlwj/crypto-js.js
-	curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/config.sample.sh > /ql/qlwj/config.sample.sh
-	curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/extra.sh > /ql/qlwj/extra.sh
-	curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/raw_jd_OpenCard.py > /ql/qlwj/raw_jd_OpenCard.py
-	curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/wskey.py > /ql/qlwj/wskey.py
+	mkdir -p /QL-/qlwj
+	curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/wx_jysz.js > /QL-/qlwj/wx_jysz.js
+	curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/crypto-js.js > /QL-/qlwj/crypto-js.js
+	curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/config.sample.sh > /QL-/qlwj/config.sample.sh
+	curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/extra.sh > /QL-/qlwj/extra.sh
+	curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/raw_jd_OpenCard.py > /QL-/qlwj/raw_jd_OpenCard.py
+	curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/wskey.py > /QL-/qlwj/wskey.py
 	if [[ $? -ne 0 ]];then
 		TIME y "应用文件下载失败"
 		    exit 1
@@ -53,16 +53,16 @@ if [[ $? -ne 0 ]];then
 fi
 
 # 授权
-chmod -R +x /ql/qlwj
+chmod -R +x /QL-/qlwj
 
-cp -Rf /ql/qlwj/feverrun/config.sample.sh /ql/config/config.sh
-cp -Rf /ql/qlwj/feverrun/config.sample.sh /ql/sample/config.sample.sh
-cp -Rf /ql/qlwj/feverrun/extra.sh /ql/config/extra.sh
-cp -Rf /ql/qlwj/feverrun/extra.sh /ql/sample/extra.sample.sh
-cp -Rf /ql/qlwj/feverrun/raw_jd_OpenCard.py /ql/scripts/raw_jd_OpenCard.py
-cp -Rf /ql/qlwj/feverrun/wskey.py /ql/scripts/wskey.py
-cp -Rf /ql/qlwj/feverrun/wx_jysz.js /ql/scripts/wx_jysz.js
-cp -Rf /ql/qlwj/feverrun/crypto-js.js /ql/scripts/crypto-js.js
+cp -Rf /QL-/qlwj/feverrun/config.sample.sh /ql/config/config.sh
+cp -Rf /QL-/qlwj/feverrun/config.sample.sh /ql/sample/config.sample.sh
+cp -Rf /QL-/qlwj/feverrun/extra.sh /ql/config/extra.sh
+cp -Rf /QL-/qlwj/feverrun/extra.sh /ql/sample/extra.sample.sh
+cp -Rf /QL-/qlwj/feverrun/raw_jd_OpenCard.py /ql/scripts/raw_jd_OpenCard.py
+cp -Rf /QL-/qlwj/feverrun/wskey.py /ql/scripts/wskey.py
+cp -Rf /QL-/qlwj/feverrun/wx_jysz.js /ql/scripts/wx_jysz.js
+cp -Rf /QL-/qlwj/feverrun/crypto-js.js /ql/scripts/crypto-js.js
 echo
 echo
 
@@ -131,7 +131,7 @@ if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]]; then
     TIME g "执行WSKEY转换PT_KEY操作"
     task wskey.py |tee azcg.log
     echo
-    if [[ `ls -a |grep -c "wskey添加成功" /ql/azcg.log` -ge '1' ]] && [[ `ls -a |grep -c "wskey添加失败" /ql/azcg.log` = '0' ]] || [[ `ls -a |grep -c "wskey更新成功" /ql/azcg.log` -ge '1' ]] && [[ `ls -a |grep -c "wskey更新失败" /ql/azcg.log` = '0' ]]; then
+    if [[ `ls -a |grep -c "wskey添加成功" /QL-/azcg.log` -ge '1' ]] && [[ `ls -a |grep -c "wskey添加失败" /QL-/azcg.log` = '0' ]] || [[ `ls -a |grep -c "wskey更新成功" /QL-/azcg.log` -ge '1' ]] && [[ `ls -a |grep -c "wskey更新失败" /QL-/azcg.log` = '0' ]]; then
     	echo
     	TIME g "WSKEY转换PT_KEY成功"
 	echo
@@ -144,6 +144,19 @@ fi
 if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 0 ]] && [[ "$(grep -c JD_COOKIE=\"pt_key= /ql/config/env.sh)" = 0 ]]; then
     TIME y "没发现WSKEY或者PT_KEY，请注意设置好KEY，要不然脚本不会运行!"
 fi
+echo
+echo
+TIME g "拉取自动助力脚本任务"
+echo
+echo
+rm -fr /QL-/azcg.log
+ql extra |tee azcg.log
+rm -rf /QL-/qlwj
+
+echo
+if [[ `ls -a |grep -c "添加成功" /ql/azcg.log` -ge '1' ]] && [[ `ls -a |grep -c "执行结束" /ql/azcg.log` -ge '1' ]] || [[ `ls -a |grep -c "开始更新仓库" /ql/azcg.log` -ge '1' ]]; then
+	TIME g "脚本安装完成!"
+	rm -fr /ql/azcg.log
 echo
 echo
 TIME g "正在安装依赖，安装依赖需要时间，请耐心等候..."
