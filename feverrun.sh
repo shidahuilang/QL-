@@ -53,16 +53,16 @@ if [[ $? -ne 0 ]];then
 fi
 
 # 授权
-chmod -R +x /QL-/qlwj
+chmod -R +x /ql/qlwj
 
-cp -Rf /QL-/qlwj/feverrun/config.sample.sh /ql/config/config.sh
-cp -Rf /QL-/qlwj/feverrun/config.sample.sh /ql/sample/config.sample.sh
-cp -Rf /QL-/qlwj/feverrun/extra.sh /ql/config/extra.sh
-cp -Rf /QL-/qlwj/feverrun/extra.sh /ql/sample/extra.sample.sh
-cp -Rf /QL-/qlwj/feverrun/raw_jd_OpenCard.py /ql/scripts/raw_jd_OpenCard.py
-cp -Rf /QL-/qlwj/feverrun/wskey.py /ql/scripts/wskey.py
-cp -Rf /QL-/qlwj/feverrun/wx_jysz.js /ql/scripts/wx_jysz.js
-cp -Rf /QL-/qlwj/feverrun/crypto-js.js /ql/scripts/crypto-js.js
+cp -Rf /ql/qlwj/feverrun/config.sample.sh /ql/config/config.sh
+cp -Rf /ql/qlwj/feverrun/config.sample.sh /ql/sample/config.sample.sh
+cp -Rf /ql/qlwj/feverrun/extra.sh /ql/config/extra.sh
+cp -Rf /ql/qlwj/feverrun/extra.sh /ql/sample/extra.sample.sh
+cp -Rf /ql/qlwj/feverrun/raw_jd_OpenCard.py /ql/scripts/raw_jd_OpenCard.py
+cp -Rf /ql/qlwj/feverrun/wskey.py /ql/scripts/wskey.py
+cp -Rf /ql/qlwj/feverrun/wx_jysz.js /ql/scripts/wx_jysz.js
+cp -Rf /ql/qlwj/feverrun/crypto-js.js /ql/scripts/crypto-js.js
 echo
 echo
 
