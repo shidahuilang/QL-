@@ -274,7 +274,7 @@ docker run -dit \
   whyour/qinglong:latest
 
 if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
-	if [[ -n "$(ls -A "/opt/qlbeifen" 2>/dev/null)" ]]; then
+	if [[ -n "$(ls -A "/opt/qlbak1" 2>/dev/null)" ]]; then
 		docker cp /opt/qlbak1/config/env.sh qinglong:/ql/config/env.sh
 		docker cp /opt/qlbak1/db/env.db qinglong:/ql/db/env.db
 		docker cp /opt/qlbak1/config/auth.json qinglong:/ql/config/auth.json
