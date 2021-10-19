@@ -202,56 +202,8 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
         docker rm "${dockerid}"
 	#docker rmi "${imagesid}"
 fi
-if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
-	Available="$(df -h | grep "/opt/docker" | awk '{print $4}' | awk 'NR==1')"
-	FINAL=`echo ${Available: -1}`
-	if [[ "${FINAL}" =~ (M|K) ]]; then
-		echo
-		TIME r "敬告：可用空间小于[ 2G ]，不支持安装青龙，请挂载好大于2G的[opt]路径的硬盘"
-		echo
-		sleep 2
-		exit 1
-		echo
-	fi
-else
-	Ubunkj="$(df -h | grep "docker" | awk '{print $4}' | awk 'NR==1')"
-	FINAL=`echo ${Ubunkj: -1}`
-	if [[ "${FINAL}" =~ (M|K) ]]; then
-		echo
-		TIME r "敬告：可用空间小于[ 2G ]，不支持安装青龙，请加大磁盘空间容量"
-		echo
-		sleep 2
-		exit 1
-		echo
-	fi
-fi
-if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
-	Overlay_Available="$(df -h | grep "docker" | awk '{print $4}' | awk 'NR==1' | sed 's/.$//g')"
-	Kongjian="$(awk -v num1=${Overlay_Available} -v num2=2 'BEGIN{print(num1>num2)?"0":"1"}')"
-		echo
-		TIME y "您当前系统可用空间为${Overlay_Available}G"
-		echo
-	if [[ "${Kongjian}" == "1" ]];then
-		echo
-		TIME r "敬告：可用空间小于[ 2G ]，不支持安装青龙，请挂载好[opt]路径的硬盘"
-		echo
-		sleep 2
-		exit 1
-	fi
-else
-	Ubuntu_kj="$(df -h | grep "/dev/*/" | awk '{print $4}' | awk 'NR==1' | sed 's/.$//g')"
-	Kongjian="$(awk -v num1=${Ubuntu_kj} -v num2=2 'BEGIN{print(num1>num2)?"0":"1"}')"
-		echo
-		TIME y "您当前系统可用空间为${Ubuntu_kj}G"
-		echo
-	if [[ "${Kongjian}" == "1" ]];then
-		echo
-		TIME r "敬告：可用空间小于[ 2G ]，不支持安装青龙，请加大磁盘空间"
-		echo		
-		sleep 2
-		exit 1
-	fi
-fi
+
+
 if [ -z "$(ls -A "/opt" 2>/dev/null)" ]; then
 	mkdir -p /opt
 fi
