@@ -1,11 +1,13 @@
+//cron "0 8-22/1 * * *" wx_jysz_shell_path=https://raw.githubusercontent.com/shidahuilang/QL-/main/wx_jysz/wx_jysz.js,tag=金手指
+
 const $ = new Env('微信_金银手指');
 const notify = $.isNode() ? require('./sendNotify') : '';
 const CryptoJS = require('crypto-js')
-const app_soy_wx_jysz_token1 = []
+const app_soy_wx_jysz_token = []
 let subTitle = ``;
 let status;
 status = (status = ($.getval("gk_status") || "1") ) > 1 ? `${status}` : ""; // 账号扩展字符
-let soy_wx_jysz_token1 = $.getdata('soy_wx_jysz_token1')
+let soy_wx_jysz_token = $.getdata('soy_wx_jysz_token')
 
 !(async () => {
 
@@ -14,36 +16,36 @@ apptz = process.env.apptz;
 apptx = process.env.apptx;
 appyq = process.env.appyq;
     
-    if(!process.env.soy_wx_jysz_token1&&process.env.soy_wx_jysz_token1==''){
+    if(!process.env.soy_wx_jysz_token&&process.env.soy_wx_jysz_token==''){
         console.log(`\n【${$.name}】：未填写相对应的变量`);
         return;
     }
         
-    if (process.env.soy_wx_jysz_token1 && process.env.soy_wx_jysz_token1.indexOf('@') > -1) {
-        soy_wx_jysz_token1 = process.env.soy_wx_jysz_token1.split('@');
-    } else if (process.env.soy_wx_jysz_token1 && process.env.soy_wx_jysz_token1.indexOf('\n') > -1) {
-        soy_wx_jysz_token1 = process.env.soy_wx_jysz_token1.split('\n');
-    } else if(process.env.soy_wx_jysz_token1 && process.env.soy_wx_jysz_token1.indexOf('#') > -1){
-        soy_wx_jysz_token1 = process.env.soy_wx_jysz_token1.split('#');
+    if (process.env.soy_wx_jysz_token && process.env.soy_wx_jysz_token.indexOf('@') > -1) {
+        soy_wx_jysz_token = process.env.soy_wx_jysz_token.split('@');
+    } else if (process.env.soy_wx_jysz_token && process.env.soy_wx_jysz_token.indexOf('\n') > -1) {
+        soy_wx_jysz_token = process.env.soy_wx_jysz_token.split('\n');
+    } else if(process.env.soy_wx_jysz_token && process.env.soy_wx_jysz_token.indexOf('#') > -1){
+        soy_wx_jysz_token = process.env.soy_wx_jysz_token.split('#');
     }else{
-        soy_wx_jysz_token1 = process.env.soy_wx_jysz_token1.split();
+        soy_wx_jysz_token = process.env.soy_wx_jysz_token.split();
     };
     
-    Object.keys(soy_wx_jysz_token1).forEach((item) => {
-        if (soy_wx_jysz_token1[item]) {
-            app_soy_wx_jysz_token1.push(soy_wx_jysz_token1[item]);
+    Object.keys(soy_wx_jysz_token).forEach((item) => {
+        if (soy_wx_jysz_token[item]) {
+            app_soy_wx_jysz_token.push(soy_wx_jysz_token[item]);
         };
     });
 
-    soy_wx_jysz_User_Agent1 = process.env.soy_wx_jysz_User_Agent1
+    soy_wx_jysz_User_Agent = process.env.soy_wx_jysz_User_Agent
     
     
 }else{
 	if (typeof $request !== "undefined") {
     await get_appdata()
   } else{
-  app_soy_wx_jysz_token1.push($.getdata('soy_wx_jysz_token1'))
-  soy_wx_jysz_User_Agent1.push($.getdata('soy_wx_jysz_User_Agent1'))
+  app_soy_wx_jysz_token.push($.getdata('soy_wx_jysz_token'))
+  soy_wx_jysz_User_Agent.push($.getdata('soy_wx_jysz_User_Agent'))
   
   }
 apptz = $.getdata('apptz');//是否推送，默认true
@@ -52,7 +54,7 @@ appyq = $.getdata('appyq');//默认邀请,需要自行修改变量
     
     let jyszcount = ($.getval('jyszcount') || '1');
   for (let i = 2; i <= jyszcount; i++) {
-    app_soy_wx_jysz_token1.push($.getdata(`soy_wx_jysz_token1${i}`))
+    app_soy_wx_jysz_token.push($.getdata(`soy_wx_jysz_token${i}`))
    
 }
 }
@@ -63,19 +65,19 @@ appyq = $.getdata('appyq');//默认邀请,需要自行修改变量
         8 * 60 * 60 * 1000
       ).toLocaleString()} ===\n`
     );
-    console.log(`===【共 ${app_soy_wx_jysz_token1.length} 个账号】===\n`);
+    console.log(`===【共 ${app_soy_wx_jysz_token.length} 个账号】===\n`);
     if(!apptz){apptz=true};
     if(!apptx){apptx=true};
       
-for (i = 0; i < app_soy_wx_jysz_token1.length; i++) {
-    soy_wx_jysz_token1=app_soy_wx_jysz_token1[i]
-    //soy_wx_jysz_headers=soy_wx_jysz_User_Agent1
+for (i = 0; i < app_soy_wx_jysz_token.length; i++) {
+    soy_wx_jysz_token=app_soy_wx_jysz_token[i]
+    //soy_wx_jysz_headers=soy_wx_jysz_User_Agent
     //JSON.stringify(
-    if(!soy_wx_jysz_User_Agent1){
-        soy_wx_jysz_User_Agent1='Mozilla/5.0 (iPhone; CPU iPhone OS 12_5_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.13(0x18000d31) NetType/WIFI Language/zh_CN'
-        soy_wx_jysz_headers= {"Host": "apponlie.sahaj.cn","Accept": "application/json","Origin": "http://ppllmm.zhuwentao52.top","User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 12_5_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.13(0x18000d31) NetType/WIFI Language/zh_CN","token": `${soy_wx_jysz_token1}`,"X-Requested-With": "com.tencent.mm","Referer": "http://ppllmm.zhuwentao52.top/"}
+    if(!soy_wx_jysz_User_Agent){
+        soy_wx_jysz_User_Agent='Mozilla/5.0 (iPhone; CPU iPhone OS 12_5_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.13(0x18000d31) NetType/WIFI Language/zh_CN'
+        soy_wx_jysz_headers= {"Host": "apponlie.sahaj.cn","Accept": "application/json","Origin": "http://ppllmm.zhuwentao52.top","User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 12_5_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.13(0x18000d31) NetType/WIFI Language/zh_CN","token": `${soy_wx_jysz_token}`,"X-Requested-With": "com.tencent.mm","Referer": "http://ppllmm.zhuwentao52.top/"}
     }else{
-      soy_wx_jysz_headers= {"Host": "apponlie.sahaj.cn","Accept": "application/json","Origin": "http://ppllmm.zhuwentao52.top","User-Agent": `${soy_wx_jysz_User_Agent1}`,"token": `${soy_wx_jysz_token1}`,
+      soy_wx_jysz_headers= {"Host": "apponlie.sahaj.cn","Accept": "application/json","Origin": "http://ppllmm.zhuwentao52.top","User-Agent": `${soy_wx_jysz_User_Agent}`,"token": `${soy_wx_jysz_token}`,
       "X-Requested-With": "com.tencent.mm","Referer": "http://ppllmm.zhuwentao52.top/"} 
     }
     
@@ -104,17 +106,17 @@ for (i = 0; i < app_soy_wx_jysz_token1.length; i++) {
 function get_appdata() {
     //http://apponlie.sahaj.cn/user/myInfo
    if ($request.url.indexOf("myInfo") > -1) {
-       const soy_wx_jysz_token1 = $request.headers.token
-   if(soy_wx_jysz_token1){
-       $.setdata(soy_wx_jysz_token1,`soy_wx_jysz_token1${status}`)
-       //$.log(soy_wx_jysz_token1)
+       const soy_wx_jysz_token = $request.headers.token
+   if(soy_wx_jysz_token){
+       $.setdata(soy_wx_jysz_token,`soy_wx_jysz_token${status}`)
+       //$.log(soy_wx_jysz_token)
    }
    
-  const soy_wx_jysz_User_Agent1 = $request.headers.User-Agent
-   if(soy_wx_jysz_User_Agent1){
+  const soy_wx_jysz_User_Agent = $request.headers.User-Agent
+   if(soy_wx_jysz_User_Agent){
        
-       $.setdata(soy_wx_jysz_User_Agent1,`soy_wx_jysz_User_Agent1${status}`)
-       //$.log(soy_wx_jysz_token1)
+       $.setdata(soy_wx_jysz_User_Agent,`soy_wx_jysz_User_Agent${status}`)
+       //$.log(soy_wx_jysz_token)
    } 
    
   } 
@@ -211,7 +213,7 @@ function soy_jysz_task(data) {
     return new Promise((resolve, reject) => {
         $.post({
             url : `http://apponlie.sahaj.cn/task/completeTask`,
-            headers : {"Accept": "application/json","Content-Type": "application/json;charset=UTF-8","Host": "apponlie.sahaj.cn","Origin": "http://ppllmm.zhuwentao52.top","Referer": "http://ppllmm.zhuwentao52.top","token": soy_wx_jysz_token1,"User-Agent": soy_wx_jysz_User_Agent1,"X-Requested-With": "com.tencent.mm"
+            headers : {"Accept": "application/json","Content-Type": "application/json;charset=UTF-8","Host": "apponlie.sahaj.cn","Origin": "http://ppllmm.zhuwentao52.top","Referer": "http://ppllmm.zhuwentao52.top","token": soy_wx_jysz_token,"User-Agent": soy_wx_jysz_User_Agent,"X-Requested-With": "com.tencent.mm"
             },
             body : `${data}`,
         }, async(error, response, data) => {
@@ -249,7 +251,7 @@ async function soy_jysz_TX() {
                     return new Promise((resolve, reject) => {
                         $.post({
                             url : `http://apponlie.sahaj.cn/user/pickAuto`,
-                            headers : {"Accept": "application/json","Content-Type": "application/json;charset=UTF-8","Host": "apponlie.sahaj.cn","Origin": "http://ppllmm.zhuwentao52.top","Referer": "http://ppllmm.zhuwentao52.top","token": soy_wx_jysz_token1,"User-Agent": soy_wx_jysz_User_Agent1,"X-Requested-With": "com.tencent.mm"
+                            headers : {"Accept": "application/json","Content-Type": "application/json;charset=UTF-8","Host": "apponlie.sahaj.cn","Origin": "http://ppllmm.zhuwentao52.top","Referer": "http://ppllmm.zhuwentao52.top","token": soy_wx_jysz_token,"User-Agent": soy_wx_jysz_User_Agent,"X-Requested-With": "com.tencent.mm"
                                 
                             },
                             body : `${jm}`,
