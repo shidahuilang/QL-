@@ -298,7 +298,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		echo
 		TIME y " "${IP}":"${QL_PORT}"  (IP检测因数太多，不一定准确，仅供参考)"
 		echo
-		TIME g "检测到你已有配置，继续使用您的[帐号密码文件]和[环境变量文件]来安装使用,免除您设置烦恼!"
+		TIME g "检测到您已有配置，继续使用您的[帐号密码文件]和[环境变量文件]来安装使用,免除您设置烦恼!"
 		echo
 		sleep 5
 		docker exec -it qinglong bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun.sh)"
