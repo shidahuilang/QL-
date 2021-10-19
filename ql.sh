@@ -203,7 +203,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	#docker rmi "${imagesid}"
 fi
 if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
-	Available="$(df -h | grep "docker" | awk '{print $4}' | awk 'NR==1')"
+	Available="$(df -h | grep "/opt/docker" | awk '{print $4}' | awk 'NR==1')"
 	FINAL=`echo ${Available: -1}`
 	if [[ "${FINAL}" =~ (M|K) ]]; then
 		echo
@@ -214,7 +214,7 @@ if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
 		echo
 	fi
 else
-	Ubunkj="$(df -h | grep "/dev/*/" | awk '{print $4}' | awk 'NR==1')"
+	Ubunkj="$(df -h | grep "docker" | awk '{print $4}' | awk 'NR==1')"
 	FINAL=`echo ${Ubunkj: -1}`
 	if [[ "${FINAL}" =~ (M|K) ]]; then
 		echo
