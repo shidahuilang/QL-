@@ -226,7 +226,7 @@ else
 	fi
 fi
 if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
-	Overlay_Available="$(df -h | grep "/opt/docker" | awk '{print $4}' | awk 'NR==1' | sed 's/.$//g')"
+	Overlay_Available="$(df -h | grep "docker" | awk '{print $4}' | awk 'NR==1' | sed 's/.$//g')"
 	Kongjian="$(awk -v num1=${Overlay_Available} -v num2=2 'BEGIN{print(num1>num2)?"0":"1"}')"
 		echo
 		TIME y "您当前系统可用空间为${Overlay_Available}G"
