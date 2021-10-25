@@ -190,11 +190,12 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 
 	        rm -fr /opt/qlbak && mkdir -p /opt/qlbak
 		cp -r /opt/ql/config /opt/qlbak/config > /dev/null 2>&1
-		cp -r /opt/ql/db /opt/qlbak/db > /dev/null 2>&1
+                cp -r /opt/ql/db /opt/qlbak/db > /dev/null 2>&1
 		cp -r /root/ql/config /opt/qlbak/config > /dev/null 2>&1
 		cp -r /root/ql/db /opt/qlbak/db > /dev/null 2>&1
 		cp -r /opt/qlbak /opt/qlbak1 > /dev/null 2>&1
 		rm -rf /opt/ql
+
 	fi
 	docker=$(docker ps -a|grep qinglong) && dockerid=$(awk '{print $(1)}' <<<${docker})
 	#images=$(docker images|grep qinglong) && imagesid=$(awk '{print $(3)}' <<<${images})
@@ -231,6 +232,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		docker cp /opt/qlbak1/db/env.db qinglong:/ql/db/env.db
 		docker cp /opt/qlbak1/config/auth.json qinglong:/ql/config/auth.json
 		docker cp /opt/qlbak1/db/auth.db qinglong:/ql/db/auth.db
+		docker cp /opt/qlbak1/config/bot.json qinglong:/ql/config/bot.json
 	fi
 	#docker=$(docker ps -a|grep qinglong) && dockerid=$(awk '{print $(1)}' <<<${docker})
 	#curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun/nginx.conf > /root/nginx.conf
