@@ -173,8 +173,6 @@ npm install -g npm
 cd /ql
 npm install -g png-js
 cd /ql
-npm install -g base64
-cd /ql
 npm install -g date-fns
 cd /ql
 npm install -g axios
