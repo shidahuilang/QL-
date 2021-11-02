@@ -5,26 +5,28 @@ new Env('禁用重复任务');
 '''
 
 import json
-import os,sys
+import os, sys
 import requests
 import time
 
 ip="localhost"
+substr="shufflewzc_faker2"
 
 def loadSend():
     print("加载推送功能")
     global send
+    send = None
     cur_path = os.path.abspath(os.path.dirname(__file__))
     sys.path.append(cur_path)
-    if os.path.exists(cur_path + "/deleteDuplicateTasksNotify.py"):
+    if os.path.exists(cur_path + "/sendNotify.py"):
         try:
-            from deleteDuplicateTasksNotify import send
-        except:
-            print("加载通知服务失败~")
+            from sendNotify import send
+        except Exception as e:
+            send = None
+            print("加载通知服务失败~",e)
 
 headers={
     "Accept":        "application/json",
-    "Authorization": "Basic YWRtaW46YWRtaW4=",
     "User-Agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36",
 }
 
@@ -44,13 +46,24 @@ def getTaskList():
 def getDuplicate(taskList):
     wholeNames={}
     duplicateID=[]
+    taskListTemp=[]
     for task in taskList:
-        if task['name'] in wholeNames.keys():
+        if task['name'] in wholeNames.keys() and task['command'].find(substr) < 0:
             duplicateID.append(task['_id'])
         else:
+            taskListTemp.append(task)
             wholeNames[task['name']] = 1
-    return duplicateID
+    return getDuplicateForOnlyFake(taskListTemp,duplicateID)
 
+def getDuplicateForOnlyFake(taskListTemp,duplicateID):
+    if len(duplicateID)==0:
+        return duplicateID
+    duplicateIDTemp=[]
+    for task in taskListTemp:
+        for taskTemp in taskListTemp:
+            if task['_id'] != taskTemp['_id'] and task['name'] == taskTemp['name'] and task['command'].find(substr) < 0:
+                duplicateID.append(task['_id'])
+    return duplicateID
 
 def getData(duplicateID):
     rawData = "["
@@ -109,5 +122,6 @@ if __name__ == '__main__':
         print("没有重复任务")
     else:
         disableDuplicateTasks(duplicateID)
-    send("禁用成功","\n%s\n%s"%(before,after))
+    if send:
+        send("禁用成功","\n%s\n%s"%(before,after))
         # print("禁用结束！")
