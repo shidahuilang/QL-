@@ -670,3 +670,5 @@ export JD_USER_AGENT="true"
 
 ##### 趣星球 JSON格式添加CK  抓包历史找到api.xqustar.com/api/…网址  从host一直复制到cookie
 export qxqhd='{ "Host": "api.xqustar.com", "Accept": "*/*", "version": "2.1.7", "channel": "ios", "plat": "app", "Authorization": "eyJ0ec3MiOiJpbnQiLCJpZCI6ImYwZjAxMmM3LWIzNTMtNDQ1ZS0VkMCIsInR5cGUiOiJhcHAifQ.lPCBCJaEunKDe8NN9S3iuiESrY3YXPg7OJu3sS0MWiQ", "Accept-Language": "zh-cn", "Accept-Encoding": "gzip, deflate, br", "platform": "ios", "Content-Type": "application/json", "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_8 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Html5Plus/1.0 (Immersed/20) uni-app", "Connection": "keep-alive", "JSESSIONID": "", "Cookie": ""}'
+#青蛙开卡新变量
+export guaopencard_rewardBean="1,2,3" # 京豆奖励判断 | 1=邀请 2=开卡 3=关注  | 填1,2,3
