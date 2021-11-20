@@ -152,7 +152,7 @@ echo -e "
 
         
 
-        Faker仓库频道：${plain}${red}https://t.me/pandaqx${plain}   
+  
 —————————————————————————————————————————————————————————————
 "
 }
@@ -213,7 +213,7 @@ fi
 
 #拉取nvjdc镜像
 log_action_begin_msg "开始拉取nvjdc镜像文件，nvjdc镜像比较大，请耐心等待"
-docker pull nolanhzy/nvjdc:latest
+docker pull 10529459/lanyannvjdc:1.4
 log_action_end_msg $?
 
 #创建并启动nvjdc容器
