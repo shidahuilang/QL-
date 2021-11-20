@@ -218,7 +218,7 @@ log_action_end_msg $?
 
 #创建并启动nvjdc容器
 log_action_begin_msg "开始创建nvjdc容器"
-docker run   --name langnvjdc -p ${jdcport}:80 -d  -v  "$(pwd)"/Config.json:/app/Config/Config.json:ro \
+docker run   --name nvjdc -p ${jdcport}:80 -d  -v  "$(pwd)"/Config.json:/app/Config/Config.json:ro \
 -v "$(pwd)"/.local-chromium:/app/.local-chromium  \
 -it --privileged=true  registry.cn-hangzhou.aliyuncs.com/nvjdc/langnvjdc:1.4
 
@@ -230,24 +230,24 @@ echo -e "${green}Faker集合仓库频道：${plain}${red}https://t.me/pandaqx${p
 }
 
 update_nvjdc(){
-  cd /root/langnvjdc
-portinfo=$(docker port langnvjdc | head -1  | sed 's/ //g' | sed 's/80\/tcp->0.0.0.0://g')
+  cd /root/nvjdc
+portinfo=$(docker port nvjdc | head -1  | sed 's/ //g' | sed 's/80\/tcp->0.0.0.0://g')
 baseip=$(curl -s ipip.ooo)  > /dev/null
-docker rm -f langnvjdc
+docker rm -f nvjdc
 docker pull registry.cn-hangzhou.aliyuncs.com/nvjdc/langnvjdc:1.4
-docker run   --name langnvjdc -p ${portinfo}:80 -d  -v  "$(pwd)"/Config.json:/app/Config/Config.json:ro \
+docker run   --name nvjdc -p ${portinfo}:80 -d  -v  "$(pwd)"/Config.json:/app/Config/Config.json:ro \
 -v "$(pwd)"/.local-chromium:/app/.local-chromium  \
 -it --privileged=true  registry.cn-hangzhou.aliyuncs.com/nvjdc/langnvjdc:1.4
-echo -e "${green}langnvjdc更新完毕，脚本自动退出。${plain}"
+echo -e "${green}nvjdc更新完毕，脚本自动退出。${plain}"
 echo -e "${green}面板访问地址：http://${baseip}:${portinfo}${plain}"
 exit 0
 }
 
 uninstall_nvjdc(){
-docker rm -f langnvjdc
+docker rm -f nvjdc
 docker rmi -f registry.cn-hangzhou.aliyuncs.com/nvjdc/langnvjdc:1.4
-rm -rf langnvjdc
-echo -e "${green}langnvjdc面板已卸载，脚本自动退出。${plain}"
+rm -rf nvjdc
+echo -e "${green}nvjdc面板已卸载，脚本自动退出。${plain}"
 exit 0
 }
 
