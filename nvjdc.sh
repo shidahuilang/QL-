@@ -220,7 +220,7 @@ log_action_end_msg $?
 log_action_begin_msg "开始创建nvjdc容器"
 docker run   --name nvjdc -p ${jdcport}:80 -d  -v  "$(pwd)"/Config.json:/app/Config/Config.json:ro \
 -v "$(pwd)"/.local-chromium:/app/.local-chromium  \
--it --privileged=true  nolanhzy/nvjdc:latest
+-it --privileged=true  10529459/lanyannvjdc:1.4
 
 log_action_end_msg $?
 baseip=$(curl -s ipip.ooo)  > /dev/null
