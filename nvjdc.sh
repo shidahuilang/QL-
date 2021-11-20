@@ -217,10 +217,10 @@ docker pull registry.cn-hangzhou.aliyuncs.com/nvjdc/langnvjdc:1.4
 log_action_end_msg $?
 
 #创建并启动nvjdc容器
-cd  /root/nolanjdc
+cd  /root/nvjdc
 log_action_begin_msg "开始创建nvjdc容器"
-docker run   --name nvjdc -p ${jdcport}:80 -d  -v  "$(pwd)"/Config.json:/app \
--v "$(pwd)"/localtime:"$(pwd)"localtime:ro \
+docker run   --name nvjdc -p ${jdcport}:80 -d  -v  "$(pwd)"/Config.json:/app/Config/Config.json:ro \
+-v "$(pwd)"/.local-chromium:/app/.local-chromium  \
 -it --privileged=true  registry.cn-hangzhou.aliyuncs.com/nvjdc/langnvjdc:1.4
 
 log_action_end_msg $?
