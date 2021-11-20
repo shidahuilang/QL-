@@ -218,9 +218,9 @@ log_action_end_msg $?
 
 #创建并启动nvjdc容器
 log_action_begin_msg "开始创建nvjdc容器"
-docker run   --name lanyannvjdc -p ${jdcport}:80 -d  -v  "$(pwd)"/Config.json:/app/Config/Config.json:ro \
+docker run   --name langnvjdc -p ${jdcport}:80 -d  -v  "$(pwd)"/Config.json:/app/Config/Config.json:ro \
 -v "$(pwd)"/.local-chromium:/app/.local-chromium  \
--it --privileged=true  10529459/lanyannvjdc:1.4
+-it --privileged=true  registry.cn-hangzhou.aliyuncs.com/nvjdc/langnvjdc:1.4
 
 log_action_end_msg $?
 baseip=$(curl -s ipip.ooo)  > /dev/null
@@ -230,24 +230,24 @@ echo -e "${green}Faker集合仓库频道：${plain}${red}https://t.me/pandaqx${p
 }
 
 update_nvjdc(){
-  cd /root/lanyannvjdc
-portinfo=$(docker port lanyannvjdc | head -1  | sed 's/ //g' | sed 's/80\/tcp->0.0.0.0://g')
+  cd /root/langnvjdc
+portinfo=$(docker port langnvjdc | head -1  | sed 's/ //g' | sed 's/80\/tcp->0.0.0.0://g')
 baseip=$(curl -s ipip.ooo)  > /dev/null
-docker rm -f lanyannvjdc
-docker pull 10529459/lanyannvjdc:1.4
-docker run   --name lanyannvjdc -p ${portinfo}:80 -d  -v  "$(pwd)"/Config.json:/app/Config/Config.json:ro \
+docker rm -f langnvjdc
+docker pull registry.cn-hangzhou.aliyuncs.com/nvjdc/langnvjdc:1.4
+docker run   --name langnvjdc -p ${portinfo}:80 -d  -v  "$(pwd)"/Config.json:/app/Config/Config.json:ro \
 -v "$(pwd)"/.local-chromium:/app/.local-chromium  \
--it --privileged=true  10529459/lanyannvjdc:1.4
-echo -e "${green}lanyannvjdc更新完毕，脚本自动退出。${plain}"
+-it --privileged=true  registry.cn-hangzhou.aliyuncs.com/nvjdc/langnvjdc:1.4
+echo -e "${green}langnvjdc更新完毕，脚本自动退出。${plain}"
 echo -e "${green}面板访问地址：http://${baseip}:${portinfo}${plain}"
 exit 0
 }
 
 uninstall_nvjdc(){
-docker rm -f lanyannvjdc
-docker rmi -f 10529459/lanyannvjdc:1.4
-rm -rf lanyannvjdc
-echo -e "${green}lanyannvjdc面板已卸载，脚本自动退出。${plain}"
+docker rm -f langnvjdc
+docker rmi -f registry.cn-hangzhou.aliyuncs.com/nvjdc/langnvjdc:1.4
+rm -rf langnvjdc
+echo -e "${green}langnvjdc面板已卸载，脚本自动退出。${plain}"
 exit 0
 }
 
