@@ -162,7 +162,6 @@ exit
 
 install_nvjdc(){
 echo -e "${red}开始进行安装,请根据命令提示操作${plain}"
-git clone https://github.com/btlanyan/nvjdc.git /root/nolanjdc
 mkdir nvjdc && cd nvjdc 
 mkdir -p  .local-chromium/Linux-884014 && cd .local-chromium/Linux-884014
 wget https://mirrors.huaweicloud.com/chromium-browser-snapshots/Linux_x64/884014/chrome-linux.zip > /dev/null 2>&1 
@@ -237,7 +236,7 @@ portinfo=$(docker port nvjdc | head -1  | sed 's/ //g' | sed 's/80\/tcp->0.0.0.0
 baseip=$(curl -s ipip.ooo)  > /dev/null
 docker rm -f nvjdc
 docker pull 10529459/lanyannvjdc:1.4
-docker run   --name nvjdc -p ${portinfo}:80 -d  -v  "$(pwd)"/Config.json:/app/Config/Config.json:ro \
+docker run   --name nvjdc -p ${portinfo}:80 -d  -v  "$(pwd)":/app \
 -v "$(pwd)"/.local-chromium:/app/.local-chromium  \
 -it --privileged=true  docker pull 10529459/lanyannvjdc:1.4
 echo -e "${green}nvjdc更新完毕，脚本自动退出。${plain}"
