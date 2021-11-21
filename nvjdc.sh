@@ -162,6 +162,7 @@ exit
 
 install_nvjdc(){
 echo -e "${red}开始进行安装,请根据命令提示操作${plain}"
+git clone https://github.com/btlanyan/nvjdc.git /root/nolanjdc
 mkdir nvjdc && cd nvjdc 
 mkdir -p  .local-chromium/Linux-884014 && cd .local-chromium/Linux-884014
 wget https://mirrors.huaweicloud.com/chromium-browser-snapshots/Linux_x64/884014/chrome-linux.zip > /dev/null 2>&1 
@@ -219,7 +220,7 @@ log_action_end_msg $?
 #创建并启动nvjdc容器
 
 log_action_begin_msg "开始创建nvjdc容器"
-docker run   --name nvjdc -p ${jdcport}:80 -d  -v  "$(pwd)"/Config.json:/app/Config/Config.json:ro \
+docker run   --name nvjdc1 -p ${jdcport}:80 -d  -v  "$(pwd)"/Config.json:/app/Config/Config.json:ro \
 -v "$(pwd)"/.local-chromium:/app/.local-chromium  \
 -it --privileged=true  10529459/lanyannvjdc:1.4
 
