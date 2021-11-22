@@ -38,9 +38,9 @@ TIME() {
 	echo
 	TIME y " 请选择要安装的脚本库"
 	echo
-	TIME l " 1. 手动提交助力码脚本，Telegram添加机器人自己每个星期提交一次助力码"
+	TIME l " 1. 手动提交助力码脚本，Telegram添加机器人自己每个星期提交一次助力码(Aaron-lv库)"
 	echo
-	TIME l " 2. 自动提交助力码脚本，要去脚本作者群提交资料过白名单"
+	TIME l " 2. 自动提交助力码脚本，要去脚本作者群提交资料过白名单（feverrun库）"
 	echo
 	TIME l " 3. 退出安装程序!"
 	echo
