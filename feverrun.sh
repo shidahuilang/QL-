@@ -38,7 +38,6 @@ curtinlv_JD-Script_jd_tool_dl_shell_path=$dir_script/curtinlv_JD-Script_jd_tool_
 OpenCard_shell_path=$dir_script/raw_jd_OpenCard.py
 task_before_shell_path=$dir_shell/task_before.sh
 sample_shell_path=/ql/sample/config.sample.sh
-git clone https://ghproxy.com/https://github.com/shidahuilang/QL- qlwj
 mkdir -p /ql/qlwj
 curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/auth.json > /ql/qlwj/auth.json
 curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/crypto-js.js > /ql/qlwj/crypto-js.js
