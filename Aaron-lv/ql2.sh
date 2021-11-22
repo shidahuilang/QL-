@@ -260,7 +260,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	clear
 	echo
 	TIME y "青龙面板安装完成，下一步进入安装任务程序，请耐心等候..."
-	docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/Aaron-lv/ql2.sh)"
+	docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/Aaron-lv11.sh)"
 	echo
 	if [[ ! -d /opt/ql/scripts/Aaron-lv_sync_jd_scripts ]] && [[ ! -d /opt/ql/scripts/shufflewzc_faker2 ]]; then
 		sleep 2
