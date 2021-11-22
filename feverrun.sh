@@ -34,7 +34,7 @@ disable_shell_path=$dir_script/Disable.py
 wskey_shell_path=$dir_script/wskey.py
 crypto_shell_path=$dir_script/crypto-js.js
 Evaluation_shell_path=$dir_script/Evaluation.py
-curtinlv_JD-Script_jd_tool_dl_shell_path=$dir_script/curtinlv_JD-Script_jd_tool_dl.py
+#curtinlv_JD-Script_jd_tool_dl_shell_path=$dir_script/curtinlv_JD-Script_jd_tool_dl.py
 OpenCard_shell_path=$dir_script/raw_jd_OpenCard.py
 task_before_shell_path=$dir_shell/task_before.sh
 sample_shell_path=/ql/sample/config.sample.sh
@@ -47,7 +47,7 @@ if [[ $? -ne 0 ]];then
 	curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/extra.sh > /ql/qlwj/extra.sh
 	curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/raw_jd_OpenCard.py > /ql/qlwj/raw_jd_OpenCard.py
 	curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/Evaluation.py > /ql/qlwj/Evaluation.py
-        curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/curtinlv_JD-Script_jd_tool_dl.py > /ql/qlwj/curtinlv_JD-Script_jd_tool_dl.py
+      #  curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/curtinlv_JD-Script_jd_tool_dl.py > /ql/qlwj/curtinlv_JD-Script_jd_tool_dl.py
 
         if [[ $? -ne 0 ]];then
 		TIME y "应用文件下载失败"
@@ -65,7 +65,7 @@ cp -Rf /ql/qlwj/feverrun/extra.sh /ql/sample/extra.sample.sh
 cp -Rf /ql/qlwj/feverrun/raw_jd_OpenCard.py /ql/scripts/raw_jd_OpenCard.py
 cp -Rf /ql/qlwj/feverrun/wskey.py /ql/scripts/wskey.py
 cp -Rf /ql/qlwj/Evaluation.py /ql/scripts/Evaluation.py
-cp -Rf /ql/qlwj/curtinlv_JD-Script_jd_tool_dl.py /ql/scripts/curtinlv_JD-Script_jd_tool_dl.py
+# cp -Rf /ql/qlwj/curtinlv_JD-Script_jd_tool_dl.py /ql/scripts/curtinlv_JD-Script_jd_tool_dl.py
 cp -Rf /ql/qlwj/feverrun/crypto-js.js /ql/scripts/crypto-js.js
 echo
 
