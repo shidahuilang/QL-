@@ -228,13 +228,12 @@ docker run -dit \
 
 if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	if [[ -n "$(ls -A "/opt/qlbak1" 2>/dev/null)" ]]; then
-		docker cp /opt/qlbak1/config/env.sh qinglong:/ql/config/env.sh
-		docker cp /opt/qlbak1/db/env.db qinglong:/ql/db/env.db
-		docker cp /opt/qlbak1/config/auth.json qinglong:/ql/config/auth.json
-		docker cp /opt/qlbak1/db/auth.db qinglong:/ql/db/auth.db
-		docker cp /opt/qlbak1/config/bot.json qinglong:/ql/config/bot.json
-		docker cp ${QL_PATH}/qlbeifen1/ql/config/auth.json qinglong:/ql/config/auth.json
-		docker cp ${QL_PATH}/qlbeifen1/ql/db/auth.db qinglong:/ql/db/auth.db
+		docker cp ${QL_PATH}/qlbak1/config/env.sh qinglong:/ql/config/env.sh
+		docker cp ${QL_PATH}/qlbak1/db/env.db qinglong:/ql/db/env.db
+		docker cp ${QL_PATH}/qlbak1/config/auth.json qinglong:/ql/config/auth.json
+		docker cp ${QL_PATH}/qlbak1/db/auth.db qinglong:/ql/db/auth.db
+		docker cp ${QL_PATH}/qlbak1/config/bot.json qinglong:/ql/config/bot.json
+
 	fi
 	if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` == '0' ]]; then
 		curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/authbk.json > ${QL_PATH}/ql/authbk.json
