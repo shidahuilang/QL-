@@ -49,11 +49,11 @@ TIME() {
 	read -p " ${scqlbianmaa}： " QLJB
 	case $QLJB in
 		1)
-			bash -c "$(curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-@main/Aaron-lv/ql2.sh)"
+			bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/Aaron-lv/ql2.sh)"
 		break
 		;;
 		2)
-			bash -c "$(curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun/ql1.sh)"
+			bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-/main/feverrun/ql1.sh)"
 		break
 		;;
 		3)
