@@ -295,8 +295,10 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 			if [[ $? -ne 0 ]];then
 				echo
 				TIME r "下载脚本文件失败，请检查网络..."
+				
+				sleep 2
 				exit 1
-				echo
+				
 	fi	
 	docker restart qinglong > /dev/null 2>&1
 	sleep 2
