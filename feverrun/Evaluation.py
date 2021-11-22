@@ -17,7 +17,7 @@ Ev_Scope = ''
 Ev_img = ''
 
 # 评价星级，评论是好评，星级默认4-5随机。只支持逗号 ENV设置： export Ev_xing='4,5'
-Ev_xing = '4,5'
+Ev_xing = '5'
 ###############################################
 
 import os, random, re, sys, time
