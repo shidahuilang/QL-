@@ -19,53 +19,51 @@ TIME() {
       }
 }
 echo
-echo
-echo
 TIME l "安装依赖..."
 echo
 TIME y "安装依赖需要时间，请耐心等待!"
 echo
-sleep 3
-echo
-echo
-npm config set registry https://registry.npm.taobao.org
-cd /ql
-npm install -g npm
-cd /ql
+sleep 2
+npm config set registry https://mirrors.huaweicloud.com/repository/npm/
+npm config get registry
+TIME l "安装依赖png-js"
 npm install -g png-js
-cd /ql
+TIME l "安装依赖date-fns"
 npm install -g date-fns
-cd /ql
+TIME l "安装依赖axios"
 npm install -g axios
-cd /ql
+TIME l "安装依赖crypto-js"
 npm install -g crypto-js
-cd /ql
+TIME l "安装依赖md5"
+npm install -g md5
+TIME l "安装依赖ts-md5"
 npm install -g ts-md5
-cd /ql
+TIME l "安装依赖tslib"
 npm install -g tslib
-cd /ql
+TIME l "安装依赖@types/node"
 npm install -g @types/node
-cd /ql
+TIME l "安装依赖requests"
 npm install -g requests
-cd /ql
+TIME l "安装依赖tough-cookie"
 npm install -g tough-cookie
-cd /ql
+TIME l "安装依赖jsdom"
 npm install -g jsdom
-cd /ql
+TIME l "安装依赖download"
 npm install -g download
-cd /ql
+TIME l "安装依赖tunnel"
 npm install -g tunnel
-cd /ql
+TIME l "安装依赖fs"
 npm install -g fs
-cd /ql
+TIME l "安装依赖ws"
 npm install -g ws
+TIME l "安装依赖js-base64"
+npm install -g js-base64
+TIME l "安装依赖jieba"
+npm install -g jieba
+TIME l "安装pnpm"
+cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && pnpm install && pnpm i ts-node typescript @types/node date-fns axios download canvas
 cd /ql
-pip3 install requests
-cd /ql
-cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && npm i && npm i -S ts-node typescript @types/node date-fns axios png-js canvas --build-from-source
-cd /ql
-apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && cd scripts && npm install canvas --build-from-source
-cd /ql
+TIME l "安装python3"
 apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev freetype-dev
 cd /ql
 echo
