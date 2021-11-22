@@ -59,7 +59,7 @@ TIME() {
 		3)
 			echo
 			TIME r "您选择了退出程序!"
-			rm -fr ql.sh
+			rm -fr lang.sh
 			echo
 			sleep 1
 			exit 1
