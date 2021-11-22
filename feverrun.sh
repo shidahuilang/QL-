@@ -35,7 +35,6 @@ wskey_shell_path=$dir_script/wskey.py
 crypto_shell_path=$dir_script/crypto-js.js
 Evaluation_shell_path=$dir_script/Evaluation.py
 curtinlv_JD-Script_jd_tool_dl_shell_path=$dir_script/curtinlv_JD-Script_jd_tool_dl.py
-wx_jysz_shell_path=$dir_script/wx_jysz.js
 OpenCard_shell_path=$dir_script/raw_jd_OpenCard.py
 task_before_shell_path=$dir_shell/task_before.sh
 sample_shell_path=/ql/sample/config.sample.sh
@@ -47,10 +46,10 @@ if [[ $? -ne 0 ]];then
 	curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/config.sample.sh > /ql/qlwj/config.sample.sh
 	curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/extra.sh > /ql/qlwj/extra.sh
 	curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/raw_jd_OpenCard.py > /ql/qlwj/raw_jd_OpenCard.py
-	curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/wskey.py > /ql/qlwj/wskey.py
-    curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/Evaluation.py > /ql/qlwj/Evaluation.py
-    curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/curtinlv_JD-Script_jd_tool_dl.py > /ql/qlwj/curtinlv_JD-Script_jd_tool_dl.py
-	if [[ $? -ne 0 ]];then
+	curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/Evaluation.py > /ql/qlwj/Evaluation.py
+        curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/curtinlv_JD-Script_jd_tool_dl.py > /ql/qlwj/curtinlv_JD-Script_jd_tool_dl.py
+
+        if [[ $? -ne 0 ]];then
 		TIME y "应用文件下载失败"
 		    exit 1
 	fi
@@ -65,10 +64,9 @@ cp -Rf /ql/qlwj/feverrun/extra.sh /ql/config/extra.sh
 cp -Rf /ql/qlwj/feverrun/extra.sh /ql/sample/extra.sample.sh
 cp -Rf /ql/qlwj/feverrun/raw_jd_OpenCard.py /ql/scripts/raw_jd_OpenCard.py
 cp -Rf /ql/qlwj/feverrun/wskey.py /ql/scripts/wskey.py
-cp -Rf /ql/qlwj/feverrun/wx_jysz.js /ql/scripts/wx_jysz.js
-cp -Rf /ql/qlwj/feverrun/crypto-js.js /ql/scripts/crypto-js.js
 cp -Rf /ql/qlwj/Evaluation.py /ql/scripts/Evaluation.py
 cp -Rf /ql/qlwj/curtinlv_JD-Script_jd_tool_dl.py /ql/scripts/curtinlv_JD-Script_jd_tool_dl.py
+cp -Rf /ql/qlwj/feverrun/crypto-js.js /ql/scripts/crypto-js.js
 echo
 
 # 将 extra.sh 添加到定时任务
@@ -118,16 +116,16 @@ if [ "$(grep -c raw_jd_OpenCard.py /ql/config/crontab.list)" = 0 ]; then
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"JD入会开卡领取京豆","command":"task raw_jd_OpenCard.py","schedule":"8 8,15,20 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1634041221437'
 fi
 
-# 将 Evaluation.py 添加到定时任务
-if [ "$(grep -c Evaluation.py /ql/config/crontab.list)" = 0 ]; then
+# 将 wx_jysz.js 添加到定时任务
+if [ "$(grep -c wx_jysz.js /ql/config/crontab.list)" = 0 ]; then
     echo
     echo
-    TIME g "开始添加 [自动评价助手]"
+    TIME g "开始添加 [微信_金银手指]"
     echo
     echo
     # 获取token
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
-    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"JD入会开卡领取京豆","command":"task raw_jd_OpenCard.py","schedule":"8 8,15,20 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1634097051985'
+    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"微信_金银手指","command":"task wx_jysz.js","schedule":"0 8-22/1 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1634097051985'
 fi
 echo
 echo
@@ -217,7 +215,10 @@ cd /ql
 TIME l "安装python3"
 apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev freetype-dev
 cd /ql
+task curtinlv_JD-Script_jd_tool_dl.py
 echo
 TIME g "依赖安装完毕..."
+echo
+echo
 echo
 exit 0
