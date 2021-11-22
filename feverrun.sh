@@ -41,6 +41,7 @@ sample_shell_path=/ql/sample/config.sample.sh
 git clone https://ghproxy.com/https://github.com/shidahuilang/QL- qlwj
 if [[ $? -ne 0 ]];then
 	mkdir -p /ql/qlwj
+	curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/auth.json > /ql/qlwj/auth.json
 	curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/wx_jysz.js > /ql/qlwj/wx_jysz.js
 	curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/crypto-js.js > /ql/qlwj/crypto-js.js
 	curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/config.sample.sh > /ql/qlwj/config.sample.sh
@@ -160,11 +161,16 @@ fi
 echo
 echo
 if [[ `ls -a |grep -c "添加成功" /ql/azcg.log` -ge '1' ]] && [[ `ls -a |grep -c "执行结束" /ql/azcg.log` -ge '1' ]] || [[ `ls -a |grep -c "开始更新仓库" /ql/azcg.log` -ge '1' ]]; then
+        cp -Rf /ql/qlwj/auth.json /ql/config/auth.json
 	TIME g "脚本安装完成!"
+
 	rm -fr /ql/azcg.log
+	rm -rf /ql/qlwj
 else
-	TIME r "脚本安装失败，请用一键单独安装任务重新尝试!"
+	cp -Rf /ql/qlwj/auth.json /ql/config/auth.json
+	TIME r "脚本安装失败,请再次执行一键安装脚本尝试安装"
 	rm -fr /ql/azcg.log
+	rm -rf /ql/qlwj
 	exit 1
 fi
 echo
