@@ -30,31 +30,43 @@ dir_script=/ql/scripts
 config_shell_path=$dir_shell/config.sh
 extra_shell_path=$dir_shell/extra.sh
 code_shell_path=$dir_shell/code.sh
-disable_shell_path=$dir_script/disableDuplicateTasksImplement.py
+disable_shell_path=$dir_script/Disable.py
 wskey_shell_path=$dir_script/wskey.py
 crypto_shell_path=$dir_script/crypto-js.js
 Evaluation_shell_path=$dir_script/Evaluation.py
 curtinlv_JD-Script_jd_tool_dl_shell_path=$dir_script/curtinlv_JD-Script_jd_tool_dl.py
+wx_jysz_shell_path=$dir_script/wx_jysz.js
 OpenCard_shell_path=$dir_script/raw_jd_OpenCard.py
 task_before_shell_path=$dir_shell/task_before.sh
 sample_shell_path=/ql/sample/config.sample.sh
-mkdir -p /ql/qlwj
-curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/auth.json > /ql/qlwj/auth.json
-curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/crypto-js.js > /ql/qlwj/crypto-js.js
-curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/config.sample.sh > /ql/qlwj/config.sample.sh
-curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/extra.sh > /ql/qlwj/extra.sh
-curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/raw_jd_OpenCard.py > /ql/qlwj/raw_jd_OpenCard.py
-curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/wskey.py > /ql/qlwj/wskey.py
-curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/Evaluation.py > /ql/qlwj/Evaluation.py
-curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/curtinlv_JD-Script_jd_tool_dl.py > /ql/qlwj/curtinlv_JD-Script_jd_tool_dl.py
+git clone https://ghproxy.com/https://github.com/shidahuilang/QL- qlwj
+if [[ $? -ne 0 ]];then
+	mkdir -p /ql/qlwj
+	curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/wx_jysz.js > /ql/qlwj/wx_jysz.js
+	curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/crypto-js.js > /ql/qlwj/crypto-js.js
+	curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/config.sample.sh > /ql/qlwj/config.sample.sh
+	curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/extra.sh > /ql/qlwj/extra.sh
+	curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/raw_jd_OpenCard.py > /ql/qlwj/raw_jd_OpenCard.py
+	curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/wskey.py > /ql/qlwj/wskey.py
+    curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/Evaluation.py > /ql/qlwj/Evaluation.py
+    curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/curtinlv_JD-Script_jd_tool_dl.py > /ql/qlwj/curtinlv_JD-Script_jd_tool_dl.py
+	if [[ $? -ne 0 ]];then
+		TIME y "应用文件下载失败"
+		    exit 1
+	fi
+fi
+
+# 授权
 chmod -R +x /ql/qlwj
-cp -Rf /ql/qlwj/config.sample.sh /ql/config/config.sh
-cp -Rf /ql/qlwj/config.sample.sh /ql/sample/config.sample.sh
-cp -Rf /ql/qlwj/extra.sh /ql/config/extra.sh
-cp -Rf /ql/qlwj/extra.sh /ql/sample/extra.sample.sh
-cp -Rf /ql/qlwj/raw_jd_OpenCard.py /ql/scripts/raw_jd_OpenCard.py
-cp -Rf /ql/qlwj/wskey.py /ql/scripts/wskey.py
-cp -Rf /ql/qlwj/crypto-js.js /ql/scripts/crypto-js.js
+
+cp -Rf /ql/qlwj/feverrun/config.sample.sh /ql/config/config.sh
+cp -Rf /ql/qlwj/feverrun/config.sample.sh /ql/sample/config.sample.sh
+cp -Rf /ql/qlwj/feverrun/extra.sh /ql/config/extra.sh
+cp -Rf /ql/qlwj/feverrun/extra.sh /ql/sample/extra.sample.sh
+cp -Rf /ql/qlwj/feverrun/raw_jd_OpenCard.py /ql/scripts/raw_jd_OpenCard.py
+cp -Rf /ql/qlwj/feverrun/wskey.py /ql/scripts/wskey.py
+cp -Rf /ql/qlwj/feverrun/wx_jysz.js /ql/scripts/wx_jysz.js
+cp -Rf /ql/qlwj/feverrun/crypto-js.js /ql/scripts/crypto-js.js
 cp -Rf /ql/qlwj/Evaluation.py /ql/scripts/Evaluation.py
 cp -Rf /ql/qlwj/curtinlv_JD-Script_jd_tool_dl.py /ql/scripts/curtinlv_JD-Script_jd_tool_dl.py
 echo
@@ -62,43 +74,50 @@ echo
 # 将 extra.sh 添加到定时任务
 if [ "$(grep -c extra /ql/config/crontab.list)" = 0 ]; then
     echo
-    TIME g "开始添加 [每6小时更新任务]"
+    echo
+    TIME g "开始添加 [每8小时更新任务]"
+    echo
     echo
     # 获取token
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
-    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"每6小时更新任务","command":"ql extra","schedule":"40 0-23/5 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1624782068473'
+    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"每8小时更新任务","command":"ql extra","schedule":"* */8 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1624782068473'
 fi
-echo
+
 if [ "$(grep -c wskey.py /ql/config/crontab.list)" = 0 ]; then
     echo
-    TIME g "开始添加 [每6小时转换WSKEY]"
+    echo
+    TIME g "开始添加 [早9晚11点WSKEY转换]"
+    echo
     echo
     # 获取token
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
-    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"每6小时转换WSKEY","command":"task wskey.py","schedule":"58 0-23/5 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1633428022377'
+    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"早9晚11点更新","command":"task wskey.py","schedule":"0 9,23 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1633428022377'
 fi
-echo
+
 # 将 bot 添加到定时任务
 if [ "$(grep -c bot /ql/config/crontab.list)" = 0 ]; then
     echo
+    echo
     TIME g "开始添加 [拉取机器人]"
+    echo
     echo
     # 获取token
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"拉取机器人","command":"ql bot","schedule":"13 14 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1626247933219'
 fi
-echo
+
 # 将 raw_jd_OpenCard.py 添加到定时任务
 if [ "$(grep -c raw_jd_OpenCard.py /ql/config/crontab.list)" = 0 ]; then
     echo
+    echo
     TIME g "开始添加 [JD入会开卡领取京豆]"
+    echo
     echo
     # 获取token
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"JD入会开卡领取京豆","command":"task raw_jd_OpenCard.py","schedule":"8 8,15,20 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1634041221437'
 fi
-echo
-echo
+
 # 将 Evaluation.py 添加到定时任务
 if [ "$(grep -c Evaluation.py /ql/config/crontab.list)" = 0 ]; then
     echo
@@ -108,8 +127,7 @@ if [ "$(grep -c Evaluation.py /ql/config/crontab.list)" = 0 ]; then
     echo
     # 获取token
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
-    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"JD入会开卡领取京豆","command":"task raw_jd_OpenCard.py","schedule":"8 8,15,20 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1634041221437'
-
+    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"JD入会开卡领取京豆","command":"task raw_jd_OpenCard.py","schedule":"8 8,15,20 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1634097051985'
 fi
 echo
 echo
@@ -118,41 +136,39 @@ if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]]; then
     TIME g "执行WSKEY转换PT_KEY操作"
     task wskey.py |tee azcg.log
     echo
-    if [[ `ls -a |grep -c "wskey添加成功" /ql/azcg.log` -ge '1' ]] && [[ `ls -a |grep -c "wskey添加失败" /ql/azcg.log` = '0' ]] || [[ `ls -a |grep -c "wskey更新成功" /ql/azcg.log` -ge '1' ]] && [[ `ls -a |grep -c "wskey更新失败" /ql/azcg.log` = '0' ]]; then
+    if [[ `ls -a |grep -c "wskey转换成功" /ql/azcg.log` -ge '1' ]] && [[ `ls -a |grep -c "wskey状态失效" /ql/azcg.log` = '0' ]] || [[ `ls -a |grep -c "账号启用" /ql/azcg.log` -ge '1' ]] && [[ `ls -a |grep -c "wskey更新失败" /ql/azcg.log` = '0' ]]; then
     	echo
     	TIME g "WSKEY转换PT_KEY成功"
 	echo
     else
     	echo
-    	TIME r "WSKEY转换PT_KEY失败，检查KEY的格式对不对，或者有没有失效，如果是多个WSKEY的话，或者有个别KEY出问题"
+    	TIME g "WSKEY转换PT_KEY失败，检查KEY的格式对不对，或者有没有失效，如果是多个WSKEY的话，或者有个别KEY出问题"
 	echo
     fi
 fi
 echo
 echo
-echo
-TIME y "拉取feverrun大佬的自动助力脚本"
+TIME g "拉取自动助力脚本"
 echo
 echo
 rm -fr /ql/azcg.log
 ql extra |tee azcg.log
+rm -rf /ql/qlwj
+echo
+echo
 if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 0 ]] && [[ "$(grep -c JD_COOKIE=\"pt_key= /ql/config/env.sh)" = 0 ]]; then
-    TIME r "没发现WSKEY或者PT_KEY，请注意设置好KEY，要不然脚本不会运行!"
+    TIME y "没发现WSKEY或者PT_KEY，请注意设置好KEY，要不然脚本不会运行!"
 fi
+echo
 echo
 if [[ `ls -a |grep -c "添加成功" /ql/azcg.log` -ge '1' ]] && [[ `ls -a |grep -c "执行结束" /ql/azcg.log` -ge '1' ]] || [[ `ls -a |grep -c "开始更新仓库" /ql/azcg.log` -ge '1' ]]; then
-	cp -Rf /ql/qlwj/auth.json /ql/config/auth.json
-	TIME g "脚本安装完成，正在重启青龙面板，请稍后...!"
+	TIME g "脚本安装完成!"
 	rm -fr /ql/azcg.log
-	rm -rf /ql/qlwj
 else
-	cp -Rf /ql/qlwj/auth.json /ql/config/auth.json
-	TIME r "脚本安装失败,请再次执行一键安装脚本尝试安装"
+	TIME r "脚本安装失败，请用一键单独安装任务重新尝试!"
 	rm -fr /ql/azcg.log
-	rm -rf /ql/qlwj
 	exit 1
 fi
-echo
 echo
 TIME l "安装依赖..."
 echo
