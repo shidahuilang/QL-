@@ -141,12 +141,9 @@ if [[ ${XITONG} == "debian_os" ]]; then
 	sudo apt-get install -y docker-ce-cli
 	sudo apt-get install -y containerd.io
 fi
-
-if [[ "${CHONGXIN}" == "YES" ]]; then
-	sudo rm -fr /etc/systemd/system/docker.service.d
-	sed -i 's#ExecStart=/usr/bin/dockerd -H fd://#ExecStart=/usr/bin/dockerd#g' /lib/systemd/system/docker.service
-	sudo systemctl daemon-reload
-fi
+sudo rm -fr /etc/systemd/system/docker.service.d
+sed -i 's#ExecStart=/usr/bin/dockerd -H fd://#ExecStart=/usr/bin/dockerd#g' /lib/systemd/system/docker.service
+sudo systemctl daemon-reload
 sudo rm -fr docker.sh
 if [[ `docker --version | grep -c "version"` = '0' ]]; then
 	TIME y "docker安装失败"
