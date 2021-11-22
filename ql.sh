@@ -289,11 +289,14 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	clear
 	echo
 	TIME y "青龙面板安装完成，下一步进入安装任务程序，请耐心等候..."
-	docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun.sh)"
-	echo
-	if [[ ! -d /opt/ql/scripts/feverrun_my_scripts ]]; then
-		sleep 2
-		exit 1
+		docker exec -it qinglong bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun.sh)"
+		if [[ $? -ne 0 ]];then
+			docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun.sh)"
+			if [[ $? -ne 0 ]];then
+				echo
+				TIME r "下载脚本文件失败，请检查网络..."
+				exit 1
+				echo
 	fi	
 	docker restart qinglong > /dev/null 2>&1
 	sleep 2
