@@ -46,6 +46,9 @@ curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/raw_jd_Ope
 curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/wskey.py > /ql/qlwj/wskey.py
 curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/curtinlv_JD-Script_jd_tool_dl.py > /ql/qlwj/curtinlv_JD-Script_jd_tool_dl.py
 curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/jd_Evaluation.py > /ql/qlwj/jd_Evaluation.py
+curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/Aaron-lv/jd_get_share_code.js > /ql/qlwj/jd_get_share_code.js
+curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/Aaron-lv/jd/1-5.sh > /ql/jd/1-5.sh
+curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/Aaron-lv/jd/6-10.sh > /ql/jd/6-10.sh
 chmod -R +x /ql/qlwj
 cp -Rf /ql/qlwj/config.sample.sh /ql/config/config.sh
 cp -Rf /ql/qlwj/config.sample.sh /ql/sample/config.sample.sh
@@ -56,6 +59,7 @@ cp -Rf /ql/qlwj/wskey.py /ql/scripts/wskey.py
 cp -Rf /ql/qlwj/crypto-js.js /ql/scripts/crypto-js.js
 cp -Rf /ql/qlwj/curtinlv_JD-Script_jd_tool_dl.py /ql/scripts/curtinlv_JD-Script_jd_tool_dl.py
 cp -Rf /ql/qlwj/jd_Evaluation.py /ql/scripts/jd_Evaluation.py
+cp -Rf /ql/qlwj/jd_get_share_code.js /ql/scripts/jd_get_share_code.js
 echo
 echo
 TIME l "安装依赖..."
