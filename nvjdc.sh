@@ -213,14 +213,14 @@ fi
 
 #拉取nvjdc镜像
 log_action_begin_msg "开始拉取nvjdc镜像文件，nvjdc镜像比较大，请耐心等待"
-docker pull nolanhzy/nvjdc:latest
+docker pull 10529459/lanyannvjdc:1.4
 log_action_end_msg $?
 
 #创建并启动nvjdc容器
 log_action_begin_msg "开始创建nvjdc容器"
 docker run   --name nvjdc -p ${jdcport}:80 -d  -v  "$(pwd)"/Config.json:/app/Config/Config.json:ro \
 -v "$(pwd)"/.local-chromium:/app/.local-chromium  \
--it --privileged=true  nolanhzy/nvjdc:latest
+-it --privileged=true  10529459/lanyannvjdc:1.4
 
 log_action_end_msg $?
 baseip=$(curl -s ipip.ooo)  > /dev/null
@@ -245,7 +245,7 @@ exit 0
 
 uninstall_nvjdc(){
 docker rm -f nvjdc
-docker rmi -f nolanhzy/nvjdc:0.4
+docker rmi -f 10529459/lanyannvjdc:1.4
 rm -rf nvjdc
 echo -e "${green}nvjdc面板已卸载，脚本自动退出。${plain}"
 exit 0
