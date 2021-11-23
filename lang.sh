@@ -53,7 +53,7 @@ TIME() {
 		break
 		;;
 		2)
-			bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun/ql1.sh)"
+			bash -c "$(curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun/ql1.sh)"
 		break
 		;;
 		3)
