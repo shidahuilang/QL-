@@ -57,7 +57,6 @@ cp -Rf /ql/qlwj/wskey.py /ql/scripts/wskey.py
 cp -Rf /ql/qlwj/crypto-js.js /ql/scripts/crypto-js.js
 cp -Rf /ql/qlwj/curtinlv_JD-Script_jd_tool_dl.py /ql/scripts/curtinlv_JD-Script_jd_tool_dl.py
 cp -Rf /ql/qlwj/jd_Evaluation.py /ql/scripts/jd_Evaluation.py
-cp -Rf /ql/qlwj/jd_get_share_code.js /ql/scripts/jd_get_share_code.js
 echo
 
 # 将 extra.sh 添加到定时任务
