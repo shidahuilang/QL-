@@ -61,11 +61,14 @@ npm install -g js-base64
 TIME l "安装依赖jieba"
 npm install -g jieba
 TIME l "安装pnpm"
-cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && pnpm install && pnpm i ts-node typescript @types/node date-fns axios download canvas
+cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && pnpm install && pnpm i ts-node typescript @types/node date-fns axios download
+cd /ql
+pip3 install canvas
 cd /ql
 TIME l "安装python3"
 apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev freetype-dev
 cd /ql
+task curtinlv_JD-Script_jd_tool_dl.py
 echo
 TIME g "依赖安装完毕..."
 echo

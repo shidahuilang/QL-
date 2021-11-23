@@ -6,7 +6,7 @@ Author: Curtin
 TG交流 https://t.me/topstyle996
 TG频道 https://t.me/TopStyle2021
 cron: 0 5 * * *
-new Env('评价助手脚本依赖下载');
+new Env('脚本依赖下载 for Curtinlv 仓库');
 '''
 
 try:
