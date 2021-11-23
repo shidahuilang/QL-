@@ -133,7 +133,7 @@ else
 	if [[ `docker --version | grep -c "version"` -eq '0' ]]; then
 		echo
 		TIME y "没发现有docker，正在安装docker，请稍后..."
-		bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/docker.sh)"
+		bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/docker.sh)"
 		
 	fi
 fi
@@ -151,7 +151,7 @@ else
 	if [[ `docker --version | grep -c "version"` -eq '0' ]]; then
 		echo
 		TIME y "没检测到docker，请先安装docker"
-		bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/docker.sh)"
+		bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/docker.sh)"
 		echo
 		sleep 3
 		exit 1
@@ -269,7 +269,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	clear
 	echo
 	TIME y "青龙面板安装完成，下一步进入安装任务程序，请耐心等候..."
-	docker exec -it qinglong bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/feverrun.sh)"
+	docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun.sh)"
 	echo
 	if [[ ! -d /opt/ql/scripts/feverrun_my_scripts ]]; then
 		sleep 2
