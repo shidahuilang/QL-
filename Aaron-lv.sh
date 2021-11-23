@@ -59,6 +59,7 @@ cp -Rf /ql/qlwj/curtinlv_JD-Script_jd_tool_dl.py /ql/scripts/curtinlv_JD-Script_
 cp -Rf /ql/qlwj/disableDuplicateTasksImplement.py /ql/scripts/disableDuplicateTasksImplement.py
 cp -Rf /ql/qlwj/jd_Evaluation.py /ql/scripts/jd_Evaluation.py
 cp -Rf /ql/qlwj/jd_get_share_code.js /ql/scripts/jd_get_share_code.js
+cp -Rf /ql/qlwj/doocode.py /ql/config/doocode.py
 echo
 
 # 将 extra.sh 添加到定时任务
