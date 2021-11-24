@@ -244,6 +244,7 @@ docker run -dit \
   -v $QL_PATH/ql/scripts:/ql/scripts \
   -v $QL_PATH/ql/jbot:/ql/jbot \
   -v $QL_PATH/ql/raw:/ql/raw \
+  -v $QL_PATH/ql/jd:/ql/jd \
   -v $QL_PATH/ql/repo:/ql/repo \
   ${NETWORK} \
   --name qinglong \
@@ -257,6 +258,10 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		docker cp ${QL_PATH}/qlbeifen1/ql/db/env.db qinglong:/ql/db/env.db
 		docker cp ${QL_PATH}/qlbeifen1/ql/config/auth.json qinglong:/ql/config/auth.json
 		docker cp ${QL_PATH}/qlbeifen1/ql/db/auth.db qinglong:/ql/db/auth.db
+		docker cp ${QL_PATH}/qlbeifen1/ql/config/bot.json qinglong:/ql/config/bot.json
+	fi
+	if [[ -d "${QL_PATH}/qlbeifen1/ql/jd" ]]; then
+		docker cp ${QL_PATH}/qlbeifen1/ql/jd qinglong:/ql/
 	fi
 	if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` == '0' ]]; then
 		curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun/authbk.json > ${QL_PATH}/ql/authbk.json
