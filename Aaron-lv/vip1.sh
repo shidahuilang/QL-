@@ -241,7 +241,7 @@ docker run -dit \
   --name qinglong \
   --hostname qinglong \
   --restart always \
-  whyour/qinglong:latest
+  shidahuilang/qinglong:2.10.8
 export local_ip="$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAddress)"
 if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	if [[ -n "$(ls -A "${QL_PATH}/qlbeifen1" 2>/dev/null)" ]]; then
