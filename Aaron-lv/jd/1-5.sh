@@ -12,15 +12,15 @@ export CRON1="$(date +163764761%M%S)"
 export CRON2="$(date +%M)"
 export token=$(cat /ql/config/auth.json | jq --raw-output .token)
 [[ -d '/ql/log/jd_get_share_code' ]] && rm -rf /ql/log/jd_get_share_code/*
-task jd_get_share_code.js desi JD_COOKIE "${TG}"
-lOGName="$(ls -a /ql/log/jd_get_share_code |egrep -o [0-9]+-[0-9]+-[0-9]+-[0-9]+-[0-9]+-[0-9]+.log |awk 'END {print}')"
-FARM="$(grep '/farm' /ql/log/jd_get_share_code/${lOGName})"
-PET="$(grep '/pet' /ql/log/jd_get_share_code/${lOGName})"
-BEAN="$(grep '/bean' /ql/log/jd_get_share_code/${lOGName})"
-JXFACTORY="$(grep '/jxfactory' /ql/log/jd_get_share_code/${lOGName})"
-SGMH="$(grep '/sgmh' /ql/log/jd_get_share_code/${lOGName})"
-HEALTH="$(grep '/health' /ql/log/jd_get_share_code/${lOGName})"
-
+if [[ ! "${api_id}" == "填写您Telegram的API的ID" ]] && [[ ! "${api_hash}" == "填写您Telegram的API的密匙" ]]; then
+    task jd_get_share_code.js desi JD_COOKIE "${TG}"
+    lOGName="$(ls -a /ql/log/jd_get_share_code |egrep -o [0-9]+-[0-9]+-[0-9]+-[0-9]+-[0-9]+-[0-9]+.log |awk 'END {print}')"
+    FARM="$(grep '/farm' /ql/log/jd_get_share_code/${lOGName})"
+    PET="$(grep '/pet' /ql/log/jd_get_share_code/${lOGName})"
+    BEAN="$(grep '/bean' /ql/log/jd_get_share_code/${lOGName})"
+    JXFACTORY="$(grep '/jxfactory' /ql/log/jd_get_share_code/${lOGName})"
+    SGMH="$(grep '/sgmh' /ql/log/jd_get_share_code/${lOGName})"
+    HEALTH="$(grep '/health' /ql/log/jd_get_share_code/${lOGName})"
 cat >/ql/jd/${TG}.py <<-EOF
 #调度配置 0,1 0 * * 1 python3 /ql/jd/${TG}.py
 from telethon import TelegramClient
@@ -39,7 +39,6 @@ async def main():
 with client:
     client.loop.run_until_complete(main())
 EOF
-
 cat >/ql/jd/"${RWWJ}" <<-EOF
 #!/usr/bin/env bash
 if [ "$(grep -c ${TG}.py /ql/config/crontab.list)" = 0 ]; then
@@ -57,6 +56,6 @@ if [ "$(grep -c ${TG}.sh /ql/config/crontab.list)" = 0 ]; then
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer ${token}" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"获取互助码${TG}","command":"task /ql/jd/${TG}.sh","schedule":"${CRON2} 13 * * 6"}' --compressed 'http://127.0.0.1:5700/api/crons?t=${CRON1}'
 fi
 EOF
-
 task /ql/jd/"${RWWJ}"
 rm -rf /ql/jd/"${RWWJ}"
+fi
