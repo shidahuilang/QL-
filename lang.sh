@@ -50,7 +50,7 @@ TIME() {
 	case $QLJB in
 		1)
 			 #bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/Aaron-lv/vip11.sh)"
-			 bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/Aaron-lv/vip11.sh)"
+			 bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/Aaron-lv/vip110.sh)"
 		break
 		;;
 		2)
