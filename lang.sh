@@ -49,7 +49,7 @@ TIME() {
 	read -p " ${scqlbianmaa}： " QLJB
 	case $QLJB in
 		1)
-			bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/Aaron-lv/vip1.sh)"
+			bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/Aaron-lv/vip11.sh)"
 		break
 		;;
 		2)
