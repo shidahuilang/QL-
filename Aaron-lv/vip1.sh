@@ -164,10 +164,10 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		fi
 	fi
 	docker=$(docker ps -a|grep qinglong) && dockerid=$(awk '{print $(1)}' <<<${docker})
-	images=$(docker images|grep qinglong) && imagesid=$(awk '{print $(3)}' <<<${images})
+	 #images=$(docker images|grep qinglong) && imagesid=$(awk '{print $(3)}' <<<${images})
 	docker stop -t=5 "${dockerid}" > /dev/null 2>&1
 	docker rm "${dockerid}"
-	docker rmi "${imagesid}"
+	 #docker rmi "${imagesid}"
 fi
 if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
 	Available="$(df -h | grep "${QL_Kongjian}" | awk '{print $4}' | awk 'NR==1')"
@@ -301,7 +301,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 			Y)
 				echo
 				TIME y "开始安装脚本，请耐心等待..."
-				docker exec -it qinglong bash -c "$(curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/Aaron-lv.sh)"
+				docker exec -it qinglong bash -c "$(curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun.sh)"
 			break
 			;;
 			N)
