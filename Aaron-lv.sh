@@ -164,7 +164,7 @@ fi
 echo
 echo
 echo
-TIME y "拉取Aaron-lv和faker2大佬们的脚本"
+TIME y "拉取Aaron-lv-faker2-smiek2121-shufflewzc大佬们的脚本"
 echo
 echo
 rm -fr /ql/azcg.log
