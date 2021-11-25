@@ -49,19 +49,17 @@ TIME() {
 	read -p " ${scqlbianmaa}： " QLJB
 	case $QLJB in
 		1)
-			 
-			 bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/Aaron-lv/vip002.sh)"
+			bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/Aaron-lv/vip1.sh)"
 		break
 		;;
 		2)
-			 
-			 bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun/vip001.sh)"
+			bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun/vip2.sh)"
 		break
 		;;
 		3)
 			echo
 			TIME r "您选择了退出程序!"
-			rm -fr ql.sh
+			rm -fr vip1.sh vip2.sh
 			echo
 			sleep 1
 			exit 1
