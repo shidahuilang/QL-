@@ -25,7 +25,7 @@ if [ "$(grep -c \"token\" /ql/config/auth.json)" = 0 ]; then
 	echo
 	exit 1
 fi
-vmkdir -p /run/nginx
+mkdir -p /run/nginx
 nginx -c /etc/nginx/nginx.conf
 dir_shell=/ql/config
 dir_script=/ql/scripts
