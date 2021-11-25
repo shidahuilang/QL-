@@ -17,20 +17,11 @@ TIME() {
 	 }
       }
 }
-
-[[ ! "$USER" == "root" ]] && {
-	clear
-	echo
-	TIME y "警告：请使用root用户操作!~~"
-	echo
-	sleep 2
-	exit 1
-}
 if [[ "$USER" == "root" ]]; then
 	clear
 	echo
 	echo
-	TIME g " 您选择了手动自动提交助力码库"
+	TIME g " 您选择了手动TG机器人提交助力码库"
 	echo
 	TIME y " 请选择网络类型"
 	echo
@@ -81,20 +72,21 @@ if [[ "$(. /etc/os-release && echo "$ID")" == "centos" ]]; then
 	export QL_PATH="/opt"
 	yum -y update
 	yum -y install sudo wget git
-	yum -y install net-tools.x86_64
+	yum -y install net-tools.x86_64 subversion
 elif [[ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]]; then
 	TIME g "正在安装宿主机所需要的依赖，请稍后..."
 	export QL_PATH="/opt"
 	apt-get -y update
 	apt-get -y install sudo wget git
-	apt-get -y install net-tools
+	apt-get -y install net-tools subversion
 elif [[ "$(. /etc/os-release && echo "$ID")" == "debian" ]]; then
 	TIME g "正在安装宿主机所需要的依赖，请稍后..."
 	export QL_PATH="/opt"
 	apt -y update
 	apt -y install sudo wget git
-	apt -y install net-tools
+	apt -y install net-tools subversion
 elif [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
+	XTong="openwrt"
 	if [[ -d /opt/docker ]]; then
 		export QL_PATH="/opt"
 		export QL_Kongjian="/opt/docker"
@@ -105,15 +97,9 @@ elif [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
 		TIME g "没找到/opt/docker或者/mnt/mmcblk2p4/docker"
 		exit 1
 	fi
-	XTong="openwrt"
-	opkg list | awk '{print $1}' > Installed_PKG_List
-	if [[ ! "$(cat Installed_PKG_List)" =~ git-http ]]; then
-		TIME g "正在安装宿主机所需要的依赖，请稍后..."
-		opkg update
-		opkg install git-http > /dev/null 2>&1
-		rm -fr Installed_PKG_List
-	fi
-
+else
+	TIME r "不支持您的系统"
+	exit 1
 fi
 IP="$(ifconfig -a|grep inet|grep -v 127|grep -v 172|grep -v inet6|awk '{print $2}'|tr -d "addr:")"
 if [[ -z "${IP}" ]]; then
@@ -250,7 +236,7 @@ docker run -dit \
   --name qinglong \
   --hostname qinglong \
   --restart always \
-  shidahuilang/qinglong:2.10.8
+  whyour/qinglong:2.10.6
 export local_ip="$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAddress)"
 if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 	if [[ -n "$(ls -A "${QL_PATH}/qlbeifen1" 2>/dev/null)" ]]; then
@@ -258,43 +244,86 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		docker cp ${QL_PATH}/qlbeifen1/ql/db/env.db qinglong:/ql/db/env.db
 		docker cp ${QL_PATH}/qlbeifen1/ql/config/auth.json qinglong:/ql/config/auth.json
 		docker cp ${QL_PATH}/qlbeifen1/ql/db/auth.db qinglong:/ql/db/auth.db
-		docker cp ${QL_PATH}/qlbeifen1/ql/config/bot.json qinglong:/ql/config/bot.json
-	fi
-	if [[ -d "${QL_PATH}/qlbeifen1/ql/jd" ]]; then
-		docker cp ${QL_PATH}/qlbeifen1/ql/jd qinglong:/ql/
-	fi
-	if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` == '0' ]]; then
-		curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun/authbk.json > ${QL_PATH}/ql/authbk.json
-		sleep 2
-		docker cp ${QL_PATH}/ql/authbk.json qinglong:/ql/config/auth.json
 	fi
 	docker restart qinglong
-	sleep 5
 	clear
+	echo
 	echo
 	TIME y "青龙面板安装完成，下一步进入安装任务程序，请耐心等候..."
-	docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun.sh)"
-	echo
-	if [[ ! -d /opt/ql/scripts/feverrun_my_scripts ]]; then
+	if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then
+		echo
+		TIME g "检测到你已有配置，继续使用您的[帐号密码文件]和[环境变量文件]来安装使用,免除您设置烦恼!"
+		echo
+		sleep 5
+		docker exec -it qinglong bash -c "$(curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun.sh)"
+		[[ -f ${QL_PATH}/qlbeifen1/ql/config/bot.json ]] && docker cp ${QL_PATH}/qlbeifen1/ql/config/bot.json qinglong:/ql/config/bot.json
+		if [[ -d ${QL_PATH}/qlbeifen1/ql/jd ]]; then
+			docker cp ${QL_PATH}/qlbeifen1/ql/jd qinglong:/ql/
+			for X in $(ls -a $QL_PATH/ql/jd |egrep -o [0-9]+-[0-9]+.sh); do docker exec -it qinglong bash -c "task /ql/jd/${X}"; done
+		fi
+		echo
+		docker cp  /ql/qlwj/auth.json qinglong:/ql/config/auth.json
+		docker restart qinglong > /dev/null 2>&1
+		rm -fr ${QL_PATH}/qlbeifen1 > /dev/null 2>&1
+		docker exec -it qinglong bash -c "rm -rf /ql/qlwj"
 		sleep 2
-		exit 1
-	fi	
-	docker restart qinglong > /dev/null 2>&1
-	sleep 2
-	clear
-	echo
-	echo
-	TIME y "${IP}:${QL_PORT} ,如果是VPS请用 ${local_ip}:${QL_PORT} (IP检测因数太多，不一定准确，仅供参考)"
-	echo
-	TIME y "请确保您系统已放行${QL_PORT}端口，然后使用您的 IP:${QL_PORT} 在浏览器打开页面,登录青龙面板"
-	echo
-	TIME y "点击[开始安装]，[通知方式]跳过，设置好[用户名]跟[密码],然后点击[提交]，然后点击[去登录]，输入帐号密码完成登录!"
-	echo
-	TIME y "完成登录后,请设置好 wskey 或者 pt_key "	
-	rm -fr ${QL_PATH}/qlbeifen1 > /dev/null 2>&1
-	rm -fr ${QL_PATH}/ql/authbk.json > /dev/null 2>&1
-	echo
-	exit 0
+		clear
+		echo
+		echo
+		TIME y "${IP}:${QL_PORT} ,如果是VPS请用 ${local_ip}:${QL_PORT} (IP检测因数太多，不一定准确，仅供参考)"
+		echo
+		TIME y "请确保您系统已放行${QL_PORT}端口，然后使用您的 IP:${QL_PORT} 在浏览器打开页面,登录青龙面板"
+		echo
+		TIME y "点击[开始安装]，[通知方式]跳过，设置好[用户名]跟[密码],然后点击[提交]，然后点击[去登录]，输入帐号密码完成登录!"
+		echo
+		TIME y "完成登录后,请设置好 wskey 或者 pt_key"
+		exit 0
+	else
+		echo
+		TIME y "${IP}:${QL_PORT} ,如果是VPS请用 ${local_ip}:${QL_PORT} (IP检测因数太多，不一定准确，仅供参考)"
+		echo
+		TIME g "请使用您的 IP:"${QL_PORT}" 在浏览器打开控制面板"
+		echo
+		TIME y "点击[开始安装]，[通知方式]跳过，设置好[用户名]跟[密码],然后点击[提交]，然后点击[去登录]，输入帐号密码完成登录!"
+		echo
+		TIME g "登录进入后在左侧[环境变量]添加WSKEY或者PT_KEY，不添加也没所谓，以后添加一样，但是一定要登录进入后才能继续下一步操作"
+		echo
+		QLMEUN="[ N/n ]退出程序，登录后按回车继续安装脚本"
+		while :; do
+		read -p " ${QLMEUN}： " MENU
+		if [[ `docker exec -it qinglong bash -c "cat /ql/config/auth.json" | grep -c "\"token\""` -ge '1' ]]; then
+			S="Y"
+		fi
+		if [[ ${MENU} == "N" ]] || [[ ${MENU} == "n" ]]; then
+			S="N"
+		fi
+		case $S in
+			Y)
+				echo
+				TIME y "开始安装脚本，请耐心等待..."
+				docker exec -it qinglong bash -c "$(curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun.sh)"
+)"
+			break
+			;;
+			N)
+				echo
+				TIME r "退出安装程序!"
+				echo
+				sleep 2
+				exit 1
+			break
+    			;;
+    			*)
+				QLMEUN="请先登录后按回车继续安装脚本，或者现在按[ N/n ]退出程序"
+			;;
+		esac
+		done
+		[[ -f ${QL_PATH}/qlbeifen1/ql/config/bot.json ]] && docker cp ${QL_PATH}/qlbeifen1/ql/config/bot.json qinglong:/ql/config/bot.json
+		docker restart qinglong > /dev/null 2>&1
+		rm -fr ${QL_PATH}/qlbeifen1 > /dev/null 2>&1
+		docker exec -it qinglong bash -c "rm -rf /ql/qlwj"
+		TIME g "安装完成"
+	fi
 else
 	echo
 	echo
@@ -303,5 +332,4 @@ else
 	sleep 2
 	exit 1
 fi
-echo
 exit 0
