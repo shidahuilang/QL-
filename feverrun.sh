@@ -25,6 +25,8 @@ if [ "$(grep -c \"token\" /ql/config/auth.json)" = 0 ]; then
 	echo
 	exit 1
 fi
+vmkdir -p /run/nginx
+nginx -c /etc/nginx/nginx.conf
 dir_shell=/ql/config
 dir_script=/ql/scripts
 config_shell_path=$dir_shell/config.sh
@@ -71,64 +73,13 @@ cp -Rf /ql/qlwj/extra.sh /ql/config/extra.sh
 cp -Rf /ql/qlwj/extra.sh /ql/sample/extra.sample.sh
 cp -Rf /ql/qlwj/raw_jd_OpenCard.py /ql/scripts/raw_jd_OpenCard.py
 cp -Rf /ql/qlwj/wskey.py /ql/scripts/wskey.py
-cp -Rf /ql/qlwj/crypto-js.js /ql/scripts/crypto-js.js
 cp -Rf /ql/qlwj/curtinlv_JD-Script_jd_tool_dl.py /ql/scripts/curtinlv_JD-Script_jd_tool_dl.py
+cp -Rf /ql/qlwj/disableDuplicateTasksImplement.py /ql/scripts/disableDuplicateTasksImplement.py
 cp -Rf /ql/qlwj/jd_Evaluation.py /ql/scripts/jd_Evaluation.py
 cp -Rf /ql/qlwj/jd_get_share_code.js /ql/scripts/jd_get_share_code.js
+cp -Rf /ql/qlwj/jdCookie.js /ql/scripts/jdCookie.js
 echo
-echo
-TIME l "安装依赖..."
-echo
-TIME y "安装依赖需要时间，请耐心等待!"
-echo
-sleep 2
-npm config set registry https://mirrors.huaweicloud.com/repository/npm/
-npm config get registry
-TIME l "安装依赖png-js"
-npm install -g png-js
-TIME l "安装依赖date-fns"
-npm install -g date-fns
-TIME l "安装依赖axios"
-npm install -g axios
-TIME l "安装依赖crypto-js"
-npm install -g crypto-js
-TIME l "安装依赖md5"
-npm install -g md5
-TIME l "安装依赖ts-md5"
-npm install -g ts-md5
-TIME l "安装依赖tslib"
-npm install -g tslib
-TIME l "安装依赖@types/node"
-npm install -g @types/node
-TIME l "安装依赖requests"
-npm install -g requests
-TIME l "安装依赖tough-cookie"
-npm install -g tough-cookie
-TIME l "安装依赖jsdom"
-npm install -g jsdom
-TIME l "安装依赖download"
-pip3 install download
-TIME l "安装依赖tunnel"
-npm install -g tunnel
-TIME l "安装依赖fs"
-npm install -g fs
-TIME l "安装依赖ws"
-npm install -g ws
-TIME l "安装依赖js-base64"
-npm install -g js-base64
-TIME l "安装依赖jieba"
-npm install -g jieba
-TIME l "安装pnpm"
-cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && pnpm install && pnpm i ts-node typescript @types/node date-fns axios
-cd /ql
-pip3 install canvas
-cd /ql
-TIME l "安装python3"
-apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev freetype-dev
-cd /ql
-task curtinlv_JD-Script_jd_tool_dl.py
-echo
-TIME g "依赖安装完毕..."
+bash -c  "$(curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/npm.sh)"
 echo
 # 将 extra.sh 添加到定时任务
 if [ "$(grep -c extra /ql/config/crontab.list)" = 0 ]; then
@@ -170,17 +121,6 @@ if [ "$(grep -c raw_jd_OpenCard.py /ql/config/crontab.list)" = 0 ]; then
     # 获取token
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"JD入会开卡领取京豆","command":"task raw_jd_OpenCard.py","schedule":"8 8,15,20 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1634041221437'
-fi
-sleep 2
-echo
-# 将 jd_get_share_code.js 添加到定时任务
-if [ "$(grep -c jd_get_share_code.js /ql/config/crontab.list)" = 0 ]; then
-    echo
-    TIME g "添加任务 [获取助力码]"
-    echo
-    # 获取token
-    token=$(cat /ql/config/auth.json | jq --raw-output .token)
-    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"获取助力码","command":"task jd_get_share_code.js","schedule":"20 13 * * 6"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1637505495835'
 fi
 sleep 2
 echo
@@ -234,4 +174,5 @@ else
 	rm -rf /ql/qlwj
 	exit 1
 fi
+echo
 exit 0
