@@ -302,7 +302,6 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 				echo
 				TIME y "开始安装脚本，请耐心等待..."
 				docker exec -it qinglong bash -c "$(curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun.sh)"
-)"
 			break
 			;;
 			N)
@@ -319,6 +318,10 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		esac
 		done
 		[[ -f ${QL_PATH}/qlbeifen1/ql/config/bot.json ]] && docker cp ${QL_PATH}/qlbeifen1/ql/config/bot.json qinglong:/ql/config/bot.json
+		if [[ -d ${QL_PATH}/qlbeifen1/ql/jd ]]; then
+			docker cp ${QL_PATH}/qlbeifen1/ql/jd qinglong:/ql/
+			for X in $(ls -a $QL_PATH/ql/jd |egrep -o [0-9]+-[0-9]+.sh); do docker exec -it qinglong bash -c "task /ql/jd/${X}"; done
+		fi
 		docker restart qinglong > /dev/null 2>&1
 		rm -fr ${QL_PATH}/qlbeifen1 > /dev/null 2>&1
 		docker exec -it qinglong bash -c "rm -rf /ql/qlwj"
