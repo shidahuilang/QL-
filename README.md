@@ -68,7 +68,7 @@ wget -O lang.sh https://ghproxy.com/https://raw.githubusercontent.com/shidahuila
 - 一键单独安装任务（青龙安装好后，登录页面后，可以用这个单独安装任务）
 - 单脚本
 ``` bash
-docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun.sh)"
+docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/danxiaoben.sh)"
 ``` 
 - 多脚本库
 ``` bash
