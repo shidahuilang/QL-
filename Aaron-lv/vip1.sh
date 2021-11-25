@@ -21,7 +21,7 @@ if [[ "$USER" == "root" ]]; then
 	clear
 	echo
 	echo
-	TIME g " 您选择了手动TG机器人提交助力码库"
+	TIME g " 您选择了自动TG机器人提交助力码库"
 	echo
 	TIME y " 请选择网络类型"
 	echo
@@ -244,6 +244,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		docker cp ${QL_PATH}/qlbeifen1/ql/db/env.db qinglong:/ql/db/env.db
 		docker cp ${QL_PATH}/qlbeifen1/ql/config/auth.json qinglong:/ql/config/auth.json
 		docker cp ${QL_PATH}/qlbeifen1/ql/db/auth.db qinglong:/ql/db/auth.db
+		docker cp ${QL_PATH}/qlbeifen1/ql/config/bot.json qinglong:/ql/config/bot.json
 	fi
 	docker restart qinglong
 	clear
@@ -262,7 +263,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 			for X in $(ls -a $QL_PATH/ql/jd |egrep -o [0-9]+-[0-9]+.sh); do docker exec -it qinglong bash -c "task /ql/jd/${X}"; done
 		fi
 		echo
-		docker cp  /ql/qlwj/auth.json qinglong:/ql/config/auth.json
+		docker cp  /qlbeifen1/ql/config/auth.json qinglong:/ql/config/auth.json
 		docker restart qinglong > /dev/null 2>&1
 		rm -fr ${QL_PATH}/qlbeifen1 > /dev/null 2>&1
 		docker exec -it qinglong bash -c "rm -rf /ql/qlwj"
