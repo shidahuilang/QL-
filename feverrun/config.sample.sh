@@ -113,29 +113,29 @@ export JD_BEAN_STOP="9"
 # 脚本推送控制类环境变量
 
 ## 1、京东多合一签到脚本关闭运行结果推送，默认推送，填true表示不推送
-export JD_BEAN_SIGN_STOP_NOTIFY="true"
+export JD_BEAN_SIGN_STOP_NOTIFY=""
 ## 2、京东多合一签到脚本推送简单结果，默认推送完整版结果，填true表示启用简单推送
 export JD_BEAN_SIGN_NOTIFY_SIMPLE="true"
 ## 3、东东萌宠关闭推送。填写false为不关闭推送，true为关闭推送
-export PET_NOTIFY_CONTROL="true"
+export PET_NOTIFY_CONTROL="false"
 ## 4、京东农场关闭推送。填写false为不关闭推送，true为关闭推送
-export FRUIT_NOTIFY_CONTROL="true"
+export FRUIT_NOTIFY_CONTROL="false"
 ## 5、京东领现金关闭推送。填写false为不关闭推送，true为关闭推送
-export CASH_NOTIFY_CONTROL="true"
+export CASH_NOTIFY_CONTROL="false"
 ## 6、京东摇钱树关闭推送。填写false为不关闭推送，true为关闭推送
-export MONEYTREE_NOTIFY_CONTROL="true"
+export MONEYTREE_NOTIFY_CONTROL="false"
 ## 7、京东点点券关闭推送。填写false为不关闭推送，true为关闭推送
-export DDQ_NOTIFY_CONTROL="true"
+export DDQ_NOTIFY_CONTROL="false"
 ## 8、京东京东赚赚小程序关闭推送。填写false为不关闭推送，true为关闭推送
-export JDZZ_NOTIFY_CONTROL="true"
+export JDZZ_NOTIFY_CONTROL="false"
 ## 9、宠汪汪兑换京豆关闭推送。填写false为不关闭推送，true为关闭推送
-export JD_JOY_REWARD_NOTIFY="true"
+export JD_JOY_REWARD_NOTIFY="false"
 ## 10、宠汪汪赛跑获胜后是否推送通知。填false为不推送通知消息,true为推送通知消息
 export JOY_RUN_NOTIFY="true"
 ## 11、东东超市兑换奖品是否关闭推送通知。填false为不关闭推送,true为关闭推送
 export MARKET_REWARD_NOTIFY="true"
 ## 12、京喜财富岛控制是否运行脚本后通知。输入true为通知,不填则为不通知
-export CFD_NOTIFY_CONTROL=""
+export CFD_NOTIFY_CONTROL="true"
 ## 13、京喜农场岛控制是否运行脚本后通知。0=只通知成熟;1=本次获得水滴>0;2=任务执行;3=任务执行+未种植种子
 export JXNC_NOTIFY_LEVEL="0"
 
@@ -144,7 +144,7 @@ export JXNC_NOTIFY_LEVEL="0"
 ## 1、京东领现金红包兑换京豆开关。false为不换,true为换(花费2元红包兑换200京豆，一周可换四次)，默认为false
 export CASH_EXCHANGE="false"
 ## 2、宠汪汪喂食数量。可以填的数字0,10,20,40,80,其他数字不可
-export JOY_FEED_COUNT="20"
+export JOY_FEED_COUNT="40"
 ## 3、宠汪汪帮好友喂食。默认 "false" 不会自动给好友的汪汪喂食，如想自动喂食，请修改为 "true"
 export JOY_HELP_FEED="true"
 ## 4、宠汪汪是否赛跑(默认参加双人赛跑)。false为不跑,true为跑
@@ -156,9 +156,9 @@ export JOY_RUN_FLAG="true"
 ## 如果您有5个账号但只写了四个数字，那么第5个账号将默认参加2人赛，账号如果更多，与此类似
 export JOY_TEAM_LEVEL="2&2&50&10"
 ## 6、宠汪汪赛跑自己账号内部互助。输入true为开启内部互助
-export JOY_RUN_HELP_MYSELF="false"
+export JOY_RUN_HELP_MYSELF="true"
 ## 7、宠汪汪积分兑换多少京豆。目前可填值为20或者500,脚本默认0,0表示不兑换京豆
-export JD_JOY_REWARD_NAME="500"
+export JD_JOY_REWARD_NAME="20"
 ## 8、东东超市兑换京豆数量。目前可输入值为20或者1000，或者其他商品的名称,例如碧浪洗衣凝珠
 export MARKET_COIN_TO_BEANS="超值京豆包"
 ## 9、东东超市是否参加pk。true表示参加,false表示不参加
@@ -204,8 +204,8 @@ export JD_USER_AGENT="true"
 ## [1] jd_CheckCK.js
 ### 当有自动禁用或自动启用事件发生才会发送通知，如果要每次都通知则需设定变量
 ### 自动检测账号是否正常，不正常的自动禁用，正常的如果是禁用状态则自动启用
-export SHOWSUCCESSCK="false" ##显示正常CK，true为显示
-export CKALWAYSNOTIFY="false" ##通知CK状态，true为永远通知 
+export SHOWSUCCESSCK="true" ##显示正常CK，true为显示
+export CKALWAYSNOTIFY="true" ##通知CK状态，true为永远通知 
 export CKAUTOENABLE="true" ##自动启用CK，false为停用
 export CKREMARK="true" ##显示CK备注，false为不显示
 export CKNOWARNERROR="true" ##服务器空数据等错误不触发通知，false为通知
