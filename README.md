@@ -9,10 +9,21 @@
 自动检测docker，有则跳过，无则执行安装，如果是openwrt则不会自动安装docker
 如果您以前安装有青龙的话，则自动删除您的青龙，全部推倒重新安装
 如果有条件的话，最好使用翻墙网络来安装，要不然安装依赖的时候你会急死的
+- 为防止系统没安装curl，使用不了一键命令，使用一键安装青龙面板命令之前选执行一次安装curl命令
+- 安装curl请注意区分系统，openwrt千万别另外安装curl，openwrt本身自带了，另外安装还会用不了
+- ubuntu或者debian系统
+``` bash
+sudo apt-get update && sudo apt-get install -y curl
+```
+- centos系统
+``` bash
+sudo yum install -y curl
+```
+
+### 🚩 一键安装青龙面板命令
 
 ``` bash
 bash -c "$(curl -fsSL git.io/J1ARi)"
-
 ```
 
 
