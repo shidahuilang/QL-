@@ -263,7 +263,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 			for X in $(ls -a $QL_PATH/ql/jd |egrep -o [0-9]+-[0-9]+.sh); do docker exec -it qinglong bash -c "task /ql/jd/${X}"; done
 		fi
 		echo
-		docker cp  /ql/qlwj/auth.json qinglong:/ql/config/auth.json
+		docker cp  /qlbeifen1/ql/config/auth.json qinglong:/ql/config/auth.json
 		docker restart qinglong > /dev/null 2>&1
 		rm -fr ${QL_PATH}/qlbeifen1 > /dev/null 2>&1
 		docker exec -it qinglong bash -c "rm -rf /ql/qlwj"
