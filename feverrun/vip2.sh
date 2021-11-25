@@ -255,7 +255,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		TIME g "检测到你已有配置，继续使用您的[帐号密码文件]和[环境变量文件]来安装使用,免除您设置烦恼!"
 		echo
 		sleep 5
-		docker exec -it qinglong bash -c "$(curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/Aaron-lv.sh)"
+		docker exec -it qinglong bash -c "$(curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun.sh)"
 		[[ -f ${QL_PATH}/qlbeifen1/ql/config/bot.json ]] && docker cp ${QL_PATH}/qlbeifen1/ql/config/bot.json qinglong:/ql/config/bot.json
 		if [[ -d ${QL_PATH}/qlbeifen1/ql/jd ]]; then
 			docker cp ${QL_PATH}/qlbeifen1/ql/jd qinglong:/ql/
