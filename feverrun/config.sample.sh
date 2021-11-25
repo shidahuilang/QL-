@@ -111,7 +111,9 @@ NotifyBeanSign="0"
 export JD_BEAN_STOP="9"
 
 # 脚本推送控制类环境变量
-
+##宠汪汪积分兑换有就换版
+export JOY_GET20WHEN16="true"  #控制16点才触发20京豆兑换.
+export JOY_GET20WHEN16="true"
 ## 1、京东多合一签到脚本关闭运行结果推送，默认推送，填true表示不推送
 export JD_BEAN_SIGN_STOP_NOTIFY=""
 ## 2、京东多合一签到脚本推送简单结果，默认推送完整版结果，填true表示启用简单推送
