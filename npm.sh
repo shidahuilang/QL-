@@ -59,6 +59,8 @@ TIME l "安装依赖ws"
 npm install -g ws
 TIME l "安装依赖js-base64"
 npm install -g js-base64
+TIME l "安装依赖telethon"
+pip3 install telethon
 TIME l "安装依赖jieba"
 pip3 install jieba
 TIME l "安装pnpm"
