@@ -585,3 +585,6 @@ case $1 in
         ran_num=""
         ;;
 esac
+
+## 过期京豆兑换为喜豆
+exjxbeans true
