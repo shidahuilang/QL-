@@ -3,7 +3,7 @@
 ## 添加你需要重启自动执行的任意命令，比如 ql repo
 ## 安装node依赖使用 pnpm install -g xxx xxx
 ## 安装python依赖使用 pip3 install xxx
-ql raw https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun/disableDuplicateTasksImplement.py
+
 ql raw https://raw.githubusercontent.com/passerby-b/JDDJ/main/jddj_fruit.js
 ql repo https://ghproxy.com/https://github.com/mmnvnmm/omo.git "card|tools"
 ql repo https://github.com/ccwav/QLScript2.git "jd_joy_reward_Mod" "NoUsed" "ql|jdCookie|JS_USER_AGENTS|sendNotify|USER_AGENTS|utils"
