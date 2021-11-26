@@ -418,7 +418,17 @@ export FS_LEVEL="car"
 
 ### 青蛙开卡新变量，京豆奖励判断 | 1=邀请 2=开卡 3=关注  | 填1,2,3
 export guaopencard_rewardBean="1,2,3"
+j=50
+for (( i = 11; i <= j; i++ )); do
+    export guaopencard$i="true"
+    export guaopencard_addSku$i="true"
+done
 
+export guaopencard_All="true"
+export guaopencard_addSku_All="true"
+export guaopencardRun_All="true"
+export guaopencard_draw="#"
+export guaunknownTask_addSku_All="true"
 
 
 ## 组队环境变量
