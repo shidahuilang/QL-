@@ -248,6 +248,19 @@ export NOTIFY_NOLOGINSUCCESS="true"
 ### 当接收到发送CK失效通知执行子线程任务.(jd_CheckCK.js 可替换成其他任意qinglong支持的脚本文件.)
 export NOTIFY_CKTASK="jd_CheckCK.js"
 
+# Wenmoux 部分环境变量 
+## 1、QQ星系牧场自动兑换20豆
+export Cowexchange="true"
+## 2、欧洲狂欢杯兑换兑换豆子，填38豆子，填39e卡
+export Cupexid="39"
+## 3、10秒阅读
+### 填写自己CK
+export Readck=""
+### 填写自己设备UA
+export Read10UA=""
+### 填true推送消息，默认不推送
+export jrpush=""
+
 # curtinlv 环境变量
 ## 1、赚京豆
 ### 助力账号，填写pt_pin或用户名的值，如 zlzh = ['aaaa','xxxx','yyyy'] ，支持ENV
