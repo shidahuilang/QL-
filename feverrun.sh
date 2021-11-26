@@ -53,8 +53,10 @@ curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun/raw_
 TIME l "拉取wskey.py"
 curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun/wskey.py > /ql/qlwj/wskey.py
 TIME l "拉取auth.json"
-curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun/curtinlv_JD-Script_jd_tool_dl.py > /ql/qlwj/curtinlv_JD-Script_jd_tool_dl.py
-TIME l "拉取curtinlv_JD-Script_jd_tool_dl.py"
+curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun/auth.json > /ql/qlwj/auth.json
+TIME l "拉取curtinlv_JD-Script_jd_tool_dl.py
+curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun/curtinlv_JD-Script_jd_tool_dl.py > /ql/qlwj/curtinlv_JD-Script_jd_tool_dl.py"
+TIME l "拉取disableDuplicateTasksImplement.py"
 curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun/disableDuplicateTasksImplement.py > /ql/qlwj/disableDuplicateTasksImplement.py
 TIME l "拉取jd_Evaluation.py"
 curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun/jd_Evaluation.py > /ql/qlwj/jd_Evaluation.py
