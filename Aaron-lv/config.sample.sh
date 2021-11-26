@@ -201,7 +201,7 @@ export PURCHASE_SHOPS="true"
 export TUAN_ACTIVEID=""
 ## 22、美丽研究院开关
 export JD_USER_AGENT="true"
-
+export NOTIFY_CKTASK="./wskey.py"
 # ccwav 环境变量
 ## [1] jd_CheckCK.js
 ### 当有自动禁用或自动启用事件发生才会发送通知，如果要每次都通知则需设定变量
