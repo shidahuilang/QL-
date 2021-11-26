@@ -111,10 +111,9 @@ NotifyBeanSign="0"
 export JD_BEAN_STOP="9"
 
 # 脚本推送控制类环境变量
-
 ##宠汪汪积分兑换有就换版
-export JOY_GET20WHEN16="true"  #控制16点才触发20京豆兑换.
-export JOY_GET20WHEN16="true"
+#export JOY_GET20WHEN16="true"  #控制16点才触发20京豆兑换.
+#export JOY_GET20WHEN16="true"
 ## 1、京东多合一签到脚本关闭运行结果推送，默认推送，填true表示不推送
 export JD_BEAN_SIGN_STOP_NOTIFY=""
 ## 2、京东多合一签到脚本推送简单结果，默认推送完整版结果，填true表示启用简单推送
@@ -249,6 +248,19 @@ export NOTIFY_NOLOGINSUCCESS="true"
 ### 当接收到发送CK失效通知执行子线程任务.(jd_CheckCK.js 可替换成其他任意qinglong支持的脚本文件.)
 export NOTIFY_CKTASK="jd_CheckCK.js"
 
+# Wenmoux 部分环境变量 
+## 1、QQ星系牧场自动兑换20豆
+export Cowexchange="true"
+## 2、欧洲狂欢杯兑换兑换豆子，填38豆子，填39e卡
+export Cupexid="39"
+## 3、10秒阅读
+### 填写自己CK
+export Readck=""
+### 填写自己设备UA
+export Read10UA=""
+### 填true推送消息，默认不推送
+export jrpush=""
+
 # curtinlv 环境变量
 ## 1、赚京豆
 ### 助力账号，填写pt_pin或用户名的值，如 zlzh = ['aaaa','xxxx','yyyy'] ，支持ENV
@@ -372,7 +384,7 @@ export validate_num="" ##你需要的数值
 
 # Aaron-lv 环境变量
 ## 1、京东健康社区京豆兑换
-export JD_HEALTH_REWARD_NAME="20" ##只能兑换京豆，填写纯数字20 10 5 3
+export JD_HEALTH_REWARD_NAME="" ##只能兑换京豆，填写纯数字20 10 5 3
 
 # 不知名大佬环境变量
 ## 1、清空购物车
@@ -398,7 +410,7 @@ export JD_CART_KEYWORDS=""
 ### 使用前请认真看对应注释：https://raw.githubusercontent.com/X1a0He/jd_scripts_fixed/main/jd_try_xh.js
 export JD_TRY="true"
 export JD_TRY_PRICE="20"
-export JD_TRY_TITLEFILTERS="早餐奶@产后修复@体验装@腮红@袜子一双@睫毛胶水@儿童牛奶@牙刷头@灵芝@孢子@除臭@鼻炎@口罩@宠物@和田玉@祛痘@解酒@教程@软件@英语@辅导@培训@流量卡@保护套@手机壳@衣架@戒烟@棉签@网课@擦杯布@驱蚊@刷头@卸妆@互动课@小靓美@脚气@文胸@卷尺@种子@档案袋@癣@中年@老太太@妇女@私处@孕妇@卫生巾@卫生条@课@培训@阴道@生殖器@肛门@狐臭@少女内衣@胸罩@洋娃娃@益智@少女@女性内衣@女性内裤@女内裤@女内衣@女孩@屏风底座@童装@吊带@黑丝@钢圈@婴儿@儿童@玩具@幼儿@娃娃@网课@网校@电商@手机壳@钢化膜@网络课程@女纯棉@三角裤@美少女@纸尿裤@英语@俄语@四级@六级@四六级@在线网络@在线@阴道炎@宫颈@糜烂@打底裤@手机膜@鱼@狗"
+export JD_TRY_TITLEFILTERS="早餐奶@产后修复@体验装@腮红@卡针@袜子一双@睫毛胶水@儿童牛奶@牙刷头@灵芝@孢子@除臭@鼻炎@口罩@宠物@和田玉@祛痘@解酒@教程@软件@英语@辅导@培训@流量卡@保护套@手机壳@衣架@戒烟@棉签@网课@擦杯布@驱蚊@刷头@卸妆@互动课@小靓美@脚气@文胸@卷尺@种子@档案袋@癣@中年@老太太@妇女@私处@孕妇@卫生巾@卫生条@课@培训@阴道@生殖器@肛门@狐臭@少女内衣@胸罩@洋娃娃@益智@少女@女性内衣@女性内裤@女内裤@女内衣@女孩@屏风底座@童装@吊带@黑丝@钢圈@婴儿@儿童@玩具@幼儿@娃娃@网课@网校@电商@手机壳@钢化膜@网络课程@女纯棉@三角裤@美少女@纸尿裤@英语@俄语@四级@六级@四六级@在线网络@在线@阴道炎@宫颈@糜烂@打底裤@手机膜@鱼@狗"
 ## 4、批量取关店铺和商品
 ### 是否执行取消关注，默认true
 ### 使用前请认真看对应注释：https://raw.githubusercontent.com/X1a0He/jd_scripts_fixed/main/jd_unsubscribe_xh.js
@@ -419,7 +431,17 @@ export FS_LEVEL="car"
 
 ### 青蛙开卡新变量，京豆奖励判断 | 1=邀请 2=开卡 3=关注  | 填1,2,3
 export guaopencard_rewardBean="1,2,3"
+j=50
+for (( i = 11; i <= j; i++ )); do
+    export guaopencard$i="true"
+    export guaopencard_addSku$i="true"
+done
 
+export guaopencard_All="true"
+export guaopencard_addSku_All="true"
+export guaopencardRun_All="true"
+export guaopencard_draw="#"
+export guaunknownTask_addSku_All="true"
 
 
 ## 组队环境变量
