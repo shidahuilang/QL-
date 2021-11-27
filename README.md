@@ -23,6 +23,12 @@ sudo yum install -y curl
 bash -c "$(curl -fsSL git.io/J1ARi)"
 ```
 
+### 🚩 一键安装nvjdc面板命令
+
+``` bash
+bash -c "$(curl -fsSL git.io/J1pMg)"
+```
+
 #### 🚩 如果上面的命令运行成功会有提示，登录页面，设置好KEY
 
 
