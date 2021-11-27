@@ -231,8 +231,8 @@ portinfo=$(docker port nvjdc | head -1  | sed 's/ //g' | sed 's/80\/tcp->0.0.0.0
 baseip=$(curl -s ipip.ooo)  > /dev/null
 docker rm -f nvjdc
 docker pull shidahuilang/nvjdc:1.4
-docker run   --name nvjdc -p ${portinfo}:80 -d  -v  "$(pwd)"/Config.json:/app \
--v "$(pwd)"/.local-chromium:/app/.local-chromium  \
+sudo docker run   --name nolanjdc -p ${jdcport}:80 -d  -v  "$(pwd)":/app \
+-v /etc/localtime:/etc/localtime:ro \
 -it --privileged=true  shidahuilang/nvjdc:1.4
 echo -e "${green}nvjdc更新完毕，脚本自动退出。${plain}"
 echo -e "${green}面板访问地址：http://${baseip}:${portinfo}${plain}"
