@@ -69,9 +69,7 @@ get_opsy() {
   [ -f /etc/lsb-release ] && awk -F'[="]+' '/DESCRIPTION/{print $2}' /etc/lsb-release && return
 }
 virt_check() {
-  # if hash ifconfig 2>/dev/null; then
-  # eth=$(ifconfig)
-  # fi
+
 
   virtualx=$(dmesg) 2>/dev/null
 
@@ -121,25 +119,11 @@ virt_check() {
 }
 get_system_info() {
   cname=$(awk -F: '/model name/ {name=$2} END {print name}' /proc/cpuinfo | sed 's/^[ \t]*//;s/[ \t]*$//')
-  #cores=$(awk -F: '/model name/ {core++} END {print core}' /proc/cpuinfo)
-  #freq=$(awk -F: '/cpu MHz/ {freq=$2} END {print freq}' /proc/cpuinfo | sed 's/^[ \t]*//;s/[ \t]*$//')
-  #corescache=$(awk -F: '/cache size/ {cache=$2} END {print cache}' /proc/cpuinfo | sed 's/^[ \t]*//;s/[ \t]*$//')
-  #tram=$(free -m | awk '/Mem/ {print $2}')
-  #uram=$(free -m | awk '/Mem/ {print $3}')
-  #bram=$(free -m | awk '/Mem/ {print $6}')
-  #swap=$(free -m | awk '/Swap/ {print $2}')
-  #uswap=$(free -m | awk '/Swap/ {print $3}')
-  #up=$(awk '{a=$1/86400;b=($1%86400)/3600;c=($1%3600)/60} {printf("%d days %d hour %d min\n",a,b,c)}' /proc/uptime)
-  #load=$(w | head -1 | awk -F'load average:' '{print $2}' | sed 's/^[ \t]*//;s/[ \t]*$//')
+
   opsy=$(get_opsy)
   arch=$(uname -m)
-  #lbit=$(getconf LONG_BIT)
   kern=$(uname -r)
-  # disk_size1=$( LANG=C df -hPl | grep -wvE '\-|none|tmpfs|overlay|shm|udev|devtmpfs|by-uuid|chroot|Filesystem' | awk '{print $2}' )
-  # disk_size2=$( LANG=C df -hPl | grep -wvE '\-|none|tmpfs|overlay|shm|udev|devtmpfs|by-uuid|chroot|Filesystem' | awk '{print $3}' )
-  # disk_total_size=$( calc_disk ${disk_size1[@]} )
-  # disk_used_size=$( calc_disk ${disk_size2[@]} )
-  #tcpctrl=$(sysctl net.ipv4.tcp_congestion_control | awk -F ' ' '{print $3}')
+
   virt_check
 }
 copyright(){
@@ -164,9 +148,10 @@ install_nvjdc(){
 echo -e "${red}开始进行安装,请根据命令提示操作${plain}"
 git clone https://github.com/btlanyan/nvjdc.git /root/nvjdc
 cd /root/nvjdc && mkdir -p  .local-chromium/Linux-884014 && cd .local-chromium/Linux-884014
-wget https://mirrors.huaweicloud.com/chromium-browser-snapshots/Linux_x64/884014/chrome-linux.zip && unzip chrome-linux.zip > /dev/null 2>&1 
+echo -e "下载并解压，请耐心等待"
+wget https://mirrors.huaweicloud.com/chromium-browser-snapshots/Linux_x64/884014/chrome-linux.zip && unzip chrome-linux.zip
 rm  -f chrome-linux.zip > /dev/null 2>&1 
-rm  -f /root/nvjdc/Config/Config.json
+rm  -f /root/nvjdc/Config/Config.json > /dev/null 2>&1
 cd .. && cd ..
 read -p "请输入青龙服务器在web页面中显示的名称: " QLName && printf "\n"
 read -p "请输入青龙OpenApi Client ID: " ClientID && printf "\n"
@@ -219,6 +204,7 @@ echo -e "创建并启动nvjdc容器"
 sudo docker run   --name nolanjdc -p ${jdcport}:80 -d  -v  "$(pwd)":/app \
 -v /etc/localtime:/etc/localtime:ro \
 -it --privileged=true  shidahuilang/nvjdc:1.4
+
 
 baseip=$(curl -s ipip.ooo)  > /dev/null
 
