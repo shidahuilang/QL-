@@ -230,10 +230,10 @@ update_nvjdc(){
 portinfo=$(docker port nvjdc | head -1  | sed 's/ //g' | sed 's/80\/tcp->0.0.0.0://g')
 baseip=$(curl -s ipip.ooo)  > /dev/null
 docker rm -f nvjdc
-docker pull nolanhzy/nvjdc:latest
+docker pull shidahuilang/nvjdc:1.4
 docker run   --name nvjdc -p ${portinfo}:80 -d  -v  "$(pwd)"/Config.json:/app \
 -v "$(pwd)"/.local-chromium:/app/.local-chromium  \
--it --privileged=true  nolanhzy/nvjdc:latest
+-it --privileged=true  shidahuilang/nvjdc:1.4
 echo -e "${green}nvjdc更新完毕，脚本自动退出。${plain}"
 echo -e "${green}面板访问地址：http://${baseip}:${portinfo}${plain}"
 exit 0
@@ -241,7 +241,7 @@ exit 0
 
 uninstall_nvjdc(){
 docker rm -f nvjdc
-docker rmi -f nolanhzy/nvjdc:1.4
+docker rmi -f shidahuilang/nvjdc:1.4
 rm -rf nvjdc
 echo -e "${green}nvjdc面板已卸载，脚本自动退出。${plain}"
 exit 0
