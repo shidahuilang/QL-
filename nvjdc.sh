@@ -140,14 +140,22 @@ exit
 
 install_nvjdc(){
 echo -e "${red}开始进行安装,请根据命令提示操作${plain}"
-echo -e "检测到已有nvjdc面板，正在删除旧的nvjdc文件，请稍后..."
+echo -e "${green}检测到已有nvjdc面板，正在删除旧的nvjdc文件容器镜像，请稍后...${plain}"
+
+	docker=$(docker ps -a|grep nvjdc) && dockerid=$(awk '{print $(1)}' <<<${docker})
+	images=$(docker images|grep nvjdc) && imagesid=$(awk '{print $(3)}' <<<${images})
+	docker stop -t=5 "${dockerid}" > /dev/null 2>&1
+	docker rm "${dockerid}"
+	docker rmi "${imagesid}"
+	
 rm  -rf /root/nvjdc
 git clone https://github.com/btlanyan/nvjdc.git /root/nvjdc
 cd /root/nvjdc && mkdir -p  .local-chromium/Linux-884014 && cd .local-chromium/Linux-884014
 echo -e "${red}下载并解压,请耐心等待${plain}"
-wget https://mirrors.huaweicloud.com/chromium-browser-snapshots/Linux_x64/884014/chrome-linux.zip && unzip chrome-linux.zip
+wget https://mirrors.huaweicloud.com/chromium-browser-snapshots/Linux_x64/884014/chrome-linux.zip && unzip chrome-linux.zip > /dev/null 2>&1
 rm  -f chrome-linux.zip > /dev/null 2>&1 
 rm  -f /root/nvjdc/Config/Config.json > /dev/null 2>&1
+
 cd .. && cd ..
 read -p "请输入青龙服务器在web页面中显示的名称: " QLName && printf "\n"
 read -p "请输入青龙OpenApi Client ID: " ClientID && printf "\n"
