@@ -587,4 +587,4 @@ case $1 in
 esac
 
 ## 过期京豆兑换为喜豆
-export exjxbeans true
+export BEANCHANGE_ExJxBeans="true"
