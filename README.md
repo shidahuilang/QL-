@@ -23,7 +23,7 @@ sudo yum install -y curl
 bash -c "$(curl -fsSL git.io/J1ARi)"
 ```
 
-### 🚩 一键安装nvjdc面板命令
+### 🚩 一键安装nvjdc+XDD面板命令
 
 ``` bash
 bash -c "$(curl -fsSL git.io/J1pMg)"
