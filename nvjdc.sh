@@ -205,7 +205,7 @@ cat > /root/nvjdc/Config/Config.json << EOF
       //青龙2,9 OpenApi Client Secret
       "QL_SECRET": "${ClientSecret}",
       //CK最大数量
-      "QL_CAPACITY": 40,
+      "QL_CAPACITY": 100,
       "QRurl": ""
     }
   ]
