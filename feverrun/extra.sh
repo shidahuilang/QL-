@@ -5,7 +5,8 @@
 ## 安装python依赖使用 pip3 install xxx
 #京东到家果园任务
 ql raw https://raw.githubusercontent.com/passerby-b/JDDJ/main/jddj_fruit.js
-ql repo https://ghproxy.com/https://github.com/mmnvnmm/omo.git "card|tools"
+#ql repo https://ghproxy.com/https://github.com/mmnvnmm/omo.git "card|tools"
+ql raw https://raw.githubusercontent.com/KingRan/JDJB/main/jd_live_redrain.js
 #宠汪汪有就换
 ql repo https://github.com/ccwav/QLScript2.git "jd_joy_reward_Mod" "NoUsed" "ql|jdCookie|JS_USER_AGENTS|sendNotify|USER_AGENTS|utils"
 #feverrun库
