@@ -166,7 +166,7 @@ unzip chrome-linux.zip > /dev/null 2>&1
 rm  -f chrome-linux.zip > /dev/null 2>&1 
 fi
 mkdir /root/nvjdc/Config && cd /root/nvjdc/Config
-wget -O Config.json   https://ghproxy.com/https://raw.githubusercontent.com/NolanHzy/nvjdc/main/Config.json
+wget -O Config.json   https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/nvjdc/main/Config.json
 read -p "请输入青龙服务器在web页面中显示的名称: " QLName && printf "\n"
 read -p "请输入nvjdc面板标题: " title && printf "\n"
 read -p "请输入nvjdc面板希望使用的端口号: " portinfo && printf "\n"
