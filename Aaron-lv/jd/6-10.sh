@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # 需要修改的变量,把1-5改成6-10就是提取6-10帐号的助力码，类推，11-15、16-20，一个文件5个助力码，一个TG号
+# API提取网站< https://my.telegram.org/auth >，没有API的ID跟密匙的就别修改 api_id 跟 api_hash 的说明内容，有就填写正确的ID跟密匙
 
 export TG="6-10"
 export api_id="填写您Telegram的API的ID"
@@ -53,7 +54,7 @@ if [ "$(grep -c ${TG}.sh /ql/config/crontab.list)" = 0 ]; then
     echo
     echo "添加任务 [获取互助码${TG}]"
     echo
-    curl -s -H 'Accept: application/json' -H "Authorization: Bearer ${token}" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"获取互助码${TG}","command":"task /ql/jd/${TG}.sh","schedule":"${CRON2} 13 * * 6"}' --compressed 'http://127.0.0.1:5700/api/crons?t=${CRON1}'
+    curl -s -H 'Accept: application/json' -H "Authorization: Bearer ${token}" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"获取互助码${TG}","command":"task /ql/jd/${TG}.sh","schedule":"${CRON2} 13 * * 0"}' --compressed 'http://127.0.0.1:5700/api/crons?t=${CRON1}'
 fi
 EOF
 task /ql/jd/"${RWWJ}"
