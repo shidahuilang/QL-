@@ -240,7 +240,7 @@ export NOTIFY_COMPTOGROUP2="false" ##true为推送到群组2
 export NOTIFY_NOCKFALSE="true"
 ### 7. 测试人
 ### 通知底部显示：本通知 By 测试人
-export NOTIFY_AUTHOR="青龙"
+export NOTIFY_AUTHOR="大灰狼"
 ### 8. 屏蔽登录成功
 ### 屏蔽青龙登陆成功通知，登陆失败不屏蔽
 export NOTIFY_NOLOGINSUCCESS="true"
