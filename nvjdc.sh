@@ -161,7 +161,7 @@ if [ ! -d "/root/nvjdc/.local-chromium/Linux-884014" ]; then
 cd /root/nvjdc
 echo -e "${green}正在拉取chromium-browser-snapshots等依赖,体积100多M，请耐心等待下一步命令提示···${plain}"
 mkdir -p  .local-chromium/Linux-884014 && cd .local-chromium/Linux-884014
-wget http://npm.taobao.org/mirrors/chromium-browser-snapshots/Linux_x64/884014/chrome-linux.zip > /dev/null 2>&1 
+wget https://mirrors.huaweicloud.com/chromium-browser-snapshots/Linux_x64/884014/chrome-linux.zip > /dev/null 2>&1 
 unzip chrome-linux.zip > /dev/null 2>&1 
 rm  -f chrome-linux.zip > /dev/null 2>&1 
 fi
@@ -269,10 +269,10 @@ echo -e "${green}安装完毕,面板访问地址：http://${baseip}:${portinfo}$
 }
 
 update_nvjdc(){
-mv /root/nvjdc /root/nvjdcdb
+mv /root/nvjdc /root/nvjdc1
 git clone https://ghproxy.com/https://github.com/NolanHzy/nvjdcdocker.git /root/nvjdc
-cd /root/nvjdc &&  mkdir -p  Config &&  mv /root/nvjdcdb/Config.json /root/nvjdc/Config/Config.json
-cd /root/nvjdc &&    mv /root/nvjdcdb/.local-chromium /root/nvjdc/.local-chromium
+cd /root/nvjdc &&  mkdir -p  Config &&  mv /root/nvjdc1/Config.json /root/nvjdc/Config/Config.json
+cd /root/nvjdc &&    mv /root/nvjdc1/.local-chromium /root/nvjdc/.local-chromium
 cd /root/nvjdc
 portinfo=$(docker port nvjdc | head -1  | sed 's/ //g' | sed 's/80\/tcp->0.0.0.0://g')
 condition=$(cat /root/nvjdc/Config/Config.json | grep -o '"XDDurl": .*' | awk -F":" '{print $1}' | sed 's/\"//g')
