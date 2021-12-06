@@ -111,7 +111,7 @@ if [ "$(grep -c bot /ql/config/crontab.list)" = 0 ]; then
     echo
     # 获取token
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
-    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"拉取机器人","command":"ql bot","schedule":"13 14 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1626247933219'
+    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"拉取机器人","command":"ql bot","schedule":"13 14 * * 0"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1626247933219'
 fi
 sleep 2
 echo
