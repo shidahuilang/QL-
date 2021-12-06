@@ -26,7 +26,7 @@ bash -c "$(curl -fsSL git.io/J1ARi)"
 ### 🚩 一键安装nvjdc+XDD面板命令
 
 ``` bash
-bash -c "$(curl -fsSL git.io/J1pMg)"
+bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/nvjdc.sh)"
 ```
 
 #### 🚩 如果上面的命令运行成功会有提示，登录页面，设置好KEY
