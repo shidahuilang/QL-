@@ -317,7 +317,7 @@ menu() {
   echo -e "\
 ${green}0.${plain} 退出脚本
 ${green}1.${plain} 安装nvjdc
-${green}2.${plain} 1.2升级1.4
+${green}2.${plain} 升级nvjdc
 ${green}3.${plain} 卸载nvjdc
 "
 get_system_info
