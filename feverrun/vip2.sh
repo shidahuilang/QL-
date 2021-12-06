@@ -234,7 +234,7 @@ docker run -dit \
   -v $QL_PATH/ql/jbot:/ql/jbot \
   -v $QL_PATH/ql/raw:/ql/raw \
   -v $QL_PATH/ql/jd:/ql/jd \
-  -v $QL_PATH/ql/jd:/ql/deps \
+  -v $QL_PATH/ql/deps:/ql/deps \
   -v $QL_PATH/ql/repo:/ql/repo \
   ${NETWORK} \
   --name qinglong \
