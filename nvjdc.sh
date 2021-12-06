@@ -312,7 +312,7 @@ uninstall_nvjdc(){
 	docker stop -t=5 "${dockerid}" > /dev/null 2>&1
 	docker rm "${dockerid}"
 	docker rmi "${imagesid}"
-echo -e "${green}nvjdc面板已卸载，脚本自动退出，请手动删除nvjdc的镜像。${plain}"
+echo -e "${green}nvjdc面板已卸载，镜像已删除。${plain}"
 exit 0
 }
 
