@@ -71,18 +71,21 @@ if [[ "$(. /etc/os-release && echo "$ID")" == "centos" ]]; then
 	TIME g "正在安装宿主机所需要的依赖，请稍后..."
 	export QL_PATH="/opt"
 	yum -y update
+	yum -y install unzip
 	yum -y install sudo wget git
 	yum -y install net-tools.x86_64 subversion
 elif [[ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]]; then
 	TIME g "正在安装宿主机所需要的依赖，请稍后..."
 	export QL_PATH="/opt"
 	apt-get -y update
+	apt-get -y install unzip
 	apt-get -y install sudo wget git
 	apt-get -y install net-tools subversion
 elif [[ "$(. /etc/os-release && echo "$ID")" == "debian" ]]; then
 	TIME g "正在安装宿主机所需要的依赖，请稍后..."
 	export QL_PATH="/opt"
 	apt -y update
+	apt -y install unzip
 	apt -y install sudo wget git
 	apt -y install net-tools subversion
 elif [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
