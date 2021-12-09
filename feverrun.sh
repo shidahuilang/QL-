@@ -68,6 +68,10 @@ TIME l "拉取1-5.sh"
 curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun/jd/1-5.sh > /ql/jd/1-5.sh
 TIME l "拉取6-10.sh"
 curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun/jd/6-10.sh > /ql/jd/6-10.sh
+TIME l "拉取1-5a.sh"
+curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun/jd/1-5a.sh > /ql/jd/1-5a.sh
+TIME l "拉取6-10a.sh"
+curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun/jd/6-10a.sh > /ql/jd/6-10a.sh
 chmod -R +x /ql/qlwj
 cp -Rf /ql/qlwj/config.sample.sh /ql/config/config.sh
 cp -Rf /ql/qlwj/config.sample.sh /ql/sample/config.sample.sh
