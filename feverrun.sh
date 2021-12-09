@@ -58,7 +58,7 @@ TIME l "拉取curtinlv_JD-Script_jd_tool_dl.py"
 curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun/curtinlv_JD-Script_jd_tool_dl.py > /ql/qlwj/curtinlv_JD-Script_jd_tool_dl.py
 TIME l "拉取disableDuplicateTasksImplement.py"
 curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun/disableDuplicateTasksImplement.py > /ql/qlwj/disableDuplicateTasksImplement.py
-TIME l "拉取jd_Evaluation.py"
+TIME l "拉取Evaluation.py"
 curl -fsSL https://raw.githubusercontent.com/qiu-lzsnmb/jd_lzsnmb/jd/Evaluation.py > /ql/qlwj/Evaluation.py
 TIME l "拉取jd_get_share_code.js"
 curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun/jd_get_share_code.js > /ql/qlwj/jd_get_share_code.js
