@@ -59,7 +59,7 @@ curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun/curt
 TIME l "拉取disableDuplicateTasksImplement.py"
 curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun/disableDuplicateTasksImplement.py > /ql/qlwj/disableDuplicateTasksImplement.py
 TIME l "拉取jd_Evaluation.py"
-curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun/jd_Evaluation.py > /ql/qlwj/jd_Evaluation.py
+curl -fsSL https://raw.githubusercontent.com/qiu-lzsnmb/jd_lzsnmb/jd/Evaluation.py > /ql/qlwj/Evaluation.py
 TIME l "拉取jd_get_share_code.js"
 curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun/jd_get_share_code.js > /ql/qlwj/jd_get_share_code.js
 TIME l "拉取jdCookie.js"
@@ -148,14 +148,14 @@ if [ "$(grep -c jd_get_share_code.js /ql/config/crontab.list)" = 0 ]; then
 fi
 sleep 2
 echo
-# 将 jd_Evaluation.py 添加到定时任务
-if [ "$(grep -c jd_Evaluation.py /ql/config/crontab.list)" = 0 ]; then
+# 将 Evaluation.py 添加到定时任务
+if [ "$(grep -c Evaluation.py /ql/config/crontab.list)" = 0 ]; then
     echo
     TIME g "添加任务 [自动评价]"
     echo
     # 获取token
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
-    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"京东全自动评价","command":"task jd_Evaluation.py","schedule":"0 6 */3 * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1637560543233'
+    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"京东全自动评价","command":"task Evaluation.py","schedule":"0 6 */3 * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1637560543233'
 fi
 sleep 2
 echo
