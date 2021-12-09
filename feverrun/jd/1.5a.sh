@@ -3,7 +3,7 @@
 # 需要修改的变量,把1-5改成6-10就是提取6-10帐号的助力码，类推，11-15、16-20，一个文件5个助力码，一个TG号
 # API提取网站< https://my.telegram.org/auth >，没有API的ID跟密匙的就别修改 api_id 跟 api_hash 的说明内容，有就填写正确的ID跟密匙
 
-export TG="1-5"
+export TG="1-5a"
 export api_id="填写您Telegram的API的ID"
 export api_hash="填写您Telegram的API的密匙"
 
@@ -30,13 +30,13 @@ current_path = os.path.dirname(os.path.abspath(__file__))
 os.chdir(current_path)
 client = TelegramClient("bot${TG}", "${api_id}", "${api_hash}", connection_retries=None).start()
 async def main():
-    await client.send_message("@JDShareCodebot", "${FARM}")
-    await client.send_message("@JDShareCodebot", "${PET}")
-    await client.send_message("@JDShareCodebot", "${BEAN}")
-    await client.send_message("@JDShareCodebot", "${JXFACTORY}")
-    await client.send_message("@JDShareCodebot", "${SGMH}")
-    await client.send_message("@JDShareCodebot", "${HEALTH}")
-    await client.send_read_acknowledge("@JDShareCodebot")
+    await client.send_message("@JD_ShareCode_Bot", "${FARM}")
+    await client.send_message("@JD_ShareCode_Bot", "${PET}")
+    await client.send_message("@JD_ShareCode_Bot", "${BEAN}")
+    await client.send_message("@JD_ShareCode_Bot", "${JXFACTORY}")
+    await client.send_message("@JD_ShareCode_Bot", "${SGMH}")
+    await client.send_message("@JD_ShareCode_Bot", "${HEALTH}")
+    await client.send_read_acknowledge("@JD_ShareCode_Bot")
 with client:
     client.loop.run_until_complete(main())
 EOF
