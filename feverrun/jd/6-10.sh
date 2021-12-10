@@ -40,6 +40,25 @@ async def main():
 with client:
     client.loop.run_until_complete(main())
 EOF
+
+cat >/ql/jd/${TG}-2.py <<-EOF
+#调度配置 0,1 21 * * 6 python3 /ql/jd/${TG}-2.py
+from telethon import TelegramClient
+import os
+current_path = os.path.dirname(os.path.abspath(__file__))
+os.chdir(current_path)
+client = TelegramClient("bot${TG}", "${api_id}", "${api_hash}", connection_retries=None).start()
+async def main():
+    await client.send_message("@JD_ShareCode_Bot", "${FARM}")
+    await client.send_message("@JD_ShareCode_Bot", "${PET}")
+    await client.send_message("@JD_ShareCode_Bot", "${BEAN}")
+    await client.send_message("@JD_ShareCode_Bot", "${JXFACTORY}")
+    await client.send_message("@JD_ShareCode_Bot", "${SGMH}")
+    await client.send_message("@JD_ShareCode_Bot", "${HEALTH}")
+    await client.send_read_acknowledge("@JD_ShareCode_Bot")
+with client:
+    client.loop.run_until_complete(main())
+EOF
 cat >/ql/jd/"${RWWJ}" <<-EOF
 #!/usr/bin/env bash
 if [ "$(grep -c ${TG}.py /ql/config/crontab.list)" = 0 ]; then
@@ -49,12 +68,19 @@ if [ "$(grep -c ${TG}.py /ql/config/crontab.list)" = 0 ]; then
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer ${token}" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"自动提交助力码${TG}","command":"python3 /ql/jd/${TG}.py","schedule":"1 0 * * 1"}' --compressed 'http://127.0.0.1:5700/api/crons?t=${CRON}'
 fi
 sleep 2
+if [ "$(grep -c ${TG}-2.py /ql/config/crontab.list)" = 0 ]; then
+    echo
+    echo "添加任务 [自动提交助力码${TG}-2]"
+    echo
+    curl -s -H 'Accept: application/json' -H "Authorization: Bearer ${token}" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"自动提交助力码${TG}-2","command":"python3 /ql/jd/${TG}-2.py","schedule":"0,1 21 * * 6"}' --compressed 'http://127.0.0.1:5700/api/crons?t=${CRON}'
+fi
+sleep 2
 echo
 if [ "$(grep -c ${TG}.sh /ql/config/crontab.list)" = 0 ]; then
     echo
     echo "添加任务 [获取互助码${TG}]"
     echo
-    curl -s -H 'Accept: application/json' -H "Authorization: Bearer ${token}" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"获取互助码${TG}","command":"task /ql/jd/${TG}.sh","schedule":"${CRON2} 13 * * 0"}' --compressed 'http://127.0.0.1:5700/api/crons?t=${CRON1}'
+    curl -s -H 'Accept: application/json' -H "Authorization: Bearer ${token}" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"获取互助码${TG}","command":"task /ql/jd/${TG}.sh","schedule":"${CRON2} 13 * * 6"}' --compressed 'http://127.0.0.1:5700/api/crons?t=${CRON1}'
 fi
 EOF
 task /ql/jd/"${RWWJ}"
