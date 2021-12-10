@@ -38,7 +38,7 @@ TIME() {
 	echo
 	TIME y " 请选择要安装的脚本库"
 	echo
-	TIME l " 1. 自动提交助力码混合库，每周自动提交助力码到@bot助力池（Aaron库+smiek2121+shufflewzc）"
+	TIME l " 1. 自动提交助力码混合库，每周自动提交双助力池到@bot助力池"
 	echo
 	TIME l " 2. 自动提交助力码单库，要去脚本作者群提交资料过白名单(feverrun库)"
 	echo
