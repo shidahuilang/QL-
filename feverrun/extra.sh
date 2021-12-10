@@ -12,4 +12,4 @@ ql rmlog 7
 ql repo https://github.com/ccwav/QLScript2.git "jd_joy_reward_Mod" "NoUsed" "ql|jdCookie|JS_USER_AGENTS|sendNotify|USER_AGENTS|utils"
 #feverrun库
 ql repo https://ghproxy.com/https://github.com/feverrun/my_scripts.git "jd_|jx_|jddj|getCookie|getJDCookie" "backUp" "^(jd|JD|JS)[^_]|USER|sendNotify|utils"
-task disableDuplicateTasksImplement.py
+#task disableDuplicateTasksImplement.py
