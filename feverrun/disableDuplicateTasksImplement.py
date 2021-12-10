@@ -5,7 +5,7 @@
 #1️⃣RES_SUB
 #2️⃣RES_ONLY
 #说明
-#1️⃣需保留的脚本前缀列表（不管是否重复），用 & 分割，默认保留 Aaron-lv_sync
+#1️⃣需保留的脚本前缀列表（不管是否重复），用 & 分割，默认保留 feverrun_my_scripts&JDHelloWorld_jd_scripts
 #2️⃣保留后是否禁用重复的带其他前缀脚本，默认禁用
 
 #示例
