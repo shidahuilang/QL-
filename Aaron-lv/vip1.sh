@@ -21,7 +21,7 @@ if [[ "$USER" == "root" ]]; then
 	clear
 	echo
 	echo
-	TIME g " 您选择了自动@TG机器人提交助力码库"
+	TIME g " 您选择了自动双助力池@TG机器人提交助力码库"
 	echo
 	TIME y " 请选择网络类型"
 	echo
