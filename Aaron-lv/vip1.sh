@@ -281,7 +281,7 @@ if [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
 		echo
 		TIME y "点击[开始安装]，[通知方式]跳过，设置好[用户名]跟[密码],然后点击[提交]，然后点击[去登录]，输入帐号密码完成登录!"
 		echo
-		TIME y "完成登录后,请设置好 wskey 或者 pt_key"
+		TIME y "输入 docker exec -it qinglong cat /qinglong/config/auth.json 可以查看初始化密码"
 		exit 0
 	else
 		echo
