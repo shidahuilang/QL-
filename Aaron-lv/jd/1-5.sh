@@ -65,7 +65,7 @@ if [ "$(grep -c ${TG}.py /ql/config/crontab.list)" = 0 ]; then
     echo
     echo "添加任务 [自动提交助力码${TG}]"
     echo
-    curl -s -H 'Accept: application/json' -H "Authorization: Bearer ${token}" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"自动提交助力码${TG}","command":"python3 /ql/jd/${TG}.py","schedule":"1 0 * * 1"}' --compressed 'http://127.0.0.1:5700/api/crons?t=${CRON}'
+    curl -s -H 'Accept: application/json' -H "Authorization: Bearer ${token}" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"自动提交助力码${TG}","command":"python3 /ql/jd/${TG}.py","schedule":"0,1 0 * * 1"}' --compressed 'http://127.0.0.1:5700/api/crons?t=${CRON}'
 fi
 sleep 2
 if [ "$(grep -c ${TG}-2.py /ql/config/crontab.list)" = 0 ]; then
