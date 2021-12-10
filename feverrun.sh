@@ -39,6 +39,15 @@ OpenCard_shell_path=$dir_script/raw_jd_OpenCard.py
 task_before_shell_path=$dir_shell/task_before.sh
 sample_shell_path=/ql/sample/config.sample.sh
 mkdir -p /ql/qlwj
+
+mkdir -p /ql/scripts/utils
+curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/Aaron-lv/utils/jd_jxmc.js > /ql/scripts/utils/jd_jxmc.js
+curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/Aaron-lv/utils/jd_jxmcToken.js > /ql/scripts/utils/jd_jxmcToken.js
+curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/Aaron-lv/jd_cfd_sharecodes.ts > /ql/scripts/jd_cfd_sharecodes.ts
+curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/Aaron-lv/jd_jxmc_sharecodes.ts > /ql/scripts/jd_jxmc_sharecodes.ts
+curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/Aaron-lv/TS_USER_AGENTS.ts > /ql/scripts/TS_USER_AGENTS.ts
+
+echo
 TIME l "拉取auth.json"
 curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun/auth.json > /ql/qlwj/auth.json
 TIME l "拉取crypto-js.js"
