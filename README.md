@@ -20,7 +20,7 @@ sudo yum install -y curl
 ### 🚩 一键安装青龙面板命令
 
 ``` bash
-bash -c "$(curl -fsSL git.io/J1ARi)"
+bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/lang.sh)"
 ```
 
 ### 🚩 一键安装nvjdc+XDD面板命令
