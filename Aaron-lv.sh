@@ -70,6 +70,8 @@ TIME l "拉取jd_get_share_code.js"
 curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/Aaron-lv/jd_get_share_code.js > /ql/qlwj/jd_get_share_code.js
 TIME l "拉取jdCookie.js"
 curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/Aaron-lv/jdCookie.js > /ql/qlwj/jdCookie.js
+TIME l "拉取jd_cleancartAll.js"
+curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/Aaron-lv/jd_cleancartAll.js > /ql/qlwj/jd_cleancartAll.js
 TIME l "拉取1-5.sh"
 curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/Aaron-lv/jd/1-5.sh > /ql/jd/1-5.sh
 TIME l "拉取6-10.sh"
@@ -86,6 +88,7 @@ cp -Rf /ql/qlwj/disableDuplicateTasksImplement.py /ql/scripts/disableDuplicateTa
 cp -Rf /ql/qlwj/jd_Evaluation.py /ql/scripts/jd_Evaluation.py
 cp -Rf /ql/qlwj/jd_get_share_code.js /ql/scripts/jd_get_share_code.js
 cp -Rf /ql/qlwj/jdCookie.js /ql/scripts/jdCookie.js
+cp -Rf /ql/qlwj/jd_cleancartAll.js /ql/scripts/jd_cleancartAll.js
 echo
 bash -c  "$(curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/npm.sh)"
 echo
@@ -189,6 +192,14 @@ sleep 2
 echo
 if [[ "$(grep -c JD_WSCK=\"pin= /ql/config/env.sh)" = 1 ]]; then
     echo
+    # 将 jd_cleancartAll.js 添加到定时任务
+if [ "$(grep -c jd_cleancartAll.js /ql/config/crontab.list)" = 0 ]; then
+    echo
+    TIME g "添加任务 [清空购物车]"
+    echo
+    # 获取token
+    token=$(cat /ql/config/auth.json | jq --raw-output .token)
+    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"清空购物车","command":"task jd_cleancartAll.js","schedule":"3 6,12,23 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1639110553549'
     TIME g "执行WSKEY转换PT_KEY操作"
     task wskey.py |tee azcg.log
     echo
