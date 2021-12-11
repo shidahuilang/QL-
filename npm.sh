@@ -26,9 +26,8 @@ echo
 sleep 2
 npm config set registry https://mirrors.huaweicloud.com/repository/npm/
 npm config get registry
+TIME l "升级npm
 npm install -g npm
-TIME l "升级npm至${latest_ver}"
-npm install -g npm@${latest_ver} --force
 npm install -g yarn --force
 TIME l "安装依赖png-js"
 yarn add png-js
