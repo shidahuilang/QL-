@@ -165,35 +165,41 @@ read -p "请输入青龙OpenApi Client Secret: " ClientSecret && printf "\n"
 read -p "请输入青龙服务器的url地址（类似http://192.168.2.2:5700）: " QLurl && printf "\n"
 cat > /root/nvjdc/Config/Config.json << EOF
 {
-  ///浏览器最多几个网页
-  "MaxTab": "8",
-  //网站标题
-  "Title": "${title}",
-  //网站公告
-  "Announcement": "本项目脚本收集于互联网。为了您的财产安全，请关闭京东免密支付。",
-  ///XDD PLUS Url  http://IP地址:端口/api/login/smslogin
-  "XDDurl": "${XDDurl}",
-  ///xddToken
-  "XDDToken": "${XDDToken}",
-  ///青龙配置 注意 如果不要青龙  Config :[]
-  "Config": [
-    {
-      //序号必填从1 开始
+    ///最大支持几个网页
+    "MaxTab": "20",
+    //网站标题
+    "Title": "Nvjdc",
+    //回收时间分钟 不填默认3分钟
+    "Closetime": "3",
+    //网站公告
+    "Announcement": "NolanHzy大佬写的工具，可以通过短信登录获取cookie，并自动同步到青龙面板那边，不再需要手动更新cookie",
+    ///开启打印等待日志卡短信验证登陆 可开启 拿到日志群里回复 默认不要填写
+    "Debug": "",
+    ///自动滑块次数5次 5次后手动滑块 可设置为0默认手动滑块
+    "AutoCaptchaCount": "5",
+    ///XDD PLUS Url  http://IP地址:端口/api/login/smslogin
+    "XDDurl": "",
+    ///xddToken
+    "XDDToken": "",
+    ///多青龙配置
+    "Config": [
+        {
+      //序号必须从1开始
       "QLkey": 1,
       //服务器名称
       "QLName": "${QLName}",
-      //青龙地址
+      //青龙url
       "QLurl": "${QLurl}",
       //青龙2,9 OpenApi Client ID
       "QL_CLIENTID": "${ClientID}",
       //青龙2,9 OpenApi Client Secret
       "QL_SECRET": "${ClientSecret}",
-      //CK最大数量
-      "QL_CAPACITY": 100,
-      "QRurl": ""
-    }
-  ]
-
+      //青龙面包最大ck容量
+      "QL_CAPACITY": 200,
+      //消息推送二维码
+      "QRurl":""
+        }
+    ]
 }
 EOF
 else
