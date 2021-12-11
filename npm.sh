@@ -75,4 +75,3 @@ cd /ql
 task curtinlv_JD-Script_jd_tool_dl.py
 TIME g "依赖安装完毕..."
 echo
-exit 0
