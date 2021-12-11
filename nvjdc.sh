@@ -148,7 +148,7 @@ elif [[ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]]; then
 elif [[ "$(. /etc/os-release && echo "$ID")" == "debian" ]]; then
    apt install git -y > /dev/null
 fi
-rm f /root/nvjdc > /dev/null
+rm -rf /root/nvjdc > /dev/null
 git clone https://ghproxy.com/https://github.com/NolanHzy/nvjdcdocker.git /root/nvjdc
 if [ ! -d "/root/nvjdc/.local-chromium/Linux-884014" ]; then
 cd /root/nvjdc
