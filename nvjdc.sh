@@ -141,7 +141,13 @@ exit
 
 install_nvjdc(){
 echo -e "${red}开始进行安装,请根据命令提示操作${plain}"
-yum install git -y > /dev/null 
+if [[ "$(. /etc/os-release && echo "$ID")" == "centos" ]]; then
+   yum install git -y > /dev/null
+elif [[ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]]; then
+   apt-get install git -y > /dev/null
+elif [[ "$(. /etc/os-release && echo "$ID")" == "debian" ]]; then
+   apt install git -y > /dev/null
+fi   
 git clone https://ghproxy.com/https://github.com/NolanHzy/nvjdcdocker.git /root/nvjdc
 if [ ! -d "/root/nvjdc/.local-chromium/Linux-884014" ]; then
 cd /root/nvjdc
