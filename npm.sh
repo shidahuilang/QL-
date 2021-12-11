@@ -73,7 +73,6 @@ apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev freetype-dev
 TIME l "安装自动评价依赖，失败可忽略"
 cd /ql
 task curtinlv_JD-Script_jd_tool_dl.py
-echo
 TIME g "依赖安装完毕..."
 echo
 exit 0
