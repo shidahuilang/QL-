@@ -26,8 +26,9 @@ echo
 sleep 2
 npm config set registry https://mirrors.huaweicloud.com/repository/npm/
 npm config get registry
-TIME l "升级npm
 npm install -g npm
+TIME l "升级npm至${latest_ver}"
+npm install -g npm@${latest_ver} --force
 npm install -g yarn --force
 TIME l "安装依赖png-js"
 yarn add png-js
@@ -64,14 +65,16 @@ npm install -g js-base64
 TIME l "安装依赖jieba"
 pip3 install jieba
 TIME l "安装pnpm"
+npm install -g got@11.8.3
 cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && pnpm install && pnpm i ts-node typescript axios
 cd /ql
 pip3 install canvas
 cd /ql
 TIME l "安装python3"
 apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev freetype-dev
-TIME l "安装自动评价依赖，失败可忽略"
 cd /ql
 task curtinlv_JD-Script_jd_tool_dl.py
+echo
 TIME g "依赖安装完毕..."
 echo
+exit 0
