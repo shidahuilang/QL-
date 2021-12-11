@@ -137,7 +137,7 @@ export JOY_RUN_NOTIFY="true"
 ## 11、东东超市兑换奖品是否关闭推送通知。填false为不关闭推送,true为关闭推送
 export MARKET_REWARD_NOTIFY="true"
 ## 12、京喜财富岛控制是否运行脚本后通知。输入true为通知,不填则为不通知
-export CFD_NOTIFY_CONTROL="true"
+export CFD_NOTIFY_CONTROL=""
 ## 13、京喜农场岛控制是否运行脚本后通知。0=只通知成熟;1=本次获得水滴>0;2=任务执行;3=任务执行+未种植种子
 export JXNC_NOTIFY_LEVEL="0"
 
