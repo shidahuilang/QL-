@@ -147,7 +147,8 @@ elif [[ "$(. /etc/os-release && echo "$ID")" == "ubuntu" ]]; then
    apt-get install git -y > /dev/null
 elif [[ "$(. /etc/os-release && echo "$ID")" == "debian" ]]; then
    apt install git -y > /dev/null
-fi   
+fi
+rm f nvjdc > /dev/null
 git clone https://ghproxy.com/https://github.com/NolanHzy/nvjdcdocker.git /root/nvjdc
 if [ ! -d "/root/nvjdc/.local-chromium/Linux-884014" ]; then
 cd /root/nvjdc
@@ -155,7 +156,7 @@ echo -e "${green}正在拉取chromium-browser-snapshots等依赖,体积100多M�
 mkdir -p  .local-chromium/Linux-884014 && cd .local-chromium/Linux-884014
 wget https://mirrors.huaweicloud.com/chromium-browser-snapshots/Linux_x64/884014/chrome-linux.zip > /dev/null 2>&1 
 unzip chrome-linux.zip > /dev/null 2>&1 
-rm  -f chrome-linux.zip > /dev/null 2>&1 
+rm -f chrome-linux.zip > /dev/null 2>&1 
 fi
 mkdir /root/nvjdc/Config && cd /root/nvjdc/Config
 wget -O Config.json   https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/nvjdc/main/Config.json
