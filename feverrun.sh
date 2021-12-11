@@ -72,6 +72,8 @@ TIME l "拉取jd_get_share_code.js"
 curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun/jd_get_share_code.js > /ql/qlwj/jd_get_share_code.js
 TIME l "拉取jdCookie.js"
 curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun/jdCookie.js > /ql/qlwj/jdCookie.js
+TIME l "拉取jd_cleancartAll.js"
+curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/Aaron-lv/jd_cleancartAll.js > /ql/qlwj/jd_cleancartAll.js
 TIME l "拉取1-5.sh"
 curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/feverrun/jd/1-5.sh > /ql/jd/1-5.sh
 TIME l "拉取6-10.sh"
@@ -88,6 +90,7 @@ cp -Rf /ql/qlwj/disableDuplicateTasksImplement.py /ql/scripts/disableDuplicateTa
 cp -Rf /ql/qlwj/Evaluation.py /ql/scripts/Evaluation.py
 cp -Rf /ql/qlwj/jd_get_share_code.js /ql/scripts/jd_get_share_code.js
 cp -Rf /ql/qlwj/jdCookie.js /ql/scripts/jdCookie.js
+cp -Rf /ql/qlwj/jd_cleancartAll.js /ql/scripts/jd_cleancartAll.js
 echo
 bash -c  "$(curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/npm.sh)"
 echo
