@@ -64,13 +64,13 @@ npm install -g js-base64
 TIME l "安装依赖jieba"
 pip3 install jieba
 TIME l "安装pnpm"
-npm install -g got@11.8.3
 cd /ql/scripts/ && apk add --no-cache build-base g++ cairo-dev pango-dev giflib-dev && pnpm install && pnpm i ts-node typescript axios
 cd /ql
 pip3 install canvas
 cd /ql
 TIME l "安装python3"
 apk add python3 zlib-dev gcc jpeg-dev python3-dev musl-dev freetype-dev
+TIME l "安装自动评价依赖，失败可忽略"
 cd /ql
 task curtinlv_JD-Script_jd_tool_dl.py
 echo
