@@ -28,7 +28,7 @@ npm config set registry https://mirrors.huaweicloud.com/repository/npm/
 npm config get registry
 TIME l "升级npm
 npm install -g npm
-npm install -g yarn --force
+#npm install -g yarn --force
 TIME l "安装依赖png-js"
 yarn add png-js
 TIME l "安装依赖date-fns"
