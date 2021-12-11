@@ -221,6 +221,7 @@ cat > /root/nvjdc/Config/Config.json << EOF
   "XDDurl": "${XDDurl}",
   ///xddToken
   "XDDToken": "${XDDToken}",
+  "PUSH_PLUS_TOKEN": "${PUSH_PLUS_TOKEN}",
   ///青龙配置 注意 如果不要青龙  Config :[]
   "Config": []
 }
