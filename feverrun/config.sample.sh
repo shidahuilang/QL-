@@ -109,29 +109,27 @@ NotifyBeanSign="0"
 # 定义每日签到每个接口间的延迟时间
 ## 默认每个签到接口并发无延迟，如需要依次进行每个接口，请自定义延迟时间，单位为毫秒，延迟作用于每个签到接口, 如填入延迟则切换顺序签到(耗时较长)
 export JD_BEAN_STOP="9"
-export jd_work_price="1"
+
 # 脚本推送控制类环境变量
-##宠汪汪积分兑换有就换版
-#export JOY_GET20WHEN16="true"  #控制16点才触发20京豆兑换.
-#export JOY_GET20WHEN16="true"
+
 ## 1、京东多合一签到脚本关闭运行结果推送，默认推送，填true表示不推送
-export JD_BEAN_SIGN_STOP_NOTIFY=""
+export JD_BEAN_SIGN_STOP_NOTIFY="true"
 ## 2、京东多合一签到脚本推送简单结果，默认推送完整版结果，填true表示启用简单推送
 export JD_BEAN_SIGN_NOTIFY_SIMPLE="true"
 ## 3、东东萌宠关闭推送。填写false为不关闭推送，true为关闭推送
-export PET_NOTIFY_CONTROL="false"
+export PET_NOTIFY_CONTROL="true"
 ## 4、京东农场关闭推送。填写false为不关闭推送，true为关闭推送
-export FRUIT_NOTIFY_CONTROL="false"
+export FRUIT_NOTIFY_CONTROL="true"
 ## 5、京东领现金关闭推送。填写false为不关闭推送，true为关闭推送
-export CASH_NOTIFY_CONTROL="false"
+export CASH_NOTIFY_CONTROL="true"
 ## 6、京东摇钱树关闭推送。填写false为不关闭推送，true为关闭推送
-export MONEYTREE_NOTIFY_CONTROL="false"
+export MONEYTREE_NOTIFY_CONTROL="true"
 ## 7、京东点点券关闭推送。填写false为不关闭推送，true为关闭推送
-export DDQ_NOTIFY_CONTROL="false"
+export DDQ_NOTIFY_CONTROL="true"
 ## 8、京东京东赚赚小程序关闭推送。填写false为不关闭推送，true为关闭推送
-export JDZZ_NOTIFY_CONTROL="false"
+export JDZZ_NOTIFY_CONTROL="true"
 ## 9、宠汪汪兑换京豆关闭推送。填写false为不关闭推送，true为关闭推送
-export JD_JOY_REWARD_NOTIFY="false"
+export JD_JOY_REWARD_NOTIFY="true"
 ## 10、宠汪汪赛跑获胜后是否推送通知。填false为不推送通知消息,true为推送通知消息
 export JOY_RUN_NOTIFY="true"
 ## 11、东东超市兑换奖品是否关闭推送通知。填false为不关闭推送,true为关闭推送
@@ -146,7 +144,7 @@ export JXNC_NOTIFY_LEVEL="0"
 ## 1、京东领现金红包兑换京豆开关。false为不换,true为换(花费2元红包兑换200京豆，一周可换四次)，默认为false
 export CASH_EXCHANGE="false"
 ## 2、宠汪汪喂食数量。可以填的数字0,10,20,40,80,其他数字不可
-export JOY_FEED_COUNT="40"
+export JOY_FEED_COUNT="20"
 ## 3、宠汪汪帮好友喂食。默认 "false" 不会自动给好友的汪汪喂食，如想自动喂食，请修改为 "true"
 export JOY_HELP_FEED="true"
 ## 4、宠汪汪是否赛跑(默认参加双人赛跑)。false为不跑,true为跑
@@ -158,9 +156,9 @@ export JOY_RUN_FLAG="true"
 ## 如果您有5个账号但只写了四个数字，那么第5个账号将默认参加2人赛，账号如果更多，与此类似
 export JOY_TEAM_LEVEL="2&2&50&10"
 ## 6、宠汪汪赛跑自己账号内部互助。输入true为开启内部互助
-export JOY_RUN_HELP_MYSELF="true"
+export JOY_RUN_HELP_MYSELF="false"
 ## 7、宠汪汪积分兑换多少京豆。目前可填值为20或者500,脚本默认0,0表示不兑换京豆
-export JD_JOY_REWARD_NAME="20"
+export JD_JOY_REWARD_NAME="500"
 ## 8、东东超市兑换京豆数量。目前可输入值为20或者1000，或者其他商品的名称,例如碧浪洗衣凝珠
 export MARKET_COIN_TO_BEANS="超值京豆包"
 ## 9、东东超市是否参加pk。true表示参加,false表示不参加
@@ -206,8 +204,8 @@ export JD_USER_AGENT="true"
 ## [1] jd_CheckCK.js
 ### 当有自动禁用或自动启用事件发生才会发送通知，如果要每次都通知则需设定变量
 ### 自动检测账号是否正常，不正常的自动禁用，正常的如果是禁用状态则自动启用
-export SHOWSUCCESSCK="true" ##显示正常CK，true为显示
-export CKALWAYSNOTIFY="true" ##通知CK状态，true为永远通知 
+export SHOWSUCCESSCK="false" ##显示正常CK，true为显示
+export CKALWAYSNOTIFY="false" ##通知CK状态，true为永远通知 
 export CKAUTOENABLE="true" ##自动启用CK，false为停用
 export CKREMARK="true" ##显示CK备注，false为不显示
 export CKNOWARNERROR="true" ##服务器空数据等错误不触发通知，false为通知
@@ -240,26 +238,13 @@ export NOTIFY_COMPTOGROUP2="false" ##true为推送到群组2
 export NOTIFY_NOCKFALSE="true"
 ### 7. 测试人
 ### 通知底部显示：本通知 By 测试人
-export NOTIFY_AUTHOR="大灰狼"
+export NOTIFY_AUTHOR="青龙"
 ### 8. 屏蔽登录成功
 ### 屏蔽青龙登陆成功通知，登陆失败不屏蔽
 export NOTIFY_NOLOGINSUCCESS="true"
 ### 9. CK失效时自动执行
 ### 当接收到发送CK失效通知执行子线程任务.(jd_CheckCK.js 可替换成其他任意qinglong支持的脚本文件.)
 export NOTIFY_CKTASK="jd_CheckCK.js"
-
-# Wenmoux 部分环境变量 
-## 1、QQ星系牧场自动兑换20豆
-export Cowexchange="true"
-## 2、欧洲狂欢杯兑换兑换豆子，填38豆子，填39e卡
-export Cupexid="39"
-## 3、10秒阅读
-### 填写自己CK
-export Readck=""
-### 填写自己设备UA
-export Read10UA=""
-### 填true推送消息，默认不推送
-export jrpush=""
 
 # curtinlv 环境变量
 ## 1、赚京豆
@@ -278,7 +263,7 @@ export cash_zlzh="$(echo $JD_COOKIE | sed "s/&/ /g; s/\S*pt_pin=\([^;]\+\);\S*/\
 export jxgc_kaituan="$(echo $JD_COOKIE | sed "s/&/ /g; s/\S*pt_pin=\([^;]\+\)\S*;/\1/g; s/ /\&/g;" | awk 'BEGIN{for(i=0;i<10;i++)hex[i]=i;hex["A"]=hex["a"]=10;hex["B"]=hex["b"]=11;hex["C"]=hex["c"]=12;hex["D"]=hex["d"]=13;hex["E"]=hex["e"]=14;hex["F"]=hex["f"]=15;}{gsub(/\+/," ");i=$0;while(match(i,/%../)){;if(RSTART>1);printf"%s",substr(i,1,RSTART-1);printf"%c",hex[substr(i,RSTART+1,1)]*16+hex[substr(i,RSTART+2,1)];i=substr(i,RSTART+RLENGTH);}print i;}')"  ## 支持中文用户名
 ## 5、入会开卡
 ### JD入会开卡领取京豆送豆满足此值，否则不入会（默认没获得30豆不进）
-export openCardBean="30"
+export openCardBean="1"
 ### 布尔值，是否记录符合条件的shopid(默认True)
 export record="true"
 ### 布尔值， True:仅记录，不入会(默认False)
@@ -384,7 +369,7 @@ export validate_num="" ##你需要的数值
 
 # Aaron-lv 环境变量
 ## 1、京东健康社区京豆兑换
-export JD_HEALTH_REWARD_NAME="" ##只能兑换京豆，填写纯数字20 10 5 3
+export JD_HEALTH_REWARD_NAME="20" ##只能兑换京豆，填写纯数字20 10 5 3
 
 # 不知名大佬环境变量
 ## 1、清空购物车
@@ -409,11 +394,8 @@ export JD_CART_KEYWORDS=""
 ### 由ZCY01二次修改：脚本默认不运行，由X1a0He修复：依然保持脚本默认不运行。true为运行
 ### 使用前请认真看对应注释：https://raw.githubusercontent.com/X1a0He/jd_scripts_fixed/main/jd_try_xh.js
 export JD_TRY="true"
-export JD_TRY_PRICE="10"
-export JD_TRY_TRIALPRICE="10"
-export JD_TRY_MINSUPPLYNUM="1"
-export JD_TRY_APPLYNUMFILTER="* 10 || 10000"
-export JD_TRY_TITLEFILTERS="早餐奶@产后修复@体验装@腮红@纸尿裤@卡针@袜子一双@睫毛胶水@儿童牛奶@牙刷头@灵芝@孢子@除臭@鼻炎@口罩@宠物@和田玉@祛痘@解酒@教程@软件@英语@辅导@培训@流量卡@保护套@手机壳@衣架@戒烟@棉签@网课@擦杯布@驱蚊@刷头@卸妆@互动课@小靓美@脚气@文胸@卷尺@种子@档案袋@癣@中年@老太太@妇女@私处@孕妇@卫生巾@卫生条@课@培训@阴道@生殖器@肛门@狐臭@少女内衣@胸罩@洋娃娃@益智@少女@女性内衣@女性内裤@女内裤@女内衣@女孩@屏风底座@童装@吊带@黑丝@钢圈@婴儿@儿童@玩具@幼儿@娃娃@网课@网校@电商@手机壳@钢化膜@网络课程@女纯棉@三角裤@美少女@纸尿裤@英语@俄语@四级@六级@四六级@在线网络@在线@阴道炎@宫颈@糜烂@打底裤@手机膜@鱼@狗"
+export JD_TRY_PRICE="20"
+export JD_TRY_TITLEFILTERS="早餐奶@产后修复@体验装@腮红@袜子一双@睫毛胶水@儿童牛奶@牙刷头@灵芝@孢子@除臭@鼻炎@口罩@宠物@和田玉@祛痘@解酒@教程@软件@英语@辅导@培训@流量卡@保护套@手机壳@衣架@戒烟@棉签@网课@擦杯布@驱蚊@刷头@卸妆@互动课@小靓美@脚气@文胸@卷尺@种子@档案袋@癣@中年@老太太@妇女@私处@孕妇@卫生巾@卫生条@课@培训@阴道@生殖器@肛门@狐臭@少女内衣@胸罩@洋娃娃@益智@少女@女性内衣@女性内裤@女内裤@女内衣@女孩@屏风底座@童装@吊带@黑丝@钢圈@婴儿@儿童@玩具@幼儿@娃娃@网课@网校@电商@手机壳@钢化膜@网络课程@女纯棉@三角裤@美少女@纸尿裤@英语@俄语@四级@六级@四六级@在线网络@在线@阴道炎@宫颈@糜烂@打底裤@手机膜@鱼@狗"
 ## 4、批量取关店铺和商品
 ### 是否执行取消关注，默认true
 ### 使用前请认真看对应注释：https://raw.githubusercontent.com/X1a0He/jd_scripts_fixed/main/jd_unsubscribe_xh.js
@@ -434,17 +416,9 @@ export FS_LEVEL="car"
 
 ### 青蛙开卡新变量，京豆奖励判断 | 1=邀请 2=开卡 3=关注  | 填1,2,3
 export guaopencard_rewardBean="1,2,3"
-j=50
-for (( i = 11; i <= j; i++ )); do
-    export guaopencard$i="true"
-    export guaopencard_addSku$i="true"
-done
 
-export guaopencard_All="true"
-export guaopencard_addSku_All="true"
-export guaopencardRun_All="true"
-export guaopencard_draw="#"
-export guaunknownTask_addSku_All="true"
+## 过期京豆兑换为喜豆
+export BEANCHANGE_ExJxBeans="true"
 
 
 ## 组队环境变量
@@ -588,6 +562,3 @@ case $1 in
         ran_num=""
         ;;
 esac
-
-## 过期京豆兑换为喜豆
-export BEANCHANGE_ExJxBeans="true"
