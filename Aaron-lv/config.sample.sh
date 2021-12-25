@@ -91,7 +91,7 @@ export PUSH_PLUS_TOKEN=""
 ## 下方填写您的一对多推送的 "群组编码" ，（一对多推送下面->您的群组(如无则新建)->群组编码）
 ## 1. 需订阅者扫描二维码 2、如果您是创建群组所属人，也需点击“查看二维码”扫描绑定，否则不能接受群组消息推送
 export PUSH_PLUS_USER=""
-export jd_work_price="1"
+
 ## 9. go-cqhttp
 ## gobot_url 推送到个人QQ: http://127.0.0.1/send_private_msg  群：http://127.0.0.1/send_group_msg 
 ## gobot_token 填写在go-cqhttp文件设置的访问密钥
@@ -201,7 +201,7 @@ export PURCHASE_SHOPS="true"
 export TUAN_ACTIVEID=""
 ## 22、美丽研究院开关
 export JD_USER_AGENT="true"
-export NOTIFY_CKTASK="./wskey.py"
+
 # ccwav 环境变量
 ## [1] jd_CheckCK.js
 ### 当有自动禁用或自动启用事件发生才会发送通知，如果要每次都通知则需设定变量
@@ -240,7 +240,7 @@ export NOTIFY_COMPTOGROUP2="false" ##true为推送到群组2
 export NOTIFY_NOCKFALSE="true"
 ### 7. 测试人
 ### 通知底部显示：本通知 By 测试人
-export NOTIFY_AUTHOR="大灰狼"
+export NOTIFY_AUTHOR="青龙"
 ### 8. 屏蔽登录成功
 ### 屏蔽青龙登陆成功通知，登陆失败不屏蔽
 export NOTIFY_NOLOGINSUCCESS="true"
@@ -278,7 +278,7 @@ export cash_zlzh="$(echo $JD_COOKIE | sed "s/&/ /g; s/\S*pt_pin=\([^;]\+\);\S*/\
 export jxgc_kaituan="$(echo $JD_COOKIE | sed "s/&/ /g; s/\S*pt_pin=\([^;]\+\)\S*;/\1/g; s/ /\&/g;" | awk 'BEGIN{for(i=0;i<10;i++)hex[i]=i;hex["A"]=hex["a"]=10;hex["B"]=hex["b"]=11;hex["C"]=hex["c"]=12;hex["D"]=hex["d"]=13;hex["E"]=hex["e"]=14;hex["F"]=hex["f"]=15;}{gsub(/\+/," ");i=$0;while(match(i,/%../)){;if(RSTART>1);printf"%s",substr(i,1,RSTART-1);printf"%c",hex[substr(i,RSTART+1,1)]*16+hex[substr(i,RSTART+2,1)];i=substr(i,RSTART+RLENGTH);}print i;}')"  ## 支持中文用户名
 ## 5、入会开卡
 ### JD入会开卡领取京豆送豆满足此值，否则不入会（默认没获得30豆不进）
-export openCardBean="30"
+export openCardBean="1"
 ### 布尔值，是否记录符合条件的shopid(默认True)
 export record="true"
 ### 布尔值， True:仅记录，不入会(默认False)
@@ -329,6 +329,8 @@ export guaopencard_All="true"
 export guaopencard_addSku_All="true"
 export guaopencardRun_All="true"
 export guaopencard_draw="true"
+### 青蛙开卡新变量，京豆奖励判断 | 1=邀请 2=开卡 3=关注  | 填1,2,3
+export guaopencard_rewardBean="1,2,3"
 
 # cdle 环境变量
 ## 1、签到领现金兑换
@@ -397,8 +399,9 @@ export CleanUsers=""
 export JD_BEAN_CHANGE_SENDNUM="10"
 ## 2、清空购物车
 ### 使用前请认真看对应注释：https://raw.githubusercontent.com/X1a0He/jd_scripts_fixed/main/jd_cart_remove.js
-### 当环境变量中存在JD_CART并设置为true时才会执行删除购物车
+### 当环境变量中存在JD_CART和rush_clean并设置为true时才会执行删除购物车
 export JD_CART="true"
+export rush_clean="true"
 ### 运行一次取消多全部已关注的商品。数字0表示不取关任何商品，默认20
 export JD_CART_REMOVESIZE="20"
 ### 是否清空，如果为false，则上面设置了多少就只删除多少条
@@ -409,11 +412,7 @@ export JD_CART_KEYWORDS=""
 ### 由ZCY01二次修改：脚本默认不运行，由X1a0He修复：依然保持脚本默认不运行。true为运行
 ### 使用前请认真看对应注释：https://raw.githubusercontent.com/X1a0He/jd_scripts_fixed/main/jd_try_xh.js
 export JD_TRY="true"
-export JD_TRY_PRICE="10"
-export JD_TRY_TRIALPRICE="10"
-export JD_TRY_MINSUPPLYNUM="1"
-export JD_TRY_APPLYNUMFILTER="* 10 || 10000"
-export JD_TRY_TITLEFILTERS="早餐奶@产后修复@体验装@纸尿裤@腮红@卡针@袜子一双@睫毛胶水@儿童牛奶@牙刷头@灵芝@孢子@除臭@鼻炎@口罩@宠物@和田玉@祛痘@解酒@教程@软件@英语@辅导@培训@流量卡@保护套@手机壳@衣架@戒烟@棉签@网课@擦杯布@驱蚊@刷头@卸妆@互动课@小靓美@脚气@文胸@卷尺@种子@档案袋@癣@中年@老太太@妇女@私处@孕妇@卫生巾@卫生条@课@培训@阴道@生殖器@肛门@狐臭@少女内衣@胸罩@洋娃娃@益智@少女@女性内衣@女性内裤@女内裤@女内衣@女孩@屏风底座@童装@吊带@黑丝@钢圈@婴儿@儿童@玩具@幼儿@娃娃@网课@网校@电商@手机壳@钢化膜@网络课程@女纯棉@三角裤@美少女@纸尿裤@英语@俄语@四级@六级@四六级@在线网络@在线@阴道炎@宫颈@糜烂@打底裤@手机膜@鱼@狗"
+export JD_TRY_PRICE="20"
 ## 4、批量取关店铺和商品
 ### 是否执行取消关注，默认true
 ### 使用前请认真看对应注释：https://raw.githubusercontent.com/X1a0He/jd_scripts_fixed/main/jd_unsubscribe_xh.js
@@ -432,19 +431,10 @@ export JDDJ_CKPATH="./jdCookie.js"
 ### 京东工业品加购任务
 export FS_LEVEL="car"
 
-### 青蛙开卡新变量，京豆奖励判断 | 1=邀请 2=开卡 3=关注  | 填1,2,3
-export guaopencard_rewardBean="1,2,3"
-j=50
-for (( i = 11; i <= j; i++ )); do
-    export guaopencard$i="true"
-    export guaopencard_addSku$i="true"
-done
+## 过期京豆兑换为喜豆
+export BEANCHANGE_ExJxBeans="true"
+export exjxbeans="true"
 
-export guaopencard_All="true"
-export guaopencard_addSku_All="true"
-export guaopencardRun_All="true"
-export guaopencard_draw="#"
-export guaunknownTask_addSku_All="true"
 
 
 ## 组队环境变量
@@ -588,6 +578,3 @@ case $1 in
         ran_num=""
         ;;
 esac
-
-## 过期京豆兑换为喜豆
-export BEANCHANGE_ExJxBeans="true"
