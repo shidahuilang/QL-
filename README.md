@@ -18,7 +18,7 @@ yum install -y curl
 
 - 安装完curl后，执行下面一键命令安装青龙+依赖+任务（安装完毕后再次使用命令可以对应用进行升级）
 ```sh
-bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/lang.sh)"
+bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/lang1.sh)"
 ```
 #
 
