@@ -251,16 +251,16 @@ function systemctl_status() {
 
 function Unstall_qinglong() {
   if [[ `docker images | grep -c "qinglong"` -ge '1' ]] || [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
-    ECHOY "检测到青龙面板，正在御载青龙面板，请稍后..."
+    ECHOY "检测到青龙面板，正在卸载青龙面板，请稍后..."
     docker=$(docker ps -a|grep qinglong) && dockerid=$(awk '{print $(1)}' <<<${docker})
     images=$(docker images|grep qinglong) && imagesid=$(awk '{print $(3)}' <<<${images})
     docker stop -t=5 "${dockerid}" > /dev/null 2>&1
     docker rm "${dockerid}"
     docker rmi "${imagesid}"
     if [[ `docker ps -a | grep -c "qinglong"` == '0' ]]; then
-      print_ok "青龙面板御载完成"
+      print_ok "青龙面板卸载完成"
     else
-      print_error "青龙面板御载失败"
+      print_error "青龙面板卸载失败"
       exit 1
     fi
   fi
@@ -446,16 +446,16 @@ function install_yanzheng() {
 
 function jiance_nvjdc() {
   if [[ `docker images | grep -c "nvjdc"` -ge '1' ]] || [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
-    ECHOY "检测到nvjdc面板，正在御载nvjdc面板，请稍后..."
+    ECHOY "检测到nvjdc面板，正在卸载nvjdc面板，请稍后..."
     dockernv=$(docker ps -a|grep nvjdc) && dockernvid=$(awk '{print $(1)}' <<<${dockernv})
     imagesnv=$(docker images|grep nvjdc) && imagesnvid=$(awk '{print $(3)}' <<<${imagesnv})
     docker stop -t=5 "${dockernvid}" > /dev/null 2>&1
     docker rm "${dockernvid}"
     docker rmi "${imagesnvid}"
     if [[ `docker images | grep -c "nvjdc"` == '0' ]]; then
-      print_ok "nvjdc面板御载完成"
+      print_ok "nvjdc面板卸载完成"
     else
-      print_error "nvjdc面板御载失败"
+      print_error "nvjdc面板卸载失败"
       exit 1
     fi
     rm -rf "${Home}" > /dev/null 2>&1
@@ -547,7 +547,7 @@ function up_nvjdc() {
   cp -Rf ${QL_PATH}/nvjdcbf/Config ${Home}/Config
   cp -Rf ${QL_PATH}/nvjdcbf/.local-chromium ${Home}/.local-chromium
   if [[ `docker images | grep -c "nvjdc"` -ge '1' ]] || [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
-    ECHOY "御载nvjdc镜像"
+    ECHOY "卸载nvjdc镜像"
     dockernv=$(docker ps -a|grep nvjdc) && dockernvid=$(awk '{print $(1)}' <<<${dockernv})
     imagesnv=$(docker images|grep nvjdc) && imagesnvid=$(awk '{print $(3)}' <<<${imagesnv})
     docker stop -t=5 "${dockernvid}" > /dev/null 2>&1
@@ -555,9 +555,9 @@ function up_nvjdc() {
     docker rmi "${imagesnvid}"
   fi
   if [[ `docker images | grep -c "nvjdc"` == '0' ]]; then
-    print_ok "nvjdc镜像御载完成"
+    print_ok "nvjdc镜像卸载完成"
   else
-    print_error "nvjdc镜像御载失败，再次尝试删除"
+    print_error "nvjdc镜像卸载失败，再次尝试删除"
     up_nvjdc
   fi
   cd /root
@@ -607,18 +607,18 @@ function OpenApi_Client() {
 function Google_Check() {
   export Google_Check=$(curl -I -s --connect-timeout 8 google.com -w %{http_code} | tail -n1)
   if [ ! "$Google_Check" == 301 ];then
-    export curlurl="https://cdn.jsdelivr.net/gh/281677160/ql@main"
+    export curlurl="https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main"
     export ghproxy_Path="https://ghproxy.com/"
     ECHOGG "使用代理"
     echo "
-    export curlurl="https://cdn.jsdelivr.net/gh/281677160/ql@main"
+    export curlurl="https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main"
     export ghproxy_Path="https://ghproxy.com/"
     " > /root/ghproxy.sh
   else
-    export curlurl="https://raw.githubusercontent.com/281677160/ql/main"
+    export curlurl="https://raw.githubusercontent.com/shidahuilang/QL-/main"
     export ghproxy_Path=""
     echo "
-    export curlurl="https://raw.githubusercontent.com/281677160/ql/main"
+    export curlurl="https://raw.githubusercontent.com/shidahuilang/QL-/main"
     export ghproxy_Path=""
     " > /root/ghproxy.sh
   fi
@@ -695,8 +695,8 @@ memunvjdc() {
   ECHOB " 1. 升级青龙面板"
   ECHOB " 2. 更新撸豆脚本库"
   ECHOB " 3. 升级nvjdc面板"
-  ECHOB " 4. 御载nvjdc面板"
-  ECHOB " 5. 御载青龙+nvjdc面板"
+  ECHOB " 4. 卸载nvjdc面板"
+  ECHOB " 5. 卸载青龙+nvjdc面板"
   ECHOB " 6. 进入第一主菜单（安装选择界面）"
   ECHOB " 7. 退出程序!"
   echo
@@ -721,11 +721,11 @@ memunvjdc() {
   break
   ;;
   4)
-    ECHOY " 是否御载nvjdc面板?"
-    read -p " 是否御载nvjdc面板?输入[Yy]回车确认,直接回车返回菜单：" YZJDC
+    ECHOY " 是否卸载nvjdc面板?"
+    read -p " 是否卸载nvjdc面板?输入[Yy]回车确认,直接回车返回菜单：" YZJDC
     case $YZJDC in
     [Yy])
-      ECHOG " 正在御载nvjdc面板"
+      ECHOG " 正在卸载nvjdc面板"
       jiance_nvjdc
     ;;
     *)
@@ -735,11 +735,11 @@ memunvjdc() {
   break
   ;;
   5)
-    ECHOY " 是否御载青龙+nvjdc面板?"
-    read -p " 是否御载青龙+nvjdc面板?输入[Yy]回车确认,直接回车返回菜单：" YZQLNV
+    ECHOY " 是否卸载青龙+nvjdc面板?"
+    read -p " 是否卸载青龙+nvjdc面板?输入[Yy]回车确认,直接回车返回菜单：" YZQLNV
     case $YZQLNV in
     [Yy])
-      ECHOG "正在御载青龙+nvjdc面板"
+      ECHOG "正在卸载青龙+nvjdc面板"
       Unstall_qinglong
       jiance_nvjdc
       rm -rf /etc/bianliang.sh
@@ -773,7 +773,7 @@ memuqinglong() {
   echo
   ECHOYY " 1. 升级青龙面板"
   ECHOY " 2. 更新撸豆脚本库"
-  ECHOYY " 3. 御载青龙面板"
+  ECHOYY " 3. 卸载青龙面板"
   ECHOY " 4. 进入第一主菜单（安装选择界面）"
   ECHOYY " 5. 退出程序!"
   echo
@@ -792,12 +792,12 @@ memuqinglong() {
   break
   ;;
   3)
-    ECHOB " 是否御载青龙面板?"
+    ECHOB " 是否卸载青龙面板?"
     echo
-    read -p " 是否御载青龙面板?输入[Yy]回车确认,直接回车返回菜单：" YZQLN
+    read -p " 是否卸载青龙面板?输入[Yy]回车确认,直接回车返回菜单：" YZQLN
     case $YZQLN in
     [Yy])
-      ECHOG "正在御载青龙面板"
+      ECHOG "正在卸载青龙面板"
       Unstall_qinglong
       rm -rf /etc/bianliang.sh
     ;;
