@@ -2,9 +2,9 @@
 
 #====================================================
 #	System Request:Ubuntu 18.04+/20.04+
-#	Author:	281677160
+#	Author:	dahuilang
 #	Dscription: qinglong onekey Management
-#	github: https://github.com/281677160/danshui
+#	github: https://github.com/shidahuilang
 #====================================================
 
 # 字体颜色配置
