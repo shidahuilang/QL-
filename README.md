@@ -1,100 +1,99 @@
-- 执行以下命令
+#### 🚩 一键安装青龙面板命令
+#
+- 为防止系统没安装curl，使用不了一键命令，使用一键安装青龙面板命令之前先执行一次安装curl命令
 
-
-脚本适用于（ubuntu的docker、debian的docker、centos的docker、openwrt的docker）
-一键安装青龙，包括（docker、任务、依赖安装，一条龙服务）
-自动检测docker，有则跳过，无则执行安装，如果是openwrt则不会自动安装docker
-如果您以前安装有青龙的话，则自动删除您的青龙，全部推倒重新安装
-如果有条件的话，最好使用翻墙网络来安装
-- 为防止系统没安装curl，使用不了一键命令，使用一键安装青龙面板命令之前选执行一次安装curl命令
 - 安装curl请注意区分系统，openwrt千万别另外安装curl，openwrt本身自带了，另外安装还会用不了
-- ubuntu或者debian系统
-``` bash
-sudo apt-get update && sudo apt-get install -y curl
-```
-- centos系统
-``` bash
-sudo yum install -y curl
+#
+
+- 使用root用户登录ubuntu或者debian系统，后执行以下命令安装curl
+```sh
+apt -y update && apt -y install curl
 ```
 
-### 🚩 一键安装青龙面板命令
+- 使用root用户登录centos系统，后执行以下命令安装curl
+```sh
+yum install -y curl
+```
+#
 
-``` bash
+- 安装完curl后，执行下面一键命令安装青龙+依赖+任务（安装完毕后再次使用命令可以对应用进行升级）
+```sh
 bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/lang.sh)"
 ```
+#
 
-### 🚩 一键安装nvjdc面板命令
+## 第二步
 
-``` bash
-bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/nvjdc.sh)"
-```
-
-#### 🚩 如果上面的命令运行成功会有提示，登录页面，设置好KEY
+#### 🚩 如果上面的命令运行成功会有提示，按提示操作登录面板
 
 
-- > 上面的安装完毕后，确保你的设备放行了`5700`端口，用自己的`ip:5700`进入页面
+- 登录面板后，在‘ 环境变量 ’项添加 WSKEY 或者 PT_KEY
 
-- > 进入页面后，点击安装青龙面板，然后按提示设置好账号、密码，登录管理页面就可以了
+- 添加 wskey 或者 pt_key 都要注意KEY里面的分号，英文分号，记得别省略了，WSKEY和PT_KEY二选一即可
 
-- > 信息推送不需要填写，直接跳过就好了，任务运行后在配置文件添加就可以
+- 格式如下：
 
-- > 面板安装成功后，登录面板，然后在‘ 环境变量 ’项添加 WSKEY
+```sh
+# > 添加 wskey
 
-- 名称
+名称
 JD_WSCK
 
-- 值
-``` bash
-pin=您的账号;wskey=XXXXXX
-```
+值
+pin=您的账号;wskey=您的wskey值;
 
 
 
-- > 您也可以使用 JD_COOKIE，WSKEY和JD_COOKIE二选一即可
+# > 添加PT_KEY
 
-- 名称
+名称
 JD_COOKIE
 
-- 值
-``` bash
-pt_key=XXXXXX;pt_pin=您的账号;
+值
+pt_key=您的pt_key值;pt_pin=您的账号;
 ```
 
-
-设置好KEY后，回到命令窗，输入Y或者y回车继续安装脚本，如果拉取脚本途中出现错误，可以使用单独“一键单独安装任务”和“一键安装单独青龙的依赖”继续安装
-
-
-
-- 🚩 全部一键脚本
-
-
-
-- 一键安装青龙，包括（docker、任务、依赖安装，一条龙服务）
-``` bash
-wget -O lang.sh https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/lang.sh && bash lang.sh
+#
+#### 🚩 青龙面板安装依赖方法
+- ####  依赖管理 --> 添加依赖 --> 依赖类型(NodeJs) --> 自动拆分(是) --> 名称(把下面依赖名称全复制粘贴) --> 确定 
+```sh
+date-fns
+axios
+ts-node
+typescript
+png-js
+crypto-js
+md5
+dotenv
+got
+ts-md5
+tslib
+@types/node
+requests
+tough-cookie
+jsdom
+download
+tunnel
+fs
+ws
+js-base64
+jieba
+canvas
 ```
+#
+#### 🚩 单独安装某项的一键脚本
 
-- 一键单独安装任务（青龙安装好后，登录页面后，可以用这个单独安装任务）
-- 单脚本
-``` bash
-docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/danxiaoben.sh)"
-``` 
-- 多脚本库
-``` bash
-docker exec -it qinglong bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/jiaoben.sh)"
-```
+
 - 一键单独安装docker
-``` bash
-wget -O docker.sh https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/docker.sh && bash docker.sh
+```sh
+bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/docker.sh)"
 ```
 
 - 一键安装单独青龙的依赖
-``` bash
+```sh
 docker exec -it qinglong bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/npm.sh)"
 ```
+## 感谢！
 
-
-- 感谢！
-
-> [`danshui`]
-> [`whyour`]
+> [`whyour`](https://github.com/whyour/qinglong)
+> [`NolanHzy`](https://github.com/NolanHzy/nvjdcdocker)
