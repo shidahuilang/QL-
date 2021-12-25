@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 # 环境变量
 #1️⃣RES_SUB
@@ -6,6 +5,10 @@
 #说明
 #1️⃣需保留的脚本前缀列表（不管是否重复），用 & 分割，默认保留 shufflewzc_faker2&JDHelloWorld_jd_scripts
 #2️⃣保留后是否禁用重复的带其他前缀脚本，默认禁用
+
+#示例
+#1️⃣Aaron-lv_sync&smiek2121_scripts
+#2️⃣true 或 false
 """
 cron: 20 10 */7 * *
 new Env('禁用重复任务');
