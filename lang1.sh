@@ -1,3 +1,4 @@
+
 #!/usr/bin/env bash
 
 #====================================================
@@ -100,8 +101,7 @@ function qinglong_port() {
   ;;
   esac
   done
-  export local_ip="$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAddress)"
-  export YUMING="请输入您当前服务器的IP[比如：${local_ip}]"
+  export YUMING="请输入您当前服务器的IP[比如：192.168.2.99]"
   echo
   echo
   while :; do
@@ -125,36 +125,35 @@ function qinglong_port() {
     export QL_PORT=${QL_PORT:-"5700"}
     export NETLEIXING="bridge"
     export NETWORK="-p ${QL_PORT}:5700"
-    export YPORT="您设置的青龙面板端口为"
+    export YPORT="青龙面口为"
   elif [[ "${QING_PORT}" == "NO" ]]; then
     export QL_PORT="5700"
-    export YPORT="host默认青龙端口为"
+    export YPORT="host模式默认青龙端口为"
     export NETWORK="--net host"
     export NETLEIXING="host"
   fi
-  if [[ "${Api_Client}" == "true" ]] && [[ "${QING_PORT}" == "YES" ]]; then
+  if [[ "${Api_Client}" == "true" ]]; then
      read -p " nvjdc面板名称，可中文可英文(直接回车默认：NolanJDCloud): " NVJDCNAME && printf "\n"
      export NVJDCNAME=${NVJDCNAME:-"NolanJDCloud"}
      read -p " 请输入您想设置的nvjdc面板端口(直接回车默认：5701): " JDC_PORT && printf "\n"
      export JDC_PORT=${JDC_PORT:-"5701"}
      read -p " 请输入通过nvjdc面板验证最大挂机数(直接回车默认：99): " CAPACITY && printf "\n"
      export CAPACITY=${CAPACITY:-"99"}
-     export QLurl="http://${IP}:${QL_PORT}"
-  elif [[ "${Api_Client}" == "true" ]] && [[ "${QING_PORT}" == "NO" ]]; then
-     read -p " nvjdc面板名称，可中文可英文(直接回车默认：NolanJDCloud): " NVJDCNAME && printf "\n"
-     export NVJDCNAME=${NVJDCNAME:-"NolanJDCloud"}
-     read -p " 请输入青龙最大挂机数(直接回车默认：99): " CAPACITY && printf "\n"
-     export CAPACITY=${CAPACITY:-"99"}
-     export JDC_PORT="5701"
+     ECHOGG "pushplus网址：http://www.pushplus.plus"
+     read -p " 输入pushplus的TOKEN，有人通过nvjdc面板进入挂机或删除KEY时通知您(直接回车默认不通知): " PUSHPLUS && printf "\n"
+     export PUSHPLUS=${PUSHPLUS:-""}
      export QLurl="http://${IP}:${QL_PORT}"
   fi
+  ECHOGG "网络类型：${NETLEIXING}"
   ECHOGG "您的IP为：${IP}"
   ECHOGG "${YPORT}：${QL_PORT}"
-  ECHOGG "网络类型：${NETLEIXING}"
+  ECHOGG "您的青龙登录地址将为：http://${IP}:${QL_PORT}"
   if [[ "${Api_Client}" == "true" ]]; then
-    ECHOGG "您的nvjdc面板名称为：${NVJDCNAME}"
-    ECHOGG "您的nvjdc面板端口为：${JDC_PORT}"
-    ECHOGG "通过nvjdc面板验证最大挂机数为：${CAPACITY}"
+    ECHOYY "nvjdc面板名称为：${NVJDCNAME}"
+    ECHOYY "nvjdc面板端口为：${JDC_PORT}"
+    ECHOYY "通过nvjdc面板验证最大挂机数为：${CAPACITY}"
+    ECHOYY "pushplus的TOKEN为：${PUSHPLUS}"
+    ECHOYY "您的nvjdc登录地址将为：http://${IP}:${JDC_PORT}"
   fi
   echo
   read -p " 检查是否正确,正确则按回车继续,不正确输入[Q/q]回车重新输入： " NNRT
@@ -189,6 +188,7 @@ function system_check() {
     opkg install git-http > /dev/null 2>&1
     opkg install ca-bundle > /dev/null 2>&1
     opkg install coreutils-timeout > /dev/null 2>&1
+    opkg install findutils-xargs > /dev/null 2>&1
     opkg install unzip
     XTong="openwrt"
     if [[ -d /opt/docker ]]; then
@@ -251,16 +251,17 @@ function systemctl_status() {
 
 function Unstall_qinglong() {
   if [[ `docker images | grep -c "qinglong"` -ge '1' ]] || [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
-    ECHOY "检测到青龙面板，正在卸载青龙面板，请稍后..."
+    ECHOY "检测到青龙面板，正在御载青龙面板，请稍后..."
     docker=$(docker ps -a|grep qinglong) && dockerid=$(awk '{print $(1)}' <<<${docker})
     images=$(docker images|grep qinglong) && imagesid=$(awk '{print $(3)}' <<<${images})
     docker stop -t=5 "${dockerid}" > /dev/null 2>&1
     docker rm "${dockerid}"
     docker rmi "${imagesid}"
     if [[ `docker ps -a | grep -c "qinglong"` == '0' ]]; then
-      print_ok "青龙面板卸载完成"
+      print_ok "青龙面板御载完成"
+      rm -rf /etc/bianliang.sh > /dev/null 2>&1
     else
-      print_error "青龙面板卸载失败"
+      print_error "青龙面板御载失败"
       exit 1
     fi
   fi
@@ -332,18 +333,6 @@ docker run -dit \
   --restart always \
   whyour/qinglong:latest
   
-  if [[ -f /root/ghproxy.sh ]]; then
-    docker cp /root/ghproxy.sh qinglong:/ql/repo/ghproxy.sh
-    rm -rf /root/ghproxy.sh
-  fi
-  if [[ -n "$(ls -A "${QL_PATH}/qlbeifen1" 2>/dev/null)" ]]; then
-    curl -fsSL ${curlurl}/${wjmz}/auth.json > ${QL_PATH}/qlbeifen1/auth.json
-    docker cp ${QL_PATH}/qlbeifen1/ql/config/env.sh qinglong:/ql/config/env.sh
-    docker cp ${QL_PATH}/qlbeifen1/ql/db/env.db qinglong:/ql/db/env.db
-    docker cp ${QL_PATH}/qlbeifen1/auth.json qinglong:/ql/config/auth.json
-    docker cp ${QL_PATH}/qlbeifen1/auth.json qinglong:/ql/db/auth.db
-    docker restart qinglong
-  fi
   if [[ `docker ps -a | grep -c "qinglong"` == '1' ]]; then
     print_ok "青龙面板安装完成"
   else
@@ -352,12 +341,25 @@ docker run -dit \
   fi
 }
 
+function ql_qlbeifen() {
+  if [[ -f /root/ghproxy.sh ]]; then
+    docker cp /root/ghproxy.sh qinglong:/ql/repo/ghproxy.sh
+    rm -rf /root/ghproxy.sh
+  fi
+  if [[ -n "$(ls -A "${QL_PATH}/qlbeifen1" 2>/dev/null)" ]]; then
+    ECHOG "正在还原env.sh文件（KEY文件）"
+    docker cp ${QL_PATH}/qlbeifen1/ql/config/env.sh qinglong:/ql/config/env.sh
+    docker cp ${QL_PATH}/qlbeifen1/ql/db/env.db qinglong:/ql/db/env.db
+  fi
+  [[ -d ${QL_PATH}/qlbeifen1/ql/jd ]] && docker cp ${QL_PATH}/qlbeifen1/ql/jd qinglong:/ql/
+}
+
 function qinglong_dl() {
   clear
   echo
   echo
   ECHOG "青龙面板安装完成，请先登录面板再按回车，进行下一步安装程序，步骤如下："
-  ECHOYY "请使用 ${IP}:${QL_PORT} 在浏览器打开青龙面板"
+  ECHOYY "请使用 http://${IP}:${QL_PORT} 在浏览器打开青龙面板"
   ECHOB "点击[开始安装] --> [通知方式]跳过 --> 设置好[用户名]跟[密码] --> 点击[提交] --> 点击[去登录] --> 输入帐号密码完成登录!"
   echo
   if [[ "${Api_Client}" == "true" ]]; then
@@ -426,7 +428,6 @@ function install_yanzheng() {
     exit 1
   fi
   [[ -f ${QL_PATH}/qlbeifen1/ql/config/bot.json ]] && docker cp ${QL_PATH}/qlbeifen1/ql/config/bot.json qinglong:/ql/config/bot.json
-  [[ -d ${QL_PATH}/qlbeifen1/ql/jd ]] && docker cp ${QL_PATH}/qlbeifen1/ql/jd qinglong:/ql/
   if [[ -f ${QL_PATH}/qlbeifen1/ql/scripts/rwwc ]]; then
     docker cp ${QL_PATH}/qlbeifen1/ql/config/config.sh qinglong:/ql/config/config.sh
     docker cp ${QL_PATH}/qlbeifen1/ql/config/config.sh qinglong:/ql/sample/config.sample.sh
@@ -440,33 +441,32 @@ function install_yanzheng() {
   echo "${QL_PATH}/ql/scripts/rwwc" > ${QL_PATH}/ql/scripts/rwwc
   echo "export rwwc=${QL_PATH}/ql/scripts/rwwc" > /etc/bianliang.sh
   docker restart qinglong > /dev/null 2>&1
-  sleep 1
-  print_ok "任务安装完成"
+  print_ok "任务安装完成，请刷新青龙面板查看"
 }
 
 function jiance_nvjdc() {
   if [[ `docker images | grep -c "nvjdc"` -ge '1' ]] || [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
-    ECHOY "检测到nvjdc面板，正在卸载nvjdc面板，请稍后..."
+    ECHOY "检测到nvjdc面板，正在御载nvjdc面板，请稍后..."
     dockernv=$(docker ps -a|grep nvjdc) && dockernvid=$(awk '{print $(1)}' <<<${dockernv})
     imagesnv=$(docker images|grep nvjdc) && imagesnvid=$(awk '{print $(3)}' <<<${imagesnv})
     docker stop -t=5 "${dockernvid}" > /dev/null 2>&1
     docker rm "${dockernvid}"
     docker rmi "${imagesnvid}"
+    find / -iname 'nolanjdc' | xargs -i rm -rf {} > /dev/null 2>&1
+    find / -iname 'nvjdc' | xargs -i rm -rf {} > /dev/null 2>&1
     if [[ `docker images | grep -c "nvjdc"` == '0' ]]; then
-      print_ok "nvjdc面板卸载完成"
+      print_ok "nvjdc面板御载完成"
     else
-      print_error "nvjdc面板卸载失败"
+      print_error "nvjdc面板御载失败"
       exit 1
     fi
-    rm -rf "${Home}" > /dev/null 2>&1
-    rm -rf root/{nolanjdc,nvjdc} > /dev/null 2>&1
   fi
 }
 
 function git_clone() {
   ECHOG "开始安装nvjdc面板，请稍后..."
   ECHOY "下载nvjdc源码"
-  rm -rf "${Home}" && git clone ${ghproxy_Path}https://github.com/NolanHzy/nvjdcdocker.git ${Home}
+  rm -rf "${Home}" && git clone ${GithubProxyUrl}https://github.com/NolanHzy/nvjdcdocker.git ${Home}
   judge "下载源码"
 }
 
@@ -534,6 +534,7 @@ function linux_nolanjdc() {
     print_error "nvjdc安装失败"
     exit 1
   fi
+  rm -rf ${Home}/build.log
   ECHOY "您的nvjdc面板地址为：http://${IP}:${JDC_PORT}"
 }
 
@@ -542,12 +543,12 @@ function up_nvjdc() {
   ECHOY "下载nvjdc源码"
   rm -rf ${QL_PATH}/nvjdcbf
   cp -Rf ${Home} ${QL_PATH}/nvjdcbf
-  rm -rf "${Home}" && git clone ${ghproxy_Path}https://github.com/NolanHzy/nvjdcdocker.git ${Home}
+  rm -rf "${Home}" && git clone ${GithubProxyUrl}https://github.com/NolanHzy/nvjdcdocker.git ${Home}
   judge "下载源码"
   cp -Rf ${QL_PATH}/nvjdcbf/Config ${Home}/Config
   cp -Rf ${QL_PATH}/nvjdcbf/.local-chromium ${Home}/.local-chromium
   if [[ `docker images | grep -c "nvjdc"` -ge '1' ]] || [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
-    ECHOY "卸载nvjdc镜像"
+    ECHOY "御载nvjdc镜像"
     dockernv=$(docker ps -a|grep nvjdc) && dockernvid=$(awk '{print $(1)}' <<<${dockernv})
     imagesnv=$(docker images|grep nvjdc) && imagesnvid=$(awk '{print $(3)}' <<<${imagesnv})
     docker stop -t=5 "${dockernvid}" > /dev/null 2>&1
@@ -555,10 +556,9 @@ function up_nvjdc() {
     docker rmi "${imagesnvid}"
   fi
   if [[ `docker images | grep -c "nvjdc"` == '0' ]]; then
-    print_ok "nvjdc镜像卸载完成"
+    print_ok "nvjdc镜像御载完成"
   else
-    print_error "nvjdc镜像卸载失败，再次尝试删除"
-    up_nvjdc
+    print_error "nvjdc镜像御载失败，再次尝试删除"
   fi
   cd /root
   ECHOG "更新镜像，请耐心等候..."
@@ -599,33 +599,32 @@ function up_nvjdc() {
 }
 
 function OpenApi_Client() {
-  export MANEID="$(grep 'name' /opt/ql/db/app.db |awk 'END{print}' |sed -r 's/.*name\":\"(.*)\"/\1/' |cut -d "\"" -f1)"
-  export CLIENTID="$(grep 'client_id' /opt/ql/db/app.db |awk 'END{print}' |sed -r 's/.*client_id\":\"(.*)\"/\1/' |cut -d "\"" -f1)"
-  export CLIENTID_SECRET="$(grep 'client_secret' /opt/ql/db/app.db |awk 'END{print}' |sed -r 's/.*client_secret\":\"(.*)\"/\1/' |cut -d "\"" -f1)"
+  export MANEID="$(grep 'name' ${QL_PATH}/ql/db/app.db |awk 'END{print}' |sed -r 's/.*name\":\"(.*)\"/\1/' |cut -d "\"" -f1)"
+  export CLIENTID="$(grep 'client_id' ${QL_PATH}/ql/db/app.db |awk 'END{print}' |sed -r 's/.*client_id\":\"(.*)\"/\1/' |cut -d "\"" -f1)"
+  export CLIENTID_SECRET="$(grep 'client_secret' ${QL_PATH}/ql/db/app.db |awk 'END{print}' |sed -r 's/.*client_secret\":\"(.*)\"/\1/' |cut -d "\"" -f1)"
 }
 
 function Google_Check() {
   export Google_Check=$(curl -I -s --connect-timeout 8 google.com -w %{http_code} | tail -n1)
   if [ ! "$Google_Check" == 301 ];then
     export curlurl="https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main"
-    export ghproxy_Path="https://ghproxy.com/"
+    export GithubProxyUrl="https://ghproxy.com/"
     ECHOGG "使用代理"
     echo "
     export curlurl="https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main"
-    export ghproxy_Path="https://ghproxy.com/"
+    export GithubProxyUrl="https://ghproxy.com/"
     " > /root/ghproxy.sh
   else
     export curlurl="https://raw.githubusercontent.com/shidahuilang/QL-/main"
-    export ghproxy_Path=""
+    export GithubProxyUrl=""
     echo "
     export curlurl="https://raw.githubusercontent.com/shidahuilang/QL-/main"
-    export ghproxy_Path=""
+    export GithubProxyUrl=""
     " > /root/ghproxy.sh
   fi
 }
 
 function config_bianliang() {
-  echo "${Home}/rwwc" > ${Home}/rwwc
   echo "
   export IP="${IP}"
   export QL_PATH="${QL_PATH}"
@@ -642,6 +641,7 @@ function config_bianliang() {
   export nvrwwc="${Home}/rwwc"
   " >> /etc/bianliang.sh
   chmod +x /etc/bianliang.sh
+  [[ -d ${Home} ]] && echo "${Home}/rwwc" > ${Home}/rwwc
 }
 
 function aznvjdc() {
@@ -666,6 +666,7 @@ function qinglong_nvjdc() {
   sys_kongjian
   install_ql
   qinglong_dl
+  ql_qlbeifen
   OpenApi_Client
   install_rw
   install_yanzheng
@@ -683,6 +684,7 @@ function azqinglong() {
   sys_kongjian
   install_ql
   qinglong_dl
+  ql_qlbeifen
   install_rw
   install_yanzheng
   config_bianliang
@@ -695,8 +697,8 @@ memunvjdc() {
   ECHOB " 1. 升级青龙面板"
   ECHOB " 2. 更新撸豆脚本库"
   ECHOB " 3. 升级nvjdc面板"
-  ECHOB " 4. 卸载nvjdc面板"
-  ECHOB " 5. 卸载青龙+nvjdc面板"
+  ECHOB " 4. 御载nvjdc面板"
+  ECHOB " 5. 御载青龙+nvjdc面板"
   ECHOB " 6. 进入第一主菜单（安装选择界面）"
   ECHOB " 7. 退出程序!"
   echo
@@ -721,11 +723,11 @@ memunvjdc() {
   break
   ;;
   4)
-    ECHOY " 是否卸载nvjdc面板?"
-    read -p " 是否卸载nvjdc面板?输入[Yy]回车确认,直接回车返回菜单：" YZJDC
+    ECHOY " 是否御载nvjdc面板?"
+    read -p " 是否御载nvjdc面板?输入[Yy]回车确认,直接回车返回菜单：" YZJDC
     case $YZJDC in
     [Yy])
-      ECHOG " 正在卸载nvjdc面板"
+      ECHOG " 正在御载nvjdc面板"
       jiance_nvjdc
     ;;
     *)
@@ -735,11 +737,11 @@ memunvjdc() {
   break
   ;;
   5)
-    ECHOY " 是否卸载青龙+nvjdc面板?"
-    read -p " 是否卸载青龙+nvjdc面板?输入[Yy]回车确认,直接回车返回菜单：" YZQLNV
+    ECHOY " 是否御载青龙+nvjdc面板?"
+    read -p " 是否御载青龙+nvjdc面板?输入[Yy]回车确认,直接回车返回菜单：" YZQLNV
     case $YZQLNV in
     [Yy])
-      ECHOG "正在卸载青龙+nvjdc面板"
+      ECHOG "正在御载青龙+nvjdc面板"
       Unstall_qinglong
       jiance_nvjdc
       rm -rf /etc/bianliang.sh
@@ -773,7 +775,7 @@ memuqinglong() {
   echo
   ECHOYY " 1. 升级青龙面板"
   ECHOY " 2. 更新撸豆脚本库"
-  ECHOYY " 3. 卸载青龙面板"
+  ECHOYY " 3. 御载青龙面板"
   ECHOY " 4. 进入第一主菜单（安装选择界面）"
   ECHOYY " 5. 退出程序!"
   echo
@@ -792,12 +794,12 @@ memuqinglong() {
   break
   ;;
   3)
-    ECHOB " 是否卸载青龙面板?"
+    ECHOB " 是否御载青龙面板?"
     echo
-    read -p " 是否卸载青龙面板?输入[Yy]回车确认,直接回车返回菜单：" YZQLN
+    read -p " 是否御载青龙面板?输入[Yy]回车确认,直接回车返回菜单：" YZQLN
     case $YZQLN in
     [Yy])
-      ECHOG "正在卸载青龙面板"
+      ECHOG "正在御载青龙面板"
       Unstall_qinglong
       rm -rf /etc/bianliang.sh
     ;;
@@ -842,7 +844,7 @@ memuaz() {
   1)
     export Api_Client="true"
     export Npm_yilai="true"
-    export Sys_kj="12"
+    export Sys_kj="10"
     export Ql_nvjdc="和nvjdc面板"
     ECHOG " 安装青龙+任务+依赖+nvjdc面板"
     qinglong_nvjdc
@@ -851,7 +853,7 @@ memuaz() {
   2)
     export Api_Client="true"
     export Npm_yilai="false"
-    export Sys_kj="12"
+    export Sys_kj="10"
     export Ql_nvjdc="和nvjdc面板"
     ECHOG " 安装青龙+任务+nvjdc面板（依赖自行在青龙面板安装）"
     qinglong_nvjdc
@@ -901,8 +903,8 @@ memu() {
   ECHORR "安装过程会有重启docker操作，如不能接受，请退出安装"
   echo
   ECHOY " 请选择您要安装什么类型的任务库"
-  ECHOB " 1. TG机器人每周提交助力码库（faker2+JDHelloWorld）"
-  ECHOB " 2. 自动提交助力码库,要去库的作者那里提交资料过白名单（feverrun）"
+  ECHOB " 1. TG机器人每周提交助力码库（shufflewzc/faker2和JDHelloWorld/jd_scripts）两个库"
+  ECHOB " 2. 自动提交助力码库,要去库的作者那里提交资料过白名单（feverrun/my_scripts）单库"
   ECHOB " 3. 退出安装程序!"
   echo
   scqlanmaa="输入您选择的编码"
