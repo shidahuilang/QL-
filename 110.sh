@@ -193,12 +193,12 @@ read -p "请输入nvjdc面板标题: " title && printf "\n"
 read -p "请输入nvjdc面板希望使用的端口号: " portinfo && printf "\n"
 read -p "请输入XDD面板地址，格式如http://192.168.2.2:6666/api/login/smslogin  如不启用直接回车: " XDDurl && printf "\n"
 read -p "请输入XDD面板Token（如不启用直接回车）: " XDDToken && printf "\n"
-read -p "请输入PUSHPLUS的TOKEN（如不启用直接回车）: " PUSH_PLUS_TOKEN && printf "\n"
+read -p "请输入PUSHPLUS的TOKEN（如不启用直接回车）: " ${PUSHPLUS} && printf "\n"
 read -p "nvjdc是否对接青龙，输入y或者n " jdcqinglong && printf "\n"
  if [[ "$jdcqinglong" == "y" ]];then
-read -p "请输入青龙OpenApi Client ID: " ClientID && printf "\n"
-read -p "请输入青龙OpenApi Client Secret: " ClientSecret && printf "\n"
-read -p "请输入青龙服务器的url地址（类似http://192.168.2.2:5700）: " QLurl && printf "\n"
+read -p "请输入青龙OpenApi Client ID: " ${CLIENTID} && printf "\n"
+read -p "请输入青龙OpenApi Client Secret: " ${CLIENTID_SECRET} && printf "\n"
+read -p "请输入青龙服务器的url地址（类似http://192.168.2.2:5700）: " http://${IP}:${QL_PORT} && printf "\n"
 cat > /root/nvjdc/Config/Config.json << EOF
 {
   ///浏览器最多几个网页
