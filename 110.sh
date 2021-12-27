@@ -231,6 +231,8 @@ cat > /root/nvjdc/Config/Config.json << EOF
       "QL_CAPACITY": 99,
       ///建议一个青龙一个WxPusher 应用
       "WP_APP_TOKEN": ""
+     ///下方填写您的Token，微信扫码登录后一对一推送或一对多推送下面的token，只填" "PUSH_PLUS_TOKEN",
+      "PUSH_PLUS_TOKEN": "",
     }
   ]
 
