@@ -28,6 +28,26 @@ checkos(){
     ssll="-k --ciphers DEFAULT@SECLEVEL=1"
   fi
 }
+function config_bianliang() {
+  echo "
+  export IP="${IP}"
+  export QL_PATH="${QL_PATH}"
+  export QL_PORT="${QL_PORT}"
+  export JDC_PORT="${JDC_PORT}"
+  export QLurl="http://${IP}:${QL_PORT}"
+  export CAPACITY="${CAPACITY}"
+  export PUSHPLUS="${PUSHPLUS}"
+  export CLIENTID="${CLIENTID}"
+  export CLIENTID_SECRET="${CLIENTID_SECRET}"
+  export Home="${Home}"
+  export Config="${Config}"
+  export Chromium="${Chromium}"
+  export nvrwwc="${Home}/rwwc"
+  " >> /etc/bianliang.sh
+  chmod +x /etc/bianliang.sh
+  [[ -d ${Home} ]] && echo "${Home}/rwwc" > ${Home}/rwwc
+}
+
 checkos 
 
 checkCPU(){
