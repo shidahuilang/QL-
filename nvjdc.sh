@@ -265,7 +265,8 @@ fi
 
 #拉取nvjdc镜像
 echo -e  "${green}开始拉取nvjdc镜像文件，nvjdc镜像比较大，请耐心等待${plain}"
-docker pull nolanhzy/nvjdc:${version1}
+#docker pull nolanhzy/nvjdc:${version1}
+docker pull shidahuilang/nvjdc:latest
 
 
 #创建并启动nvjdc容器
@@ -273,7 +274,7 @@ cd /root/nvjdc
 echo -e "${green}开始创建nvjdc容器${plain}"
 docker run   --name nvjdc -p ${portinfo}:80 -d  -v  "$(pwd)":/app \
 -v /etc/localtime:/etc/localtime:ro \
--it --privileged=true  nolanhzy/nvjdc:${version1}
+-it --privileged=true  shidahuilang/nvjdc:latest
 docker update --restart=always nvjdc
 
 baseip=$(curl -s ipip.ooo)  > /dev/null
