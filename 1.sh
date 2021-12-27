@@ -448,10 +448,10 @@ function jiance_nvjdc() {
   if [[ `docker images | grep -c "nvjdc"` -ge '1' ]] || [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
     ECHOY "检测到nvjdc面板，正在卸载nvjdc面板，请稍后..."
     dockernv=$(docker ps -a|grep nvjdc) && dockernvid=$(awk '{print $(1)}' <<<${dockernv})
-    imagesnv=$(docker images|grep nvjdc) && imagesnvid=$(awk '{print $(3)}' <<<${imagesnv})
+    #imagesnv=$(docker images|grep nvjdc) && imagesnvid=$(awk '{print $(3)}' <<<${imagesnv})
     docker stop -t=5 "${dockernvid}" > /dev/null 2>&1
     docker rm "${dockernvid}"
-    docker rmi "${imagesnvid}"
+    #docker rmi "${imagesnvid}"
     find / -iname 'nolanjdc' | xargs -i rm -rf {} > /dev/null 2>&1
     find / -iname 'nvjdc' | xargs -i rm -rf {} > /dev/null 2>&1
     if [[ `docker images | grep -c "nvjdc"` == '0' ]]; then
@@ -512,7 +512,7 @@ function linux_nolanjdc() {
     docker exec -it nolanjdc bash -c "cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime"
   else
     cd  ${Home}
-    docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  "$(pwd)":/app \
+    docker run   --name nolanjdc --net host -v  "$(pwd)":/app \
     -v /etc/localtime:/etc/localtime:ro \
     -it --privileged=true  nolanhzy/nvjdc:latest
   fi
@@ -550,10 +550,10 @@ function up_nvjdc() {
   if [[ `docker images | grep -c "nvjdc"` -ge '1' ]] || [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
     ECHOY "卸载nvjdc镜像"
     dockernv=$(docker ps -a|grep nvjdc) && dockernvid=$(awk '{print $(1)}' <<<${dockernv})
-    imagesnv=$(docker images|grep nvjdc) && imagesnvid=$(awk '{print $(3)}' <<<${imagesnv})
+   # imagesnv=$(docker images|grep nvjdc) && imagesnvid=$(awk '{print $(3)}' <<<${imagesnv})
     docker stop -t=5 "${dockernvid}" > /dev/null 2>&1
     docker rm "${dockernvid}"
-    docker rmi "${imagesnvid}"
+   # docker rmi "${imagesnvid}"
   fi
   if [[ `docker images | grep -c "nvjdc"` == '0' ]]; then
     print_ok "nvjdc镜像卸载完成"
