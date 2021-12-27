@@ -1,31 +1,42 @@
-#------ Version: 20210927 ------#
+## Version: v2.8.0
+## Date: 2021-06-20
+## Update Content: 可持续发展纲要\n1. session管理破坏性修改\n2. 配置管理可编辑config下文件\n3. 自定义脚本改为查看脚本\n4. 移除互助相关
 
-## 青龙环境变量
+## 上面版本号中，如果第2位数字有变化，那么代表增加了新的参数，如果只有第3位数字有变化，仅代表更新了注释，没有增加新的参数，可更新可不更新
 
 ## 在运行 ql repo 命令时，是否自动删除失效的脚本与定时任务
 AutoDelCron="true"
+
 ## 在运行 ql repo 命令时，是否自动增加新的本地定时任务
 AutoAddCron="true"
+
 ## 拉取脚本时默认的定时规则，当匹配不到定时规则时使用，例如: 0 9 * * *
-DefaultCronRule="22 0 * * *"
+DefaultCronRule=""
+
 ## ql repo命令拉取脚本时需要拉取的文件后缀，直接写文件后缀名即可
 RepoFileExtensions="js py sh ts"
+
 ## 由于github仓库拉取较慢，所以会默认添加代理前缀，如不需要请移除
 GithubProxyUrl="https://ghproxy.com/"
+
 ## 设置定时任务执行的超时时间，默认1h，后缀"s"代表秒(默认值), "m"代表分, "h"代表小时, "d"代表天
 CommandTimeoutTime="1h"
+
 ## 设置批量执行任务时的并发数，默认同时执行5个任务
 MaxConcurrentNum="10"
+
 ## 在运行 task 命令时，随机延迟启动任务的最大延迟时间
 ## 默认给javascript任务加随机延迟，如 RandomDelay="300" ，表示任务将在 1-300 秒内随机延迟一个秒数，然后再运行，取消延迟赋值为空
-RandomDelay="20"
+RandomDelay="300"
+
 ## 如果你自己会写shell脚本，并且希望在每次运行 ql update 命令时，额外运行你的 shell 脚本，请赋值为 "true"，默认为true
 EnableExtraShell="true"
+
 ## 是否自动启动bot，默认不启动，设置为true时自动启动，目前需要自行克隆bot仓库所需代码，存到ql/repo目录下，文件夹命名为dockerbot
 AutoStartBot=""
+
 ## 安装bot依赖时指定pip源，默认使用清华源，如不需要源，设置此参数为空
 PipMirror="https://pypi.tuna.tsinghua.edu.cn/simple"
-
 
 ## 通知环境变量
 ## 1. Server酱
@@ -101,50 +112,60 @@ export GOBOT_URL=""
 export GOBOT_TOKEN=""
 export GOBOT_QQ=""
 
+## 10. gotify
+## gotify_url 填写gotify地址,如https://push.example.de:8080
+## gotify_token 填写gotify的消息应用token
+## gotify_priority 填写推送消息优先级,默认为0
+export GOTIFY_URL="";
+export GOTIFY_TOKEN="";
+export GOTIFY_PRIORITY=0;
+
 ## 其他需要的变量，脚本中需要的变量使用 export 变量名= 声明即可
 
 # 定义每日签到的通知形式
 ## js脚本每日签到提供3种通知方式，分别为：关闭通知 0 / 简洁通知 1 / 原始通知 2（默认）
-NotifyBeanSign="0"
+NotifyBeanSign="1"
 # 定义每日签到每个接口间的延迟时间
 ## 默认每个签到接口并发无延迟，如需要依次进行每个接口，请自定义延迟时间，单位为毫秒，延迟作用于每个签到接口, 如填入延迟则切换顺序签到(耗时较长)
 export JD_BEAN_STOP="9"
 
 # 脚本推送控制类环境变量
-
+##宠汪汪积分兑换有就换版
+#export JOY_GET20WHEN16="true"  #控制16点才触发20京豆兑换.
+#export JOY_GET20WHEN16="true"
 ## 1、京东多合一签到脚本关闭运行结果推送，默认推送，填true表示不推送
-export JD_BEAN_SIGN_STOP_NOTIFY="true"
+export JD_BEAN_SIGN_STOP_NOTIFY=""
 ## 2、京东多合一签到脚本推送简单结果，默认推送完整版结果，填true表示启用简单推送
 export JD_BEAN_SIGN_NOTIFY_SIMPLE="true"
 ## 3、东东萌宠关闭推送。填写false为不关闭推送，true为关闭推送
-export PET_NOTIFY_CONTROL="true"
+export PET_NOTIFY_CONTROL="false"
 ## 4、京东农场关闭推送。填写false为不关闭推送，true为关闭推送
-export FRUIT_NOTIFY_CONTROL="true"
+export FRUIT_NOTIFY_CONTROL="false"
 ## 5、京东领现金关闭推送。填写false为不关闭推送，true为关闭推送
-export CASH_NOTIFY_CONTROL="true"
+export CASH_NOTIFY_CONTROL="false"
 ## 6、京东摇钱树关闭推送。填写false为不关闭推送，true为关闭推送
-export MONEYTREE_NOTIFY_CONTROL="true"
+export MONEYTREE_NOTIFY_CONTROL="false"
 ## 7、京东点点券关闭推送。填写false为不关闭推送，true为关闭推送
-export DDQ_NOTIFY_CONTROL="true"
+export DDQ_NOTIFY_CONTROL="false"
 ## 8、京东京东赚赚小程序关闭推送。填写false为不关闭推送，true为关闭推送
-export JDZZ_NOTIFY_CONTROL="true"
+export JDZZ_NOTIFY_CONTROL="false"
 ## 9、宠汪汪兑换京豆关闭推送。填写false为不关闭推送，true为关闭推送
-export JD_JOY_REWARD_NOTIFY="true"
+export JD_JOY_REWARD_NOTIFY="false"
 ## 10、宠汪汪赛跑获胜后是否推送通知。填false为不推送通知消息,true为推送通知消息
 export JOY_RUN_NOTIFY="true"
 ## 11、东东超市兑换奖品是否关闭推送通知。填false为不关闭推送,true为关闭推送
 export MARKET_REWARD_NOTIFY="true"
 ## 12、京喜财富岛控制是否运行脚本后通知。输入true为通知,不填则为不通知
-export CFD_NOTIFY_CONTROL=""
+export CFD_NOTIFY_CONTROL="true"
 ## 13、京喜农场岛控制是否运行脚本后通知。0=只通知成熟;1=本次获得水滴>0;2=任务执行;3=任务执行+未种植种子
-export JXNC_NOTIFY_LEVEL="0"
+export JXNC_NOTIFY_LEVEL="3"
 
 # 功能配置类环境变量
 
 ## 1、京东领现金红包兑换京豆开关。false为不换,true为换(花费2元红包兑换200京豆，一周可换四次)，默认为false
 export CASH_EXCHANGE="false"
 ## 2、宠汪汪喂食数量。可以填的数字0,10,20,40,80,其他数字不可
-export JOY_FEED_COUNT="20"
+export JOY_FEED_COUNT="40"
 ## 3、宠汪汪帮好友喂食。默认 "false" 不会自动给好友的汪汪喂食，如想自动喂食，请修改为 "true"
 export JOY_HELP_FEED="true"
 ## 4、宠汪汪是否赛跑(默认参加双人赛跑)。false为不跑,true为跑
@@ -156,9 +177,9 @@ export JOY_RUN_FLAG="true"
 ## 如果您有5个账号但只写了四个数字，那么第5个账号将默认参加2人赛，账号如果更多，与此类似
 export JOY_TEAM_LEVEL="2&2&50&10"
 ## 6、宠汪汪赛跑自己账号内部互助。输入true为开启内部互助
-export JOY_RUN_HELP_MYSELF="false"
+export JOY_RUN_HELP_MYSELF="true"
 ## 7、宠汪汪积分兑换多少京豆。目前可填值为20或者500,脚本默认0,0表示不兑换京豆
-export JD_JOY_REWARD_NAME="500"
+export JD_JOY_REWARD_NAME="20"
 ## 8、东东超市兑换京豆数量。目前可输入值为20或者1000，或者其他商品的名称,例如碧浪洗衣凝珠
 export MARKET_COIN_TO_BEANS="超值京豆包"
 ## 9、东东超市是否参加pk。true表示参加,false表示不参加
@@ -204,8 +225,8 @@ export JD_USER_AGENT="true"
 ## [1] jd_CheckCK.js
 ### 当有自动禁用或自动启用事件发生才会发送通知，如果要每次都通知则需设定变量
 ### 自动检测账号是否正常，不正常的自动禁用，正常的如果是禁用状态则自动启用
-export SHOWSUCCESSCK="false" ##显示正常CK，true为显示
-export CKALWAYSNOTIFY="false" ##通知CK状态，true为永远通知 
+export SHOWSUCCESSCK="true" ##显示正常CK，true为显示
+export CKALWAYSNOTIFY="true" ##通知CK状态，true为永远通知 
 export CKAUTOENABLE="true" ##自动启用CK，false为停用
 export CKREMARK="true" ##显示CK备注，false为不显示
 export CKNOWARNERROR="true" ##服务器空数据等错误不触发通知，false为通知
@@ -238,13 +259,26 @@ export NOTIFY_COMPTOGROUP2="false" ##true为推送到群组2
 export NOTIFY_NOCKFALSE="true"
 ### 7. 测试人
 ### 通知底部显示：本通知 By 测试人
-export NOTIFY_AUTHOR="青龙"
+export NOTIFY_AUTHOR="未必然"
 ### 8. 屏蔽登录成功
 ### 屏蔽青龙登陆成功通知，登陆失败不屏蔽
 export NOTIFY_NOLOGINSUCCESS="true"
 ### 9. CK失效时自动执行
 ### 当接收到发送CK失效通知执行子线程任务.(jd_CheckCK.js 可替换成其他任意qinglong支持的脚本文件.)
 export NOTIFY_CKTASK="jd_CheckCK.js"
+
+# Wenmoux 部分环境变量 
+## 1、QQ星系牧场自动兑换20豆
+export Cowexchange="true"
+## 2、欧洲狂欢杯兑换兑换豆子，填38豆子，填39e卡
+export Cupexid="39"
+## 3、10秒阅读
+### 填写自己CK
+export Readck=""
+### 填写自己设备UA
+export Read10UA=""
+### 填true推送消息，默认不推送
+export jrpush=""
 
 # curtinlv 环境变量
 ## 1、赚京豆
@@ -309,11 +343,17 @@ export DDQ_NOTIFY_CONTROL="true" ##不填或false为通知，true为不通知
 ## 5、组队瓜分京豆活动变量
 export jd_zdjr_activityId=""
 export jd_zdjr_activityUrl=""
+
 ## 6、 24 及之后的开卡变量
 export guaopencard_All="true"
 export guaopencard_addSku_All="true"
 export guaopencardRun_All="true"
 export guaopencard_draw="true"
+export guaunknownTask_addSku_All="true"
+export guaunknownTask_card_All="true"
+export gua_carnivalcity_draw="true"
+### 青蛙开卡新变量，京豆奖励判断 | 1=邀请 2=开卡 3=关注  | 填1,2,3
+export guaopencard_rewardBean="1,2,3"
 
 # cdle 环境变量
 ## 1、签到领现金兑换
@@ -369,7 +409,7 @@ export validate_num="" ##你需要的数值
 
 # Aaron-lv 环境变量
 ## 1、京东健康社区京豆兑换
-export JD_HEALTH_REWARD_NAME="20" ##只能兑换京豆，填写纯数字20 10 5 3
+export JD_HEALTH_REWARD_NAME="" ##只能兑换京豆，填写纯数字20 10 5 3
 
 # 不知名大佬环境变量
 ## 1、清空购物车
@@ -395,7 +435,7 @@ export JD_CART_KEYWORDS=""
 ### 使用前请认真看对应注释：https://raw.githubusercontent.com/X1a0He/jd_scripts_fixed/main/jd_try_xh.js
 export JD_TRY="true"
 export JD_TRY_PRICE="20"
-export JD_TRY_TITLEFILTERS="早餐奶@产后修复@体验装@腮红@袜子一双@睫毛胶水@儿童牛奶@牙刷头@灵芝@孢子@除臭@鼻炎@口罩@宠物@和田玉@祛痘@解酒@教程@软件@英语@辅导@培训@流量卡@保护套@手机壳@衣架@戒烟@棉签@网课@擦杯布@驱蚊@刷头@卸妆@互动课@小靓美@脚气@文胸@卷尺@种子@档案袋@癣@中年@老太太@妇女@私处@孕妇@卫生巾@卫生条@课@培训@阴道@生殖器@肛门@狐臭@少女内衣@胸罩@洋娃娃@益智@少女@女性内衣@女性内裤@女内裤@女内衣@女孩@屏风底座@童装@吊带@黑丝@钢圈@婴儿@儿童@玩具@幼儿@娃娃@网课@网校@电商@手机壳@钢化膜@网络课程@女纯棉@三角裤@美少女@纸尿裤@英语@俄语@四级@六级@四六级@在线网络@在线@阴道炎@宫颈@糜烂@打底裤@手机膜@鱼@狗"
+export JD_TRY_TITLEFILTERS="早餐奶@产后修复@体验装@腮红@卡针@袜子一双@睫毛胶水@儿童牛奶@牙刷头@灵芝@孢子@除臭@鼻炎@口罩@宠物@和田玉@祛痘@解酒@教程@软件@英语@辅导@培训@流量卡@保护套@手机壳@衣架@戒烟@棉签@网课@擦杯布@驱蚊@刷头@卸妆@互动课@小靓美@脚气@文胸@卷尺@种子@档案袋@癣@中年@老太太@妇女@私处@孕妇@卫生巾@卫生条@课@培训@阴道@生殖器@肛门@狐臭@少女内衣@胸罩@洋娃娃@益智@少女@女性内衣@女性内裤@女内裤@女内衣@女孩@屏风底座@童装@吊带@黑丝@钢圈@婴儿@儿童@玩具@幼儿@娃娃@网课@网校@电商@手机壳@钢化膜@网络课程@女纯棉@三角裤@美少女@纸尿裤@英语@俄语@四级@六级@四六级@在线网络@在线@阴道炎@宫颈@糜烂@打底裤@手机膜@鱼@狗"
 ## 4、批量取关店铺和商品
 ### 是否执行取消关注，默认true
 ### 使用前请认真看对应注释：https://raw.githubusercontent.com/X1a0He/jd_scripts_fixed/main/jd_unsubscribe_xh.js
@@ -414,12 +454,12 @@ export JDDJ_CKPATH="./jdCookie.js"
 ### 京东工业品加购任务
 export FS_LEVEL="car"
 
-### 青蛙开卡新变量，京豆奖励判断 | 1=邀请 2=开卡 3=关注  | 填1,2,3
-export guaopencard_rewardBean="1,2,3"
-
 ## 过期京豆兑换为喜豆
 export BEANCHANGE_ExJxBeans="true"
+export exjxbeans="true"
 
+## 自动评价
+export JD_Evaluation="true"
 
 ## 组队环境变量
 ## 环境变量填写要求较高，建议群组内确认填写结果
