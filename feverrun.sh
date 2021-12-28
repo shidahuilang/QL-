@@ -45,15 +45,27 @@ rm -rf /ql/repo/ghproxy.sh
 mkdir -p /ql/qlwj
 echo
 TIME l "拉取crypto-js.js"
-curl -fsSL ${curlurl}/feverrun/crypto-js.js > /ql/qlwj/crypto-js.js
+curl -fsSL ${curlurl}/Aaron-lv/crypto-js.js > /ql/qlwj/crypto-js.js
 TIME l "拉取config.sample.sh"
-curl -fsSL ${curlurl}/feverrun/config.sample.sh > /ql/qlwj/config.sample.sh
+curl -fsSL ${curlurl}/Aaron-lv/config.sample.sh > /ql/qlwj/config.sample.sh
 TIME l "拉取extra.sh"
-curl -fsSL ${curlurl}/feverrun/extra.sh > /ql/qlwj/extra.sh
-TIME l "拉取jd_OpenCard.py"
-curl -fsSL ${curlurl}/feverrun/raw_jd_OpenCard.py > /ql/qlwj/raw_jd_OpenCard.py
+curl -fsSL ${curlurl}/Aaron-lv/extra.sh > /ql/qlwj/extra.sh
+TIME l "拉取raw_jd_OpenCard.py"
+curl -fsSL ${curlurl}/Aaron-lv/raw_jd_OpenCard.py > /ql/qlwj/raw_jd_OpenCard.py
 TIME l "拉取wskey.py"
-curl -fsSL ${curlurl}/feverrun/wskey.py > /ql/qlwj/wskey.py
+curl -fsSL ${curlurl}/Aaron-lv/wskey.py > /ql/qlwj/wskey.py
+TIME l "拉取disableDuplicateTasksImplement.py"
+curl -fsSL ${curlurl}/Aaron-lv/disableDuplicateTasksImplement.py > /ql/qlwj/disableDuplicateTasksImplement.py
+TIME l "拉取jd_get_share_code.js"
+curl -fsSL ${curlurl}/Aaron-lv/jd_get_share_code.js > /ql/qlwj/jd_get_share_code.js
+TIME l "拉取jdCookie.js"
+curl -fsSL ${curlurl}/Aaron-lv/jdCookie.js > /ql/qlwj/jdCookie.js
+TIME l "拉取jd_cleancartAll.js"
+curl -fsSL ${curlurl}/Aaron-lv/jd_cleancartAll.js > /ql/qlwj/jd_cleancartAll.js
+TIME l "拉取1-5.sh"
+curl -fsSL ${curlurl}/Aaron-lv/jd/1-5.sh > /ql/jd/1-5.sh
+TIME l "拉取6-10.sh"
+curl -fsSL ${curlurl}/Aaron-lv/jd/6-10.sh > /ql/jd/6-10.sh
 chmod -R +x /ql/qlwj
 cp -Rf /ql/qlwj/config.sample.sh /ql/config/config.sh
 cp -Rf /ql/qlwj/config.sample.sh /ql/sample/config.sample.sh
@@ -61,7 +73,10 @@ cp -Rf /ql/qlwj/extra.sh /ql/config/extra.sh
 cp -Rf /ql/qlwj/extra.sh /ql/sample/extra.sample.sh
 cp -Rf /ql/qlwj/raw_jd_OpenCard.py /ql/scripts/raw_jd_OpenCard.py
 cp -Rf /ql/qlwj/wskey.py /ql/scripts/wskey.py
-cp -Rf /ql/qlwj/crypto-js.js /ql/scripts/crypto-js.js
+cp -Rf /ql/qlwj/disableDuplicateTasksImplement.py /ql/scripts/disableDuplicateTasksImplement.py
+cp -Rf /ql/qlwj/jd_get_share_code.js /ql/scripts/jd_get_share_code.js
+cp -Rf /ql/qlwj/jdCookie.js /ql/scripts/jdCookie.js
+cp -Rf /ql/qlwj/jd_cleancartAll.js /ql/scripts/jd_cleancartAll.js
 echo
 # 将 extra.sh 添加到定时任务
 if [ "$(grep -c extra /ql/config/crontab.list)" = 0 ]; then
