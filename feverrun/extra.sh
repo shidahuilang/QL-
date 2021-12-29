@@ -13,4 +13,4 @@ ql repo https://ghproxy.com/https://github.com/shufflewzc/faker2.git "jd_|jx_|gu
 ql repo https://github.com/feverrun/my_scripts.git "jd_fruit|jd_plantBean|jd_factory|jd_dreamFactory|jd_pet|jd_health|jd_sgmh|jd_jxmc|jd_cfd" "backUp|collectWate|tuan|fresh_exchange|loop|mooncake" "^(jd|JD|JS)[^_]|USER|sendNotify|utils"
 ql repo https://ghproxy.com/https://github.com/smiek2121/scripts.git "jd_|gua_" "gua_cleancart.js" "ZooFaker_Necklace.js|JDJRValidator_Pure.js|sign_graphics_validate.js|cleancart_activity.js|jdCookie.js|sendNotify.js"
 ql repo https://github.com/JDHelloWorld/jd_scripts.git "jd_fruit|jd_plantBean|jd_jdfactory|jd_dreamFactory|jd_pet|jd_health|jd_sgmh|jd_jxmc|jd_cfd|jd_88hb|jd_api_test" "activity|backUp|Coupon|enen|update|collect|game|shell|stock|getCoin|moreTask|jd_jxmc.js" "^jd[^_]|^USER|^TS|^JS|jdCookie|sendNotify|tools|utils|package|jd_validate_Worker"
-task disableDuplicateTasksImplement.py
+#task disableDuplicateTasksImplement.py
