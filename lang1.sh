@@ -1,3 +1,4 @@
+
 #!/usr/bin/env bash
 
 #====================================================
@@ -75,8 +76,6 @@ if [[ ! "$USER" == "root" ]]; then
   exit 1
 fi
 
-export Current="$PWD"
-
 function qinglong_port() {
   clear
   echo
@@ -140,26 +139,20 @@ function qinglong_port() {
      export JDC_PORT=${JDC_PORT:-"5701"}
      read -p " 请输入通过nvjdc面板验证最大挂机数(直接回车默认：99): " CAPACITY && printf "\n"
      export CAPACITY=${CAPACITY:-"99"}
-     echo -e "\033[32m pushplus网址：http://www.pushplus.plus \033[0m"
+     ECHOGG "pushplus网址：http://www.pushplus.plus"
      read -p " 输入pushplus的TOKEN，有人通过nvjdc面板进入挂机或删除KEY时通知您(直接回车默认不通知): " PUSHPLUS && printf "\n"
      export PUSHPLUS=${PUSHPLUS:-""}
      export QLurl="http://${IP}:${QL_PORT}"
-     if [[ -z ${PUSHPLUS} ]]; then
-       PUSHP="不开启通知"
-     else
-       PUSHP="${PUSHPLUS}"
-     fi
   fi
   ECHOGG "网络类型：${NETLEIXING}"
   ECHOGG "您的IP为：${IP}"
   ECHOGG "${YPORT}：${QL_PORT}"
   ECHOGG "您的青龙登录地址将为：http://${IP}:${QL_PORT}"
   if [[ "${Api_Client}" == "true" ]]; then
-    echo
     ECHOYY "nvjdc面板名称为：${NVJDCNAME}"
     ECHOYY "nvjdc面板端口为：${JDC_PORT}"
     ECHOYY "通过nvjdc面板验证最大挂机数为：${CAPACITY}"
-    ECHOYY "pushplus的TOKEN为：${PUSHP}"
+    ECHOYY "pushplus的TOKEN为：${PUSHPLUS}"
     ECHOYY "您的nvjdc登录地址将为：http://${IP}:${JDC_PORT}"
   fi
   echo
@@ -189,12 +182,7 @@ function system_check() {
     export QL_PATH="/opt"
     apt -y update
     apt -y install sudo wget git unzip net-tools subversion
-  elif [[ "$(. /etc/os-release && echo "$ID")" == "alpine" ]]; then
-    ECHOG "正在安装宿主机所需要的依赖，请稍后..."
-    export QL_PATH="/opt"
-    apk update
-    apk add sudo wget git unzip net-tools subversion
-  elif [[ -f /etc/openwrt_release ]] && [[ -f /rom/etc/openwrt_release ]]; then
+  elif [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
     ECHOG "正在安装宿主机所需要的依赖，请稍后..."
     opkg update
     opkg install git-http > /dev/null 2>&1
@@ -210,22 +198,12 @@ function system_check() {
       export QL_PATH="/root"
       export QL_Kongjian="/mnt/mmcblk2p4/docker"
     else
-      print_error "没找到/opt/docker或者/mnt/mmcblk2p4/docker"
+      ECHOR "没找到/opt/docker或者/mnt/mmcblk2p4/docker"
       exit 1
     fi
   else
     print_error "不支持您的系统"
     exit 1
-  fi
-}
-
-function kaiqiroot_ssh() {
-  if [[ ! -f /etc/openwrt_release ]] && [[ ! -f /rom/etc/openwrt_release ]]; then
-    echo
-    ECHOGG "开启root用户ssh，方便使用工具连接服务器直接修改文件代码"
-    bash -c "$(curl -fsSL ${curlurl}/ssh.sh)"
-    judge "开启root用户ssh"
-    sleep 3
   fi
 }
 
@@ -255,19 +233,9 @@ function systemctl_status() {
   if [[ "${XTong}" == "openwrt" ]]; then
     /etc/init.d/dockerman start > /dev/null 2>&1
     /etc/init.d/dockerd start > /dev/null 2>&1
-    sleep 3
-  elif [[ "$(. /etc/os-release && echo "$ID")" == "alpine" ]]; then
-    service docker start > /dev/null 2>&1
-    sleep 1
-    if [[ `docker version |grep -c "runc"` == '1' ]]; then
-      print_ok "docker正在运行中!"
-    else
-      print_error "docker没有启动，请先启动docker，或者检查一下是否安装失败"
-      sleep 1
-      exit 1
-    fi
+    sleep 2
   else
-    systemctl start docker > /dev/null 2>&1
+    systemctl start docker
     sleep 1
     echo
     ECHOGG "检测docker是否在运行"
@@ -281,19 +249,19 @@ function systemctl_status() {
   fi
 }
 
-function uninstall_qinglong() {
+function Unstall_qinglong() {
   if [[ `docker images | grep -c "qinglong"` -ge '1' ]] || [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
-    ECHOY "检测到青龙面板，正在御载青龙面板，请稍后..."
+    ECHOY "检测到青龙面板，正在卸载青龙面板，请稍后..."
     docker=$(docker ps -a|grep qinglong) && dockerid=$(awk '{print $(1)}' <<<${docker})
     images=$(docker images|grep qinglong) && imagesid=$(awk '{print $(3)}' <<<${images})
     docker stop -t=5 "${dockerid}" > /dev/null 2>&1
     docker rm "${dockerid}"
     docker rmi "${imagesid}"
     if [[ `docker ps -a | grep -c "qinglong"` == '0' ]]; then
-      print_ok "青龙面板御载完成"
+      print_ok "青龙面板卸载完成"
       rm -rf /etc/bianliang.sh > /dev/null 2>&1
     else
-      print_error "青龙面板御载失败"
+      print_error "青龙面板卸载失败"
       exit 1
     fi
   fi
@@ -314,7 +282,7 @@ function uninstall_qinglong() {
 }
 
 function sys_kongjian() {
-  if [[ -f /etc/openwrt_release ]] && [[ -f /rom/etc/openwrt_release ]]; then
+  if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
     Available="$(df -h | grep "${QL_Kongjian}" | awk '{print $4}' | awk 'NR==1')"
     FINAL=`echo ${Available: -1}`
     if [[ "${FINAL}" =~ (M|K) ]]; then
@@ -365,8 +333,6 @@ docker run -dit \
   --restart unless-stopped \
   whyour/qinglong:latest
   
-  docker restart qinglong > /dev/null 2>&1
-  sleep 2
   if [[ `docker ps -a | grep -c "qinglong"` == '1' ]]; then
     print_ok "青龙面板安装完成"
   else
@@ -376,21 +342,16 @@ docker run -dit \
 }
 
 function ql_qlbeifen() {
-  if [[ -f ${Current}/ghproxy.sh ]]; then
-    docker cp ${Current}/ghproxy.sh qinglong:/ql/repo/ghproxy.sh
-    rm -rf ${Current}/ghproxy.sh
-  else
-    print_error "没检测到主应用变量文件，请再次尝试安装!"
-    exit 1
+  if [[ -f /root/ghproxy.sh ]]; then
+    docker cp /root/ghproxy.sh qinglong:/ql/repo/ghproxy.sh
+    rm -rf /root/ghproxy.sh
   fi
-  if [[ -d "$QL_PATH/qlbeifen1" ]]; then
-    if [[ "$(grep -c JD_WSCK=\"pin= ${QL_PATH}/qlbeifen1/ql/config/env.sh)"  -ge "1" ]] || [[ "$(grep -c JD_COOKIE=\"pt_key= ${QL_PATH}/qlbeifen1/ql/config/env.sh)" -ge "1" ]]; then
-      ECHOG "检测到您有[wskey]或者[pt_key]存在，正在还原env.sh文件（KEY文件）"
-      docker cp ${QL_PATH}/qlbeifen1/ql/db/env.db qinglong:/ql/db/env.db
-      docker cp ${QL_PATH}/qlbeifen1/ql/config/env.sh qinglong:/ql/config/env.sh
-      judge "还原env.sh文件"
-    fi
+  if [[ -n "$(ls -A "${QL_PATH}/qlbeifen1" 2>/dev/null)" ]]; then
+    ECHOG "正在还原env.sh文件（KEY文件）"
+    docker cp ${QL_PATH}/qlbeifen1/ql/config/env.sh qinglong:/ql/config/env.sh
+    docker cp ${QL_PATH}/qlbeifen1/ql/db/env.db qinglong:/ql/db/env.db
   fi
+  [[ -d ${QL_PATH}/qlbeifen1/ql/jd ]] && docker cp ${QL_PATH}/qlbeifen1/ql/jd qinglong:/ql/
 }
 
 function qinglong_dl() {
@@ -463,10 +424,10 @@ function install_rw() {
 function install_yanzheng() {
   if [[ -f ${QL_PATH}/ql/config/Error ]]; then
     rm -rf ${QL_PATH}/ql/config/Error
+    rm -rf ${QL_PATH}/qlbeifen1
     exit 1
   fi
   [[ -f ${QL_PATH}/qlbeifen1/ql/config/bot.json ]] && docker cp ${QL_PATH}/qlbeifen1/ql/config/bot.json qinglong:/ql/config/bot.json
-  [[ -d ${QL_PATH}/qlbeifen1/ql/jd ]] && docker cp ${QL_PATH}/qlbeifen1/ql/jd qinglong:/ql/
   if [[ -f ${QL_PATH}/qlbeifen1/ql/scripts/rwwc ]]; then
     docker cp ${QL_PATH}/qlbeifen1/ql/config/config.sh qinglong:/ql/config/config.sh
     docker cp ${QL_PATH}/qlbeifen1/ql/config/config.sh qinglong:/ql/sample/config.sample.sh
@@ -485,7 +446,7 @@ function install_yanzheng() {
 
 function jiance_nvjdc() {
   if [[ `docker images | grep -c "nvjdc"` -ge '1' ]] || [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
-    ECHOY "检测到nvjdc面板，正在御载nvjdc面板，请稍后..."
+    ECHOY "检测到nvjdc面板，正在卸载nvjdc面板，请稍后..."
     dockernv=$(docker ps -a|grep nvjdc) && dockernvid=$(awk '{print $(1)}' <<<${dockernv})
     imagesnv=$(docker images|grep nvjdc) && imagesnvid=$(awk '{print $(3)}' <<<${imagesnv})
     docker stop -t=5 "${dockernvid}" > /dev/null 2>&1
@@ -494,9 +455,9 @@ function jiance_nvjdc() {
     find / -iname 'nolanjdc' | xargs -i rm -rf {} > /dev/null 2>&1
     find / -iname 'nvjdc' | xargs -i rm -rf {} > /dev/null 2>&1
     if [[ `docker images | grep -c "nvjdc"` == '0' ]]; then
-      print_ok "nvjdc面板御载完成"
+      print_ok "nvjdc面板卸载完成"
     else
-      print_error "nvjdc面板御载失败"
+      print_error "nvjdc面板卸载失败"
       exit 1
     fi
   fi
@@ -506,16 +467,16 @@ function git_clone() {
   ECHOG "开始安装nvjdc面板，请稍后..."
   ECHOY "下载nvjdc源码"
   rm -rf "${Home}" && git clone ${GithubProxyUrl}https://github.com/NolanHzy/nvjdcdocker.git ${Home}
-  judge "nvjdc源码下载"
+  judge "下载源码"
 }
 
 function pull_nvjdc() {
   ECHOY "安装nvjdc镜像中，安装需要时间，请耐心等候..."
   docker pull nolanhzy/nvjdc:latest
   if [[ `docker images | grep -c "nvjdc"` -ge '1' ]]; then
-    print_ok "nvjdc镜像安装 完成"
+    print_ok "镜像安装成功"
   else
-    print_error "nvjdc镜像安装失败"
+    print_error "镜像安装失败"
     exit 1
   fi
 }
@@ -523,66 +484,52 @@ function pull_nvjdc() {
 function Config_json() {
   mkdir -p ${Config}
   bash -c  "$(curl -fsSL ${curlurl}/json.sh)"
-  judge "自动配置nvjdc的Config.json文件"
+  judge "配置修改"
   chmod +x ${Config}/Config.json
 }
 
 function chrome_linux() {
   ECHOY "下载chrome-linux"
   mkdir -p ${Chromium} && cd ${Chromium}
-  wget https://mirrors.huaweicloud.com/chromium-browser-snapshots/Linux_x64/884014/chrome-linux.zip
-  judge "chrome-linux下载"
-  ECHOY "解压chrome-linux文件包，请稍后..."
+  wget -q https://mirrors.huaweicloud.com/chromium-browser-snapshots/Linux_x64/884014/chrome-linux.zip
+  judge "下载Chromium"
   unzip chrome-linux.zip
   if [[ ! -d ${Chromium}/chrome-linux ]]; then
     print_error "chrome-linux文件解压失败"
     exit 1
   else
-    print_ok "解压chrome-linux文件 完成"
+    print_ok "chrome-linux文件解成功"
     rm  -f chrome-linux.zip
   fi
 }
 
 function linux_nolanjdc() {
-  ECHOY "启动镜像中，请稍后..."
-  cd ${Current}
-  if [[ -f /etc/openwrt_release ]] && [[ -f /rom/etc/openwrt_release ]]; then
+  ECHOY "启动镜像"
+  if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
     docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  ${Home}:/app \
     -it --privileged=true  nolanhzy/nvjdc:latest
+    sleep 1
     docker exec -it nolanjdc bash -c "cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime"
-    /etc/init.d/dockerman restart > /dev/null 2>&1
-    /etc/init.d/dockerd restart > /dev/null 2>&1
-    sleep 3
-  elif [[ "$(. /etc/os-release && echo "$ID")" == "alpine" ]]; then
-    docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  ${Home}:/app \
-    -it --privileged=true  nolanhzy/nvjdc:latest
-    docker exec -it nolanjdc bash -c "cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime"
-    sleep 2
   else
     cd  ${Home}
     docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  "$(pwd)":/app \
     -v /etc/localtime:/etc/localtime:ro \
     -it --privileged=true  nolanhzy/nvjdc:latest
-    sleep 2
   fi
-  cd ${Current}
+  cd /root
   if [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
-    docker restart nolanjdc > /dev/null 2>&1
+    sleep 1
     docker restart qinglong > /dev/null 2>&1
-    sleep 3
+    docker restart nolanjdc > /dev/null 2>&1
+    sleep 1
     print_ok "nvjdc镜像启动成功"
   else
     print_error "nvjdc镜像启动失败"
     exit 1
   fi
-  dockernv=$(docker ps -a|grep nvjdc) && dockernvid=$(awk '{print $(1)}' <<<${dockernv})
-  docker update --restart=always "${dockernvid}" > /dev/null 2>&1
-  rm -rf ${Home}/build.log
-  timeout 4 docker logs -f nolanjdc |tee ${Home}/build.log
-  timeout 9 docker logs -f nolanjdc |tee ${Home}/build.log
+  timeout -k 1s 4s docker logs -f nolanjdc |tee ${Home}/build.log
   if [[ `grep -c "启动成功" ${Home}/build.log` -ge '1' ]] || [[ `grep -c "NETJDC started" ${Home}/build.log` -ge '1' ]]; then
-    print_ok "nvjdc安装 完成"
-    ECHOYY "nvjdc配置已自动配置完成，如您需修改可至 ${Config}/Config.json 修改!"
+    print_ok "nvjdc安装完成"
   else
     print_error "nvjdc安装失败"
     exit 1
@@ -592,7 +539,6 @@ function linux_nolanjdc() {
 }
 
 function up_nvjdc() {
-  cd ${Current}
   [[ -f /etc/bianliang.sh ]] && source /etc/bianliang.sh
   ECHOY "下载nvjdc源码"
   rm -rf ${QL_PATH}/nvjdcbf
@@ -602,7 +548,7 @@ function up_nvjdc() {
   cp -Rf ${QL_PATH}/nvjdcbf/Config ${Home}/Config
   cp -Rf ${QL_PATH}/nvjdcbf/.local-chromium ${Home}/.local-chromium
   if [[ `docker images | grep -c "nvjdc"` -ge '1' ]] || [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
-    ECHOY "御载nvjdc镜像"
+    ECHOY "卸载nvjdc镜像"
     dockernv=$(docker ps -a|grep nvjdc) && dockernvid=$(awk '{print $(1)}' <<<${dockernv})
     imagesnv=$(docker images|grep nvjdc) && imagesnvid=$(awk '{print $(3)}' <<<${imagesnv})
     docker stop -t=5 "${dockernvid}" > /dev/null 2>&1
@@ -610,48 +556,38 @@ function up_nvjdc() {
     docker rmi "${imagesnvid}"
   fi
   if [[ `docker images | grep -c "nvjdc"` == '0' ]]; then
-    print_ok "nvjdc镜像御载完成"
+    print_ok "nvjdc镜像卸载完成"
   else
-    print_error "nvjdc镜像御载失败，再次尝试删除"
+    print_error "nvjdc镜像卸载失败，再次尝试删除"
   fi
-  cd ${Current}
+  cd /root
   ECHOG "更新镜像，请耐心等候..."
   sudo docker pull nolanhzy/nvjdc:latest
   ECHOY "启动镜像"
-  if [[ -f /etc/openwrt_release ]] && [[ -f /rom/etc/openwrt_release ]]; then
+  if [[ "$(. /etc/os-release && echo "$ID")" == "openwrt" ]]; then
     docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  ${Home}:/app \
     -it --privileged=true  nolanhzy/nvjdc:latest
+    sleep 1
     docker exec -it nolanjdc bash -c "cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime"
-    /etc/init.d/dockerman restart > /dev/null 2>&1
-    /etc/init.d/dockerd restart > /dev/null 2>&1
-    sleep 3
-  elif [[ "$(. /etc/os-release && echo "$ID")" == "alpine" ]]; then
-    docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  ${Home}:/app \
-    -it --privileged=true  nolanhzy/nvjdc:latest
-    docker exec -it nolanjdc bash -c "cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime"
-    sleep 2
   else
     cd  ${Home}
     docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  "$(pwd)":/app \
     -v /etc/localtime:/etc/localtime:ro \
     -it --privileged=true  nolanhzy/nvjdc:latest
-    sleep 2
   fi
-  cd ${Current}
+  cd /root
   if [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
-    docker restart nolanjdc > /dev/null 2>&1
+    rm -rf ${QL_PATH}/nvjdcbf
+    echo "${Home}/rwwc" > ${Home}/rwwc
     docker restart qinglong > /dev/null 2>&1
-    sleep 5
+    docker restart nolanjdc > /dev/null 2>&1
+    sleep 1
     print_ok "nvjdc镜像启动成功"
   else
     print_error "nvjdc镜像启动失败"
     exit 1
   fi
-  dockernv=$(docker ps -a|grep nvjdc) && dockernvid=$(awk '{print $(1)}' <<<${dockernv})
-  docker update --restart=always "${dockernvid}" > /dev/null 2>&1
-  rm -rf ${Home}/build.log
-  timeout 4 docker logs -f nolanjdc |tee ${Home}/build.log
-  timeout 9 docker logs -f nolanjdc |tee ${Home}/build.log
+  timeout -k 1s 4s docker logs -f nolanjdc |tee ${Home}/build.log
   if [[ `grep -c "启动成功" ${Home}/build.log` -ge '1' ]] || [[ `grep -c "NETJDC started" ${Home}/build.log` -ge '1' ]]; then
     print_ok "nvjdc升级完成"
   else
@@ -673,21 +609,18 @@ function Google_Check() {
   if [ ! "$Google_Check" == 301 ];then
     export curlurl="https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main"
     export GithubProxyUrl="https://ghproxy.com/"
-    ECHORR "访问谷歌失败，以下使用代理安装"
-    sleep 2
+    ECHOGG "使用代理"
     echo "
     export curlurl="https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main"
     export GithubProxyUrl="https://ghproxy.com/"
-    " > ${Current}/ghproxy.sh
-    sed -i "s/^[ \t]*//g" ${Current}/ghproxy.sh
+    " > /root/ghproxy.sh
   else
     export curlurl="https://raw.githubusercontent.com/shidahuilang/QL-/main"
     export GithubProxyUrl=""
     echo "
     export curlurl="https://raw.githubusercontent.com/shidahuilang/QL-/main"
     export GithubProxyUrl=""
-    " > ${Current}/ghproxy.sh
-    sed -i "s/^[ \t]*//g" ${Current}/ghproxy.sh
+    " > /root/ghproxy.sh
   fi
 }
 
@@ -707,7 +640,6 @@ function config_bianliang() {
   export Chromium="${Chromium}"
   export nvrwwc="${Home}/rwwc"
   " >> /etc/bianliang.sh
-  sed -i "s/^[ \t]*//g" /etc/bianliang.sh
   chmod +x /etc/bianliang.sh
   [[ -d ${Home} ]] && echo "${Home}/rwwc" > ${Home}/rwwc
 }
@@ -726,11 +658,10 @@ function qinglong_nvjdc() {
   qinglong_port
   Google_Check
   system_check
-  kaiqiroot_ssh
   nolanjdc_lj
   system_docker
   systemctl_status
-  uninstall_qinglong
+  Unstall_qinglong
   jiance_nvjdc
   sys_kongjian
   install_ql
@@ -746,10 +677,9 @@ function azqinglong() {
   qinglong_port
   Google_Check
   system_check
-  kaiqiroot_ssh
   system_docker
   systemctl_status
-  uninstall_qinglong
+  Unstall_qinglong
   jiance_nvjdc
   sys_kongjian
   install_ql
@@ -767,12 +697,10 @@ memunvjdc() {
   ECHOB " 1. 升级青龙面板"
   ECHOB " 2. 更新撸豆脚本库"
   ECHOB " 3. 升级nvjdc面板"
-  ECHOB " 4. 重启青龙和nvjdc"
-  ECHOB " 5. 重置青龙登录错误次数和检测环境并修复"
-  ECHOB " 6. 御载nvjdc面板"
-  ECHOB " 7. 御载青龙+nvjdc面板"
-  ECHOB " 8. 进入第一主菜单（安装界面）"
-  ECHOB " 9. 退出程序!"
+  ECHOB " 4. 卸载nvjdc面板"
+  ECHOB " 5. 卸载青龙+nvjdc面板"
+  ECHOB " 6. 进入第一主菜单（安装选择界面）"
+  ECHOB " 7. 退出程序!"
   echo
   scqlbianmaa="输入您选择的编码"
   while :; do
@@ -795,28 +723,11 @@ memunvjdc() {
   break
   ;;
   4)
-    ECHOY "重启nvjdc和青龙，请耐心等候..."
-    docker restart nolanjdc
-    docker restart qinglong
-    sleep 5
-    print_ok "命令执行完成"
-  break
-  ;;
-  5)
-    ECHOY "开始重置青龙登录错误次数和检测环境并修复，请耐心等候..."
-    docker exec -it qinglong bash -c "ql resetlet"
-    sleep 2
-    docker exec -it qinglong bash -c "ql check"
-    bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/timesync.sh)"
-    print_ok "命令执行完成"
-  break
-  ;;
-  6)
-    ECHOY " 是否御载nvjdc面板?"
-    read -p " 是否御载nvjdc面板?输入[Yy]回车确认,直接回车返回菜单：" YZJDC
+    ECHOY " 是否卸载nvjdc面板?"
+    read -p " 是否卸载nvjdc面板?输入[Yy]回车确认,直接回车返回菜单：" YZJDC
     case $YZJDC in
     [Yy])
-      ECHOG " 正在御载nvjdc面板"
+      ECHOG " 正在卸载nvjdc面板"
       jiance_nvjdc
     ;;
     *)
@@ -825,13 +736,13 @@ memunvjdc() {
     esac
   break
   ;;
-  7)
-    ECHOY " 是否御载青龙+nvjdc面板?"
-    read -p " 是否御载青龙+nvjdc面板?输入[Yy]回车确认,直接回车返回菜单：" YZQLNV
+  5)
+    ECHOY " 是否卸载青龙+nvjdc面板?"
+    read -p " 是否卸载青龙+nvjdc面板?输入[Yy]回车确认,直接回车返回菜单：" YZQLNV
     case $YZQLNV in
     [Yy])
-      ECHOG "正在御载青龙+nvjdc面板"
-      uninstall_qinglong
+      ECHOG "正在卸载青龙+nvjdc面板"
+      Unstall_qinglong
       jiance_nvjdc
       rm -rf /etc/bianliang.sh
     ;;
@@ -841,11 +752,11 @@ memunvjdc() {
     esac
   break
   ;;
-  8)
+  6)
     memu
   break
   ;;
-  9)
+  7)
     ECHOR "您选择了退出程序!"
     sleep 1
     exit 1
@@ -864,11 +775,9 @@ memuqinglong() {
   echo
   ECHOYY " 1. 升级青龙面板"
   ECHOY " 2. 更新撸豆脚本库"
-  ECHOYY " 3. 重启青龙面板"
-  ECHOY " 4. 重置青龙登录错误次数和检测环境并修复"
-  ECHOYY " 5. 御载青龙面板"
-  ECHOY " 6. 进入第一主菜单（安装界面）"
-  ECHOYY " 7. 退出程序!"
+  ECHOYY " 3. 卸载青龙面板"
+  ECHOY " 4. 进入第一主菜单（安装选择界面）"
+  ECHOYY " 5. 退出程序!"
   echo
   scqlbianmaa="输入您选择的编码"
   while :; do
@@ -885,29 +794,13 @@ memuqinglong() {
   break
   ;;
   3)
-    ECHOY "重启青龙，请耐心等候..."
-    docker restart qinglong
-    sleep 5
-    print_ok "命令执行完成"
-  break
-  ;;
-  4)
-    ECHOY "开始重置青龙登录错误次数和检测环境并修复，请耐心等候..."
-    docker exec -it qinglong bash -c "ql resetlet"
-    sleep 2
-    docker exec -it qinglong bash -c "ql check"
-    bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/shidahuilang/QL-@main/timesync.sh)"
-    print_ok "命令执行完成"
-  break
-  ;;
-  5)
-    ECHOB " 是否御载青龙面板?"
+    ECHOB " 是否卸载青龙面板?"
     echo
-    read -p " 是否御载青龙面板?输入[Yy]回车确认,直接回车返回菜单：" YZQLN
+    read -p " 是否卸载青龙面板?输入[Yy]回车确认,直接回车返回菜单：" YZQLN
     case $YZQLN in
     [Yy])
-      ECHOG "正在御载青龙面板"
-      uninstall_qinglong
+      ECHOG "正在卸载青龙面板"
+      Unstall_qinglong
       rm -rf /etc/bianliang.sh
     ;;
     *)
@@ -916,11 +809,11 @@ memuqinglong() {
     esac
   break
   ;;
-  6)
+  4)
     memu
   break
   ;;
-  7)
+  5)
     ECHOR "您选择了退出程序!"
     sleep 1
     exit 1
@@ -1001,9 +894,8 @@ memu() {
   clear
   echo
   echo
-  ECHORR "脚本适用于（ubuntu、debian、centos、alpine、openwrt）"
-  ECHORR "一键安装青龙，包括（docker、任务、依赖安装，一条龙服务"
-  ECHORR "N1或者其他晶晨系列盒子安装在[root]文件夹，其他设备都安装在[opt]文件夹内"
+  ECHORR "脚本适用于（ubuntu、debian、centos、openwrt）"
+  ECHORR "一键安装青龙，包括（docker、任务、依赖安装，一条龙服务），安装路径[opt]"
   ECHORR "自动检测docker，有则跳过，无则安装，openwrt则请自行安装docker，如果空间太小请挂载好硬盘"
   ECHORR "如果您以前安装有青龙的话，则自动删除您的青龙容器和镜像，全部推倒重新安装"
   ECHORR "如果安装当前文件夹已经存在 ql 文件的话，如果您的[环境变量文件]符合要求，就会继续使用，免除重新输入KEY的烦恼"
@@ -1022,14 +914,14 @@ memu() {
   1)
     export wjmz="Aaron-lv"
     export Sh_Path="Aaron-lv.sh"
-    export kugonggao="您库的选择：shufflewzc/faker2和JDHelloWorld/jd_scripts"
+    export kugonggao="您的库选择：TG机器人每周提交助力码库"
     memuaz
   break
   ;;
   2)
     export wjmz="feverrun"
     export Sh_Path="feverrun.sh"
-    export kugonggao="您库的选择：feverrun/my_scripts"
+    export kugonggao="您的库选择：自动提交助力码库"
     memuaz
   break
   ;;
