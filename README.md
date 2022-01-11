@@ -106,3 +106,5 @@ docker exec -it qinglong bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.
 > [`NolanHzy`]
 > [`danshui`]
 > [`feverrun`]
+> [`Aaron-lv`]
+> [`faker2`]
