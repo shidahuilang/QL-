@@ -157,7 +157,7 @@ elif [[ "$(. /etc/os-release && echo "$ID")" == "debian" ]]; then
    apt install git -y > /dev/null
 fi
 rm -rf /root/nvjdc > /dev/null
-git clone https://ghproxy.com/https://github.com/NolanHzy/nvjdcdocker.git /root/nvjdc
+git clone https://ghproxy.com/https://github.com/shidahuilang/nvjdc.git /root/nvjdc
 if [ ! -d "/root/nvjdc/.local-chromium/Linux-884014" ]; then
 cd /root/nvjdc
 echo -e "${green}正在拉取chromium-browser-snapshots等依赖,体积100多M，请耐心等待下一步命令提示···${plain}"
@@ -265,7 +265,7 @@ fi
 
 #拉取nvjdc镜像
 echo -e  "${green}开始拉取nvjdc镜像文件，nvjdc镜像比较大，请耐心等待${plain}"
-docker pull nolanhzy/nvjdc:${version1}
+docker pull shidahuilang/nvjdc:latest
 
 
 #创建并启动nvjdc容器
@@ -273,7 +273,7 @@ cd /root/nvjdc
 echo -e "${green}开始创建nvjdc容器${plain}"
 docker run   --name nvjdc -p ${portinfo}:80 -d  -v  "$(pwd)":/app \
 -v /etc/localtime:/etc/localtime:ro \
--it --privileged=true  nolanhzy/nvjdc:${version1}
+-it --privileged=true  shidahuilang/nvjdc:latest
 docker update --restart=always nvjdc
 
 baseip=$(curl -s ipip.ooo)  > /dev/null
@@ -283,7 +283,7 @@ echo -e "${green}安装完毕,面板访问地址：http://${baseip}:${portinfo}$
 
 update_nvjdc(){
 mv /root/nvjdc /root/nvjdc1
-git clone https://ghproxy.com/https://github.com/NolanHzy/nvjdcdocker.git /root/nvjdc
+git clone https://ghproxy.com/https://github.com/shidahuilang/nvjdc.git /root/nvjdc
 cd /root/nvjdc &&  mkdir -p  Config &&  mv /root/nvjdc1/Config.json /root/nvjdc/Config/Config.json
 cd /root/nvjdc &&    mv /root/nvjdc1/.local-chromium /root/nvjdc/.local-chromium
 cd /root/nvjdc
@@ -310,10 +310,10 @@ fi
 fi
 baseip=$(curl -s ipip.ooo)  > /dev/null
 docker rm -f nvjdc
-docker pull nolanhzy/nvjdc:latest
+docker pull shidahuilang/nvjdc:latest
 docker run   --name nvjdc -p ${portinfo}:80 -d  -v  "$(pwd)":/app \
 -v /etc/localtime:/etc/localtime:ro \
--it --privileged=true  nolanhzy/nvjdc:latest
+-it --privileged=true  shidahuilang/nvjdc:latest
 docker update --restart=always nvjdc
 echo -e "${green}nvjdc更新完毕，脚本自动退出。${plain}"
 exit 0
