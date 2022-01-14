@@ -51,6 +51,8 @@ TIME l "拉取jd_OpenCard.py"
 curl -fsSL ${curlurl}/feverrun/jd_OpenCard.py > /ql/qlwj/jd_OpenCard.py
 TIME l "拉取wskey.py"
 curl -fsSL ${curlurl}/feverrun/wskey.py > /ql/qlwj/wskey.py
+TIME l "拉取disableDuplicateTasksImplement.py"
+curl -fsSL ${curlurl}/feverrun/disableDuplicateTasksImplement.py > /ql/qlwj/disableDuplicateTasksImplement.py
 TIME l "拉取1-5.sh"
 curl -fsSL ${curlurl}/Aaron-lv/jd/1-5.sh > /ql/jd/1-5.sh
 TIME l "拉取6-10.sh"
