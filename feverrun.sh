@@ -54,8 +54,8 @@ TIME l "拉取config.sample.sh"
 curl -fsSL ${curlurl}/feverrun/config.sample.sh > /ql/qlwj/config.sample.sh
 TIME l "拉取extra.sh"
 curl -fsSL ${curlurl}/feverrun/extra.sh > /ql/qlwj/extra.sh
-TIME l "拉取raw_jd_OpenCard.py"
-curl -fsSL ${curlurl}/Aaron-lv/raw_jd_OpenCard.py > /ql/qlwj/raw_jd_OpenCard.py
+TIME l "拉取jd_OpenCard.py"
+curl -fsSL ${curlurl}/Aaron-lv/jd_OpenCard.py > /ql/qlwj/raw_jd_OpenCard.py
 TIME l "拉取wskey.py"
 curl -fsSL ${curlurl}/Aaron-lv/wskey.py > /ql/qlwj/wskey.py
 TIME l "拉取disableDuplicateTasksImplement.py"
