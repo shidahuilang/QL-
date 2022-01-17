@@ -549,21 +549,21 @@ function linux_nolanjdc() {
   cd ${Current}
   if [[ -f /etc/openwrt_release ]] && [[ -f /rom/etc/openwrt_release ]]; then
     docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  ${Home}:/app \
-    -it --privileged=true  shidahuilang/nvjdc:latest
+    -it --privileged=true  shidahuilang/nvjdc:1.4
     docker exec -it nolanjdc bash -c "cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime"
     /etc/init.d/dockerman restart > /dev/null 2>&1
     /etc/init.d/dockerd restart > /dev/null 2>&1
     sleep 3
   elif [[ "$(. /etc/os-release && echo "$ID")" == "alpine" ]]; then
     docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  ${Home}:/app \
-    -it --privileged=true  shidahuilang/nvjdc:latest
+    -it --privileged=true  shidahuilang/nvjdc:1.4
     docker exec -it nolanjdc bash -c "cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime"
     sleep 2
   else
     cd  ${Home}
     docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  "$(pwd)":/app \
     -v /etc/localtime:/etc/localtime:ro \
-    -it --privileged=true  shidahuilang/nvjdc:latest
+    -it --privileged=true  shidahuilang/nvjdc:1.4
     sleep 2
   fi
   cd ${Current}
@@ -617,26 +617,25 @@ function up_nvjdc() {
   fi
   cd ${Current}
   ECHOG "更新镜像，请耐心等候..."
-  sudo docker pull shidahuilang/nvjdc:latest
+  sudo docker pull shidahuilang/nvjdc:1.4
   ECHOY "启动镜像"
   if [[ -f /etc/openwrt_release ]] && [[ -f /rom/etc/openwrt_release ]]; then
     docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  ${Home}:/app \
-    -it --privileged=true  shidahuilang/nvjdc:latest
+    -it --privileged=true  shidahuilang/nvjdc:1.4
     docker exec -it nolanjdc bash -c "cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime"
     /etc/init.d/dockerman restart > /dev/null 2>&1
     /etc/init.d/dockerd restart > /dev/null 2>&1
     sleep 3
   elif [[ "$(. /etc/os-release && echo "$ID")" == "alpine" ]]; then
     docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  ${Home}:/app \
-    -it --privileged=true  shidahuilang/nvjdc:latest
+    -it --privileged=true  shidahuilang/nvjdc:1.4
     docker exec -it nolanjdc bash -c "cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime"
     sleep 2
   else
     cd  ${Home}
     docker run   --name nolanjdc -p ${JDC_PORT}:80 -d  -v  "$(pwd)":/app \
     -v /etc/localtime:/etc/localtime:ro \
-    -it --privileged=true  shidahuilang/nvjdc:latest
-    sleep 2
+    -it --privileged=true  shidahuilang/nvjdc:1.4
   fi
   cd ${Current}
   if [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
