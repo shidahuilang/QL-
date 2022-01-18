@@ -105,6 +105,7 @@ bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shid
 docker exec -it qinglong bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/npm.sh)"
 ```
 ## 感谢！
+@TG:@shidahuilang
 
 > [`whyour`]
 > [`NolanHzy`]
