@@ -605,3 +605,6 @@ case $1 in
         ran_num=""
         ;;
 esac
+#清空购物车
+export gua_cleancart_products="true"
+export gua_cleancart_Run="true"
