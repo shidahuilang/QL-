@@ -284,17 +284,17 @@ function systemctl_status() {
 
 function uninstall_qinglong() {
   if [[ `docker images | grep -c "qinglong"` -ge '1' ]] || [[ `docker ps -a | grep -c "qinglong"` -ge '1' ]]; then
-    ECHOY "检测到青龙面板，正在御载青龙面板，请稍后..."
+    ECHOY "检测到青龙面板，正在卸载青龙面板，请稍后..."
     docker=$(docker ps -a|grep qinglong) && dockerid=$(awk '{print $(1)}' <<<${docker})
     images=$(docker images|grep qinglong) && imagesid=$(awk '{print $(3)}' <<<${images})
     docker stop -t=5 "${dockerid}" > /dev/null 2>&1
     docker rm "${dockerid}"
     docker rmi "${imagesid}"
     if [[ `docker ps -a | grep -c "qinglong"` == '0' ]]; then
-      print_ok "青龙面板御载完成"
+      print_ok "青龙面板卸载完成"
       rm -rf /etc/bianliang.sh > /dev/null 2>&1
     else
-      print_error "青龙面板御载失败"
+      print_error "青龙面板卸载失败"
       exit 1
     fi
   fi
@@ -486,7 +486,7 @@ function install_yanzheng() {
 
 function jiance_nvjdc() {
   if [[ `docker images | grep -c "nvjdc"` -ge '1' ]] || [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
-    ECHOY "检测到nvjdc面板，正在御载nvjdc面板，请稍后..."
+    ECHOY "检测到nvjdc面板，正在卸载nvjdc面板，请稍后..."
     dockernv=$(docker ps -a|grep nvjdc) && dockernvid=$(awk '{print $(1)}' <<<${dockernv})
     imagesnv=$(docker images|grep nvjdc) && imagesnvid=$(awk '{print $(3)}' <<<${imagesnv})
     docker stop -t=5 "${dockernvid}" > /dev/null 2>&1
@@ -495,9 +495,9 @@ function jiance_nvjdc() {
     find / -iname 'nolanjdc' | xargs -i rm -rf {} > /dev/null 2>&1
     find / -iname 'nvjdc' | xargs -i rm -rf {} > /dev/null 2>&1
     if [[ `docker images | grep -c "nvjdc"` == '0' ]]; then
-      print_ok "nvjdc面板御载完成"
+      print_ok "nvjdc面板卸载完成"
     else
-      print_error "nvjdc面板御载失败"
+      print_error "nvjdc面板卸载失败"
       exit 1
     fi
   fi
@@ -603,7 +603,7 @@ function up_nvjdc() {
   cp -Rf ${QL_PATH}/nvjdcbf/Config ${Home}/Config
   cp -Rf ${QL_PATH}/nvjdcbf/.local-chromium ${Home}/.local-chromium
   if [[ `docker images | grep -c "nvjdc"` -ge '1' ]] || [[ `docker ps -a | grep -c "nvjdc"` -ge '1' ]]; then
-    ECHOY "御载nvjdc镜像"
+    ECHOY "卸载nvjdc镜像"
     dockernv=$(docker ps -a|grep nvjdc) && dockernvid=$(awk '{print $(1)}' <<<${dockernv})
     imagesnv=$(docker images|grep nvjdc) && imagesnvid=$(awk '{print $(3)}' <<<${imagesnv})
     docker stop -t=5 "${dockernvid}" > /dev/null 2>&1
@@ -611,9 +611,9 @@ function up_nvjdc() {
     docker rmi "${imagesnvid}"
   fi
   if [[ `docker images | grep -c "nvjdc"` == '0' ]]; then
-    print_ok "nvjdc镜像御载完成"
+    print_ok "nvjdc镜像卸载完成"
   else
-    print_error "nvjdc镜像御载失败，再次尝试删除"
+    print_error "nvjdc镜像卸载失败，再次尝试删除"
   fi
   cd ${Current}
   ECHOG "更新镜像，请耐心等候..."
@@ -769,8 +769,8 @@ memunvjdc() {
   ECHOB " 3. 升级nvjdc面板"
   ECHOB " 4. 重启青龙和nvjdc"
   ECHOB " 5. 重置青龙登录错误次数和检测环境并修复"
-  ECHOB " 6. 御载nvjdc面板"
-  ECHOB " 7. 御载青龙+nvjdc面板"
+  ECHOB " 6. 卸载nvjdc面板"
+  ECHOB " 7. 卸载青龙+nvjdc面板"
   ECHOB " 8. 进入第一主菜单（安装界面）"
   ECHOB " 9. 退出程序!"
   echo
@@ -812,11 +812,11 @@ memunvjdc() {
   break
   ;;
   6)
-    ECHOY " 是否御载nvjdc面板?"
-    read -p " 是否御载nvjdc面板?输入[Yy]回车确认,直接回车返回菜单：" YZJDC
+    ECHOY " 是否卸载nvjdc面板?"
+    read -p " 是否卸载nvjdc面板?输入[Yy]回车确认,直接回车返回菜单：" YZJDC
     case $YZJDC in
     [Yy])
-      ECHOG " 正在御载nvjdc面板"
+      ECHOG " 正在卸载nvjdc面板"
       jiance_nvjdc
     ;;
     *)
@@ -826,11 +826,11 @@ memunvjdc() {
   break
   ;;
   7)
-    ECHOY " 是否御载青龙+nvjdc面板?"
-    read -p " 是否御载青龙+nvjdc面板?输入[Yy]回车确认,直接回车返回菜单：" YZQLNV
+    ECHOY " 是否卸载青龙+nvjdc面板?"
+    read -p " 是否卸载青龙+nvjdc面板?输入[Yy]回车确认,直接回车返回菜单：" YZQLNV
     case $YZQLNV in
     [Yy])
-      ECHOG "正在御载青龙+nvjdc面板"
+      ECHOG "正在卸载青龙+nvjdc面板"
       uninstall_qinglong
       jiance_nvjdc
       rm -rf /etc/bianliang.sh
@@ -866,7 +866,7 @@ memuqinglong() {
   ECHOY " 2. 更新撸豆脚本库"
   ECHOYY " 3. 重启青龙面板"
   ECHOY " 4. 重置青龙登录错误次数和检测环境并修复"
-  ECHOYY " 5. 御载青龙面板"
+  ECHOYY " 5. 卸载青龙面板"
   ECHOY " 6. 进入第一主菜单（安装界面）"
   ECHOYY " 7. 退出程序!"
   echo
@@ -901,12 +901,12 @@ memuqinglong() {
   break
   ;;
   5)
-    ECHOB " 是否御载青龙面板?"
+    ECHOB " 是否卸载青龙面板?"
     echo
-    read -p " 是否御载青龙面板?输入[Yy]回车确认,直接回车返回菜单：" YZQLN
+    read -p " 是否卸载青龙面板?输入[Yy]回车确认,直接回车返回菜单：" YZQLN
     case $YZQLN in
     [Yy])
-      ECHOG "正在御载青龙面板"
+      ECHOG "正在卸载青龙面板"
       uninstall_qinglong
       rm -rf /etc/bianliang.sh
     ;;
