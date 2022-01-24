@@ -265,7 +265,7 @@ fi
 
 #拉取nvjdc镜像
 echo -e  "${green}开始拉取nvjdc镜像文件，nvjdc镜像比较大，请耐心等待${plain}"
-docker pull shidahuilang/nvjdc:latest
+docker pull shidahuilang/nvjdc:2.4
 
 
 #创建并启动nvjdc容器
@@ -273,7 +273,7 @@ cd /root/nvjdc
 echo -e "${green}开始创建nvjdc容器${plain}"
 docker run   --name nvjdc -p ${portinfo}:80 -d  -v  "$(pwd)":/app \
 -v /etc/localtime:/etc/localtime:ro \
--it --privileged=true  shidahuilang/nvjdc:latest
+-it --privileged=true  shidahuilang/nvjdc:2.4
 docker update --restart=always nvjdc
 
 baseip=$(curl -s ipip.ooo)  > /dev/null
@@ -313,7 +313,7 @@ docker rm -f nvjdc
 docker pull shidahuilang/nvjdc:latest
 docker run   --name nvjdc -p ${portinfo}:80 -d  -v  "$(pwd)":/app \
 -v /etc/localtime:/etc/localtime:ro \
--it --privileged=true  shidahuilang/nvjdc:latest
+-it --privileged=true  shidahuilang/nvjdc:2.4
 docker update --restart=always nvjdc
 echo -e "${green}nvjdc更新完毕，脚本自动退出。${plain}"
 exit 0
