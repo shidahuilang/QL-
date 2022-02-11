@@ -6,5 +6,5 @@
 
 ql repo https://github.com/smiek2121/scripts.git "jd_|gua_" "gua_cleancart.js|gua_wealth_island_help.js|jd_sign_graphics.js|gua_ddworld.js|jd_joy_steal.js|jd_sendBeans.js|gua_wealth_island.js|jd_joy.js" "ZooFaker_Necklace.js|JDJRValidator_Pure.js|sign_graphics_validate.js|cleancart_activity.js|jdCookie.js|sendNotify.js"
 ql repo https://github.com/JDHelloWorld/jd_scripts.git "jd_fruit|jd_plantBean|jd_jdfactory|jd_dreamFactory|jd_pet|jd_health|jd_sgmh|jd_jxmc|jd_cfd|jd_88hb|jd_api_test" "activity|jd_cfd.ts|jd_jxmc.ts|backUp|Coupon|enen|update|collect|game|shell|stock|getCoin|moreTask|jd_jxmc.js" "^jd[^_]|^USER|^TS|^JS|jdCookie|sendNotify|tools|utils|package|jd_validate_Worker"
-ql repo https://github.com/shidahuilang/f2.git "jd_|jx_|gua_|jddj_|jdCookie" "activity|backUp" "^jd[^_]|USER|function|utils|sendNotify|ZooFaker_Necklace.js|JDJRValidator_|sign_graphics_validate|ql|JDSignValidator"
+ql repo https://github.com/okyyds/yyds.git "jd_|jx_|gua_|jddj_|jdCookie" "activity|backUp" "^jd[^_]|USER|function|utils|sendNotify|ZooFaker_Necklace.js|JDJRValidator_|sign_graphics_validate|ql|JDSignValidator" "master"
 task disableDuplicateTasksImplement.py
