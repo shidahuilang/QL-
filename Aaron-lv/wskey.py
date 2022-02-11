@@ -6,13 +6,18 @@ import requests
 import time
 import json
 import re
-import uuid
+import sys
+
 
 requests.packages.urllib3.disable_warnings()
 
 token = ""
 username = ""
 password = ""
+
+# 自定义青龙端口：
+port = ""
+
 if username == "" or password == "":
     f = open("/ql/config/auth.json")
     auth = f.read()
@@ -21,28 +26,33 @@ if username == "" or password == "":
     password = auth["password"]
     token = auth["token"]
     f.close()
+    
+    
+def printf(text):
+    print(text)
+    sys.stdout.flush()
 
-
+    
 def gettimestamp():
     return str(int(time.time() * 1000))
 
 
 def login(username, password):
-    url = "http://127.0.0.1:5700/api/login?t=%s" % gettimestamp()
+    url = qlurl + "/api/login?t=%s" % gettimestamp()
     data = {"username": username, "password": password}
     r = s.post(url, data)
     s.headers.update({"authorization": "Bearer " + json.loads(r.text)["data"]["token"]})
 
 
 def getitem(key):
-    url = "http://127.0.0.1:5700/api/envs?searchValue=%s&t=%s" % (key, gettimestamp())
+    url = qlurl + "/api/envs?searchValue=%s&t=%s" % (key, gettimestamp())
     r = s.get(url)
     item = json.loads(r.text)["data"]
     return item
 
 
 def getckitem(key):
-    url = "http://127.0.0.1:5700/api/envs?searchValue=JD_COOKIE&t=%s" % gettimestamp()
+    url = qlurl + "/api/envs?searchValue=JD_COOKIE&t=%s" % gettimestamp()
     r = s.get(url)
     for i in json.loads(r.text)["data"]:
         if key in i["value"]:
@@ -50,63 +60,21 @@ def getckitem(key):
     return []
 
 
-def genToken(wsCookie):
-    url = "https://api.jds.codes/gentoken"
-    body = {"url": "https://home.m.jd.com/myJd/newhome.action"}
-    headers = {
-        "user-agent": "Mozilla/5.0 (Windows NT 6.3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36",
-        "Content-Type":"application/json"
-    }
-    r = requests.post(url, headers=headers, data=json.dumps(body))
-    r = json.loads(r.text)
-    data=r["data"]["sign"].split("&")
-    jduuid = data[1]
-    clientVersion = data[3]
-    client = data[2]
-    sign = data[4] + "&" + data[5] + "&" + data[6]
-    url = "https://api.m.jd.com/client.action?functionId=genToken&%s&%s&%s&%s" % (clientVersion, client, jduuid, sign)
-    headers = {
-        "Host": 'api.m.jd.com',
-        "Cookie": wsCookie,
-        "accept": '*/*',
-        "referer": '',
-        'user-agent': "okhttp/3.12.1;jdmall;apple;version/9.4.0;build/88830;screen/1440x3007;os/11;network/wifi;" + str(
-            uuid.uuid4()),
-        'accept-language': 'zh-Hans-CN;q=1, en-CN;q=0.9',
-        'content-type': 'application/x-www-form-urlencoded;',
-    }
-    r = requests.post(url, headers=headers, data="body=%7B%22to%22%3A%20%22https%3A//home.m.jd.com/myJd/newhome.action%22%2C%20%22action%22%3A%20%22to%22%7D")
-    r = json.loads(r.text)["tokenKey"]
-    return r
-
-
-def getJDCookie(tokenKey):
-    url = "https://un.m.jd.com/cgi-bin/app/appjmp?tokenKey=%s&to=https://home.m.jd.com/myJd/newhome.action" % tokenKey
-    headers = {
-        "Connection": 'Keep-Alive',
-        'Content-Type': 'application/x-www-form-urlencoded',
-        "Accept": 'application/json, text/plain, */*',
-        'Accept-Language': 'zh-cn',
-        "User-Agent": 'okhttp/3.12.1;jdmall;apple;version/9.4.0;build/88830;screen/1440x3007;os/11;network/wifi;' + str(
-            uuid.uuid4())
-    }
-    r = requests.get(url, headers=headers, allow_redirects=False,)
-    pt_pin = re.findall(r"pt_pin=(.*?);", str(r.headers))[0]
-    pt_key = re.findall(r"pt_key=(.*?);", str(r.headers))[0]
-    return "pt_key=" + pt_key + ";pt_pin=" + pt_pin + ";"
-
-
 def wstopt(wskey):
     try:
-        token = genToken(wskey)
-        r = getJDCookie(token)
+        url = "https://signer.nz.lu/getck"
+        headers = {
+            "user-agent": "Mozilla/5.0 (Windows NT 6.3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
+        }
+        data = {"wskey": wskey, "key": "xb3z4z2m3n847"}
+        r = requests.post(url, headers=headers, data=json.dumps(data), verify=False)
         return r
     except:
         return "error"
 
 
 def update(text, qlid):
-    url = "http://127.0.0.1:5700/api/envs?t=%s" % gettimestamp()
+    url = qlurl + "/api/envs?t=%s" % gettimestamp()
     s.headers.update({"Content-Type": "application/json;charset=UTF-8"})
     data = {
         "name": "JD_COOKIE",
@@ -121,7 +89,7 @@ def update(text, qlid):
 
 
 def insert(text):
-    url = "http://127.0.0.1:5700/api/envs?t=%s" % gettimestamp()
+    url = qlurl + "/api/envs?t=%s" % gettimestamp()
     s.headers.update({"Content-Type": "application/json;charset=UTF-8"})
     data = []
     data_json = {
@@ -142,39 +110,51 @@ if __name__ == '__main__':
         login(username, password)
     else:
         s.headers.update({"authorization": "Bearer " + token})
+    if port == "":
+        try:
+            r = requests.get("http://127.0.0.1:5700/login")
+            qlurl = "http://127.0.0.1:5700"
+        except:
+            qlurl = "http://127.0.0.1:5600"
+    else:
+        qlurl = "http://127.0.0.1:" + port
     wskeys = getitem("JD_WSCK")
     count = 1
     for i in wskeys:
         if i["status"] == 0:
             r = wstopt(i["value"])
             if r == "error":
-                print("api请求错误")
+                printf("api请求错误")
             else:
-                ptck = r
-                try:
-                    wspin = re.findall(r"pin=(.*?);", i["value"])[0]
-                    if ptck == "wskey错误":
-                        print("第%s个wskey可能过期了,pin为%s" % (count, wspin))
-                    elif ptck == "未知错误" or ptck == "error":
-                        print("第%s个wskey发生了未知错误,pin为%s" % (count, wspin))
-                    elif "</html>" in ptck:
-                        print("你的ip被cloudflare拦截")
-                    else:
-                        ptpin = re.findall(r"pt_pin=(.*?);", ptck)[0]
-                        item = getckitem("pt_pin=" + ptpin)
-                        if item != []:
-                            qlid = item["_id"]
-                            if update(ptck, qlid):
-                                print("第%s个wskey更新成功,pin为%s" % (count, wspin))
-                            else:
-                                print("第%s个wskey更新失败,pin为%s" % (count, wspin))
+                ptck = r.text
+                if r.status_code == 429:
+                    printf("您的ip请求api过于频繁，已被流控")
+                    exit()
+                else:
+                    try:
+                        wspin = re.findall(r"pin=(.*?);", i["value"])[0]
+                        if ptck == "wskey错误":
+                            printf("第%s个wskey可能过期了,pin为%s" % (count, wspin))
+                        elif ptck == "未知错误" or ptck == "error":
+                            printf("第%s个wskey发生了未知错误,pin为%s" % (count, wspin))
+                        elif "</html>" in ptck:
+                            printf("你的ip被cloudflare拦截")
                         else:
-                            if insert(ptck):
-                                print("第%s个wskey添加成功" % count)
+                            ptpin = re.findall(r"pt_pin=(.*?);", ptck)[0]
+                            item = getckitem("pt_pin=" + ptpin)
+                            if item != []:
+                                qlid = item["_id"]
+                                if update(ptck, qlid):
+                                    printf("第%s个wskey更新成功,pin为%s" % (count, wspin))
+                                else:
+                                    printf("第%s个wskey更新失败,pin为%s" % (count, wspin))
                             else:
-                                print("第%s个wskey添加失败" % count)
-                except:
-                    print("第%s个wskey出现异常错误" % count)
-                count += 1
+                                if insert(ptck):
+                                    printf("第%s个wskey添加成功" % count)
+                                else:
+                                    printf("第%s个wskey添加失败" % count)
+                    except:
+                        printf("第%s个wskey出现异常错误" % count)
+                    count += 1
         else:
-            print("有一个wskey被禁用了")
+            printf("有一个wskey被禁用了")
