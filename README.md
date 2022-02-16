@@ -3,6 +3,7 @@
 ![img.png](image/img.png)
 
 ![img1.png](image/img1.png)
+![img2.png](image/img2.png)
 #
 - 为防止系统没安装curl，使用不了一键命令，使用一键安装青龙面板命令之前先执行一次安装curl命令
 
