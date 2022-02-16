@@ -115,7 +115,7 @@ ql repo https://github.com/shidahuilang/f2.git "jd_|jx_|gua_|jddj_|jdCookie" "ac
 ```
 
 ## 感谢！
-## [联系大灰狼](https://t.me/shidahuilang "TG:大灰狼")
+
 
 > [`whyour`]
 > [`NolanHzy`]
