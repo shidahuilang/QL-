@@ -288,7 +288,7 @@ rm -f adbot/adbot
 
 file=env.properties
 if [ ! -f "$file" ]; then
-  wget -O env.properties https://ghproxy.com/https://raw.githubusercontent.com/rubyangxg/jd-qinglong/master/env.template.properties
+  wget -O env.properties https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/adong/env.properties
 else
   echo "env.properties已存在"
 fi
