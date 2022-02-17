@@ -479,6 +479,3 @@ else
   echo "恭喜你安装完成，阿东网页：http://localhost:$ad_port1，阿东机器人登录入口：http://localhost:$port，外部访问请打开防火墙并且开放 $ad_port1 和 $port 端口！"
 fi
 
-#bash <(curl -s -L https://ghproxy.com/https://raw.githubusercontent.com/rubyangxg/jd-qinglong/master/install.sh)
-#sed -e '0,/localhost:[0-9]\+/ s/localhost:[0-9]\+/localhost:1245/' ./adbot/gmc_config.json
-#tac ./adbot/gmc_config.json | sed -e '0,/localhost:[0-9]\+/{s/localhost:[0-9]\+/localhost:1245/}' | tac | tee a.json
