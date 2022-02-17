@@ -34,6 +34,10 @@ bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shid
 ```sh
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/nvjdc.sh)"
 ```
+- 单独安装阿东一键脚本（免费有限制，一天扫码6次，低调使用）
+```sh
+bash -c "$(curl -fsSL bash -c "$(curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/adong/adong.sh)")"
+```
 
 ## 第二步
 
