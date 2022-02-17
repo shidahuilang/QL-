@@ -36,7 +36,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/nv
 ```
 - 单独安装阿东一键脚本（免费有限制，一天扫码6次，低调使用，如有批量需求，请捐赠原作者）
 ```sh
-bash -c "$(curl -fsSL bash -c "$(curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/adong/adong.sh)")"
+bash -c "$(curl -fsSL bash -c "$(curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/adong/adong.sh)"
 ```
 
 ## 第二步
