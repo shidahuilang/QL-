@@ -8,7 +8,7 @@
   "Config": [
     {
       "QLkey": 1,
-      "QLName": "阿里云",
+      "QLName": "腾讯云",
       "QLurl": "http://xxx.xxx.xxx.xxx:5700",
       "QL_CLIENTID": "xxx",
       "QL_SECRET": "xxx",
