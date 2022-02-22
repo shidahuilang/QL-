@@ -1,0 +1,28 @@
+{
+  "MaxTab": "4",
+  "Title": "Rabbit",
+  "Closetime": "5",
+  "Announcement": "为提高账户的安全性，请关闭免密支付。",
+  "AutoCaptchaCount": "5",
+  "proxy": "",
+  "Config": [
+    {
+      "QLkey": 1,
+      "QLName": "阿里云",
+      "QLurl": "http://xxx.xxx.xxx.xxx:5700",
+      "QL_CLIENTID": "xxx",
+      "QL_SECRET": "xxx",
+      "QL_CAPACITY": 40,
+      "QL_WSCK": 40
+    },
+    {
+      "QLkey": 2,
+      "QLName": "阿里云",
+      "QLurl": "http://xxx.xxx.xxx.xxx:5700",
+      "QL_CLIENTID": "xxx",
+      "QL_SECRET": "xxx",
+      "QL_CAPACITY": 40,
+      "QL_WSCK": 40
+    }
+  ]
+}
