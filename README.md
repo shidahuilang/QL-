@@ -128,5 +128,5 @@ ql repo https://github.com/shidahuilang/f2.git "jd_|jx_|gua_|jddj_|jdCookie" "ac
 > [`danshui`]
 > [`feverrun`]
 > [`Aaron-lv`]
-> [`faker2`]
+> [`faker2`] 
 
