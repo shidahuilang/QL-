@@ -32,15 +32,15 @@ bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shid
 #
 - 单独安装rabbit一键脚本
 ```sh
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/rabbit.sh)"
+bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/rabbit.sh)"
 ```
 - 单独安装NVJDC一键脚本（懒得升级修改，凑合用）
 ```sh
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/nvjdc.sh)"
+bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/nvjdc.sh)"
 ```
 - 单独安装阿东一键脚本（免费有限制，一天扫码2次，低调使用，如有批量需求，请捐赠原作者）
 ```sh
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/adong/adong.sh)"
+bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/adong/adong.sh)"
 ```
 
 ## 第二步
