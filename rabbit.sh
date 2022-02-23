@@ -208,7 +208,7 @@ docker pull ht944/rabbit:latest
 #创建并启动rabbit容器
 cd /root/rabbit
 echo -e "${green}开始创建rabbit容器${plain}"
-cd /root/Rabbit && docker run --name rabbit -d  -v "$(pwd)"/Config:/usr/src/Project/Config -p 5701:1234 ht944/rabbit:latest
+docker run --name rabbit -d  -v "$(pwd)"/Config:/usr/src/Project/Config -p 5701:1234 ht944/rabbit:latest
 
 baseip=$(curl -s ipip.ooo)  > /dev/null
 
