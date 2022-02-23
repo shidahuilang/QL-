@@ -173,7 +173,7 @@ cat > /root/Rabbit/Config/Config.json << EOF
   "Closetime": "5",
   "Announcement": "为提高账户的安全性，请关闭免密支付。",
   "AutoCaptchaCount": "5",
-  "proxy": "",
+  "proxy": "${proxy}",
   "Config": [
     {
       "QLkey": 1,
@@ -181,7 +181,6 @@ cat > /root/Rabbit/Config/Config.json << EOF
       "QLurl": "${QLurl}",
       "QL_CLIENTID": "${CLIENTID}",
       "QL_SECRET": "${SECRET}",
-      "proxy": "${proxy}",
       "QL_CAPACITY": 40,
       "QL_WSCK": 40
     },
