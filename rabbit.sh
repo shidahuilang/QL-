@@ -163,7 +163,7 @@ wget -O Config.json   https://ghproxy.com/https://raw.githubusercontent.com/shid
 read -p "请输入青龙服务器在web页面中显示的名称: " QLName && printf "\n"
 read -p "请输入Rabbit面板标题: " Title && printf "\n"
 read -p "请输入青龙QL_CLIENTID: " CLIENTID && printf "\n"
-read -p "请输入青龙QL_CLIENTID: " SECRET && printf "\n"
+read -p "请输入青龙QL_SECRET: " SECRET && printf "\n"
 read -p "请输入青龙服务器的url地址（类似http://192.168.2.2:5700）: " QLurl && printf "\n"
 read -p "请输入proxy代理地址: " proxy && printf "\n"
 cat > /root/Rabbit/Config/Config.json << EOF
