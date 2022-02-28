@@ -182,7 +182,7 @@ if [ "$(grep -c jd_cleancartAll.js /ql/config/crontab.list)" = 0 ]; then
 fi
 task wskey.py |tee azcg.log
 echo
-TIME y "拉取faker2和JDHelloWorld两个大佬的脚本（用TG机器人每周提交助力码）"
+TIME y "拉取zero205和yyds两个脚本（用TG机器人每周提交助力码）"
 echo
 echo
 rm -fr /ql/azcg.log
