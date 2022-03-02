@@ -5,15 +5,20 @@
   "Announcement": "为提高账户的安全性，请关闭免密支付。",
   "AutoCaptchaCount": "5",
   "proxy": "",
+  "proxy_name": "",
+  "proxy_pwd": "",
+  "APP_TOKEN": "",
+  "MY_WP_UID": "",
   "Config": [
     {
       "QLkey": 1,
-      "QLName": "腾讯云",
+      "QLName": "阿里云",
       "QLurl": "http://xxx.xxx.xxx.xxx:5700",
       "QL_CLIENTID": "xxx",
       "QL_SECRET": "xxx",
       "QL_CAPACITY": 40,
-      "QL_WSCK": 40
+      "QL_WSCK": 40,
+      "APP_TOKEN": ""
     },
     {
       "QLkey": 2,
@@ -22,7 +27,8 @@
       "QL_CLIENTID": "xxx",
       "QL_SECRET": "xxx",
       "QL_CAPACITY": 40,
-      "QL_WSCK": 40
+      "QL_WSCK": 40,
+      "APP_TOKEN": ""
     }
   ]
 }
