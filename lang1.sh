@@ -197,6 +197,7 @@ function system_check() {
     apk add sudo wget git unzip net-tools subversion
   elif [[ -f /etc/openwrt_release ]] && [[ -f /rom/etc/openwrt_release ]]; then
     ECHOG "正在安装宿主机所需要的依赖，请稍后..."
+    export QL_PATH="/opt"
     opkg update
     opkg install git-http > /dev/null 2>&1
     opkg install ca-bundle > /dev/null 2>&1
