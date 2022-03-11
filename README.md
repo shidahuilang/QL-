@@ -34,6 +34,10 @@ bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shid
 ```sh
 bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/rabbit.sh)"
 ```
+- 单独安装JDX
+```sh
+docker run -d --restart always -p 5705:80 -v /root/jdx/config:/jdx/config --name jdx aaron8/jdx
+```
 - 单独安装NVJDC一键脚本（懒得升级修改，凑合用）
 ```sh
 bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/nvjdc.sh)"
