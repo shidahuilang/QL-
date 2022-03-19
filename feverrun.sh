@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
-# 
-## 本脚本搬运并模仿 liuqitoday
-# 
+
 TIME() {
 [[ -z "$1" ]] && {
 	echo -ne " "
