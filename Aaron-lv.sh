@@ -74,6 +74,8 @@ TIME l "拉取6-10.sh"
 curl -fsSL ${curlurl}/Aaron-lv/jd/6-10.sh > /ql/jd/6-10.sh
 TIME l "拉取jd_sms_login.py"
 curl -fsSL ${curlurl}/Aaron-lv/jd/jd_sms_login.py > /ql/qlwj/jd_sms_login.py
+TIME l "拉取ckck2.sh"
+curl -fsSL ${curlurl}/Aaron-lv/jd/ckck2.sh > /ql/qlwj/ckck2.sh
 chmod -R +x /ql/qlwj
 cp -Rf /ql/qlwj/config.sample.sh /ql/config/config.sh
 cp -Rf /ql/qlwj/config.sample.sh /ql/sample/config.sample.sh
@@ -115,6 +117,17 @@ if [ "$(grep -c bot /ql/config/crontab.list)" = 0 ]; then
     # 获取token
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"拉取机器人","command":"ql bot","schedule":"30 11 * * 6"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1626247933219'
+fi
+sleep 1
+echo
+# 将 ckck2.sh 添加到定时任务
+if [ "$(grep -c ckck2.sh /ql/config/crontab.list)" = 0 ]; then
+    echo
+    TIME g "添加任务 [wskey新转换]"
+    echo
+    # 获取token
+    token=$(cat /ql/config/auth.json | jq --raw-output .token)
+    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"wskey新转换","command":"task ckck2.sh","schedule":"8 8,15,20 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1634041221467'
 fi
 sleep 1
 echo
