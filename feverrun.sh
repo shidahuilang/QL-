@@ -74,6 +74,8 @@ TIME l "拉取jd_sms_login.py"
 curl -fsSL ${curlurl}/Aaron-lv/jd/jd_sms_login.py > /ql/jd/jd_sms_login.py
 TIME l "拉取jd_sms_login.py"
 curl -fsSL ${curlurl}/Aaron-lv/jd/jd_sms_login.py > /ql/qlwj/jd_sms_login.py
+TIME l "拉取ckck2.sh"
+curl -fsSL ${curlurl}/Aaron-lv/jd/ckck2.sh > /ql/qlwj/ckck2.sh
 chmod -R +x /ql/qlwj
 cp -Rf /ql/qlwj/config.sample.sh /ql/config/config.sh
 cp -Rf /ql/qlwj/config.sample.sh /ql/sample/config.sample.sh
