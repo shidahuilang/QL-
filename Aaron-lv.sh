@@ -73,7 +73,7 @@ curl -fsSL ${curlurl}/Aaron-lv/jd/1-5.sh > /ql/jd/1-5.sh
 TIME l "拉取6-10.sh"
 curl -fsSL ${curlurl}/Aaron-lv/jd/6-10.sh > /ql/jd/6-10.sh
 TIME l "拉取jd_sms_login.py"
-curl -fsSL ${curlurl}/Aaron-lv/jd/jd_sms_login.py > /ql/jd/jd_sms_login.py
+curl -fsSL ${curlurl}/Aaron-lv/jd/jd_sms_login.py > /ql/qlwj/jd_sms_login.py
 chmod -R +x /ql/qlwj
 cp -Rf /ql/qlwj/config.sample.sh /ql/config/config.sh
 cp -Rf /ql/qlwj/config.sample.sh /ql/sample/config.sample.sh
@@ -126,6 +126,17 @@ if [ "$(grep -c raw_jd_OpenCard.py /ql/config/crontab.list)" = 0 ]; then
     # 获取token
     token=$(cat /ql/config/auth.json | jq --raw-output .token)
     curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"JD入会开卡领取京豆","command":"task raw_jd_OpenCard.py","schedule":"8 8,15,20 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1634041221437'
+fi
+sleep 1
+echo
+# 将 jd_sms_login.py 添加到定时任务
+if [ "$(grep -c jd_sms_login.py /ql/config/crontab.list)" = 0 ]; then
+    echo
+    TIME g "添加任务 [获取CK脚本]"
+    echo
+    # 获取token
+    token=$(cat /ql/config/auth.json | jq --raw-output .token)
+    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"获取CK脚本","command":"task jd_sms_login.py","schedule":"8 8,15,20 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1634041221417'
 fi
 sleep 1
 echo
