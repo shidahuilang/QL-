@@ -118,6 +118,17 @@ if [ "$(grep -c bot /ql/config/crontab.list)" = 0 ]; then
 fi
 sleep 1
 echo
+# 将 jd_sms_login.py 添加到定时任务
+if [ "$(grep -c jd_sms_login.py /ql/config/crontab.list)" = 0 ]; then
+    echo
+    TIME g "添加任务 [获取CK脚本]"
+    echo
+    # 获取token
+    token=$(cat /ql/config/auth.json | jq --raw-output .token)
+    curl -s -H 'Accept: application/json' -H "Authorization: Bearer $token" -H 'Content-Type: application/json;charset=UTF-8' -H 'Accept-Language: zh-CN,zh;q=0.9' --data-binary '{"name":"获取CK脚本","command":"task jd_sms_login.py","schedule":"8 8,15,20 * * *"}' --compressed 'http://127.0.0.1:5700/api/crons?t=1634041221417'
+fi
+sleep 1
+echo
 # 将 jd_OpenCard.py 添加到定时任务
 if [ "$(grep -c jd_OpenCard.py /ql/config/crontab.list)" = 0 ]; then
     echo
