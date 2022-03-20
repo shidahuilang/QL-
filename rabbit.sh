@@ -209,7 +209,7 @@ docker pull shidahuilang/rabbit:2.24
 #cd /root/rabbit
 echo -e "${green}开始创建rabbit容器${plain}"
 #cd /root/Rabbit && docker run --name rabbit -d  -v "$(pwd)"/Config:/usr/src/Project/Config -p 5701:1234 ht944/rabbit:latest
-cd /root/Rabbit && docker run --name rabbit -d  -v --restart unless-stopped "$(pwd)"/Config:/usr/src/Project/Config -p 5701:1234 shidahuilang/rabbit:2.24
+cd /root/Rabbit && docker run --name rabbit -d -v "$(pwd)"/Config:/usr/src/Project/Config -p 5701:1234 shidahuilang/rabbit:2.24
 baseip=$(curl -s ipip.ooo)  > /dev/null
 
 echo -e "${green}安装完毕,面板访问地址：http://${baseip}:5701"
