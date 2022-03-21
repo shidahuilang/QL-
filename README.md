@@ -119,9 +119,11 @@ bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shid
 docker exec -it qinglong bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/npm.sh)"
 ```
 #### 🚩 单独F2拉库
-YYDS库
+F2库
 ```sh
-ql repo https://github.com/okyyds/yyds.git "jd_|jx_|gua_|jddj_|jdCookie" "activity|backUp" "^jd[^_]|USER|function|utils|sendNotify|ZooFaker_Necklace.js|JDJRValidator_|sign_graphics_validate|ql|JDSignValidator" "master"
+ql repo https://github.com/shufflewzc/faker2.git "jd_|jx_|gua_|jddj_|jdCookie" "activity|backUp" "^jd[^_]|USER|function|utils|sendNotify|ZooFaker_Necklace.js|JDJRValidator_|sign_graphics_validate|ql|JDSignValidator" "main"
+task disableDuplicateTasksImplement.py
+
 ```
 大灰狼备份库
 ```sh
