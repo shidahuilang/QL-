@@ -36,6 +36,7 @@ disable_shell_path=$dir_script/disableDuplicateTasksImplement.py
 wskey_shell_path=$dir_script/wskey.py
 crypto_shell_path=$dir_script/crypto-js.js
 wx_jysz_shell_path=$dir_script/wx_jysz.js
+ckck2_shell_path=$dir_script/ckck2.sh
 OpenCard_shell_path=$dir_script/raw_jd_OpenCard.py
 task_before_shell_path=$dir_shell/task_before.sh
 sample_shell_path=/ql/sample/config.sample.sh
