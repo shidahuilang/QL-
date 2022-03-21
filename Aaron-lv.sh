@@ -89,6 +89,7 @@ cp -Rf /ql/qlwj/jd_get_share_code.js /ql/scripts/jd_get_share_code.js
 cp -Rf /ql/qlwj/jdCookie.js /ql/scripts/jdCookie.js
 cp -Rf /ql/qlwj/jd_cleancartAll.js /ql/scripts/jd_cleancartAll.js
 cp -Rf /ql/qlwj/ckck2.sh /ql/scripts/ckck2.sh
+cp -Rf /ql/qlwj/jd_sms_login.py /ql/scripts/jd_sms_login.py
 echo
 # 将 extra.sh 添加到定时任务
 if [ "$(grep -c extra /ql/config/crontab.list)" = 0 ]; then
