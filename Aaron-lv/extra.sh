@@ -8,7 +8,7 @@ ql repo https://github.com/smiek2121/scripts.git "jd_|gua_" "gua_cleancart.js|gu
 ql repo https://hub.fastgit.xyz/zero205/JD_tencent_scf.git "jd_|jx_|jdCookie" "backUp|icon" "^jd[^_]|USER|sendNotify|sign_graphics_validate|JDJR|JDSign|ql" "main"
 ql repo https://github.com/shufflewzc/faker2.git "jd_|jx_|gua_|jddj_|jdCookie" "activity|backUp" "^jd[^_]|USER|function|utils|sendNotify|ZooFaker_Necklace.js|JDJRValidator_|sign_graphics_validate|ql|JDSignValidator" "main"
 #腾讯自选股
-ql repo https://raw.githubusercontent.com/leafxcy/JavaScript/main/txstockV2.js 
+ql raw https://raw.githubusercontent.com/leafxcy/JavaScript/main/txstockV2.js 
 #快手极速版
-ql repo https://raw.githubusercontent.com/leafxcy/JavaScript/main/ksjsb.js
+ql raw https://raw.githubusercontent.com/leafxcy/JavaScript/main/ksjsb.js
 task disableDuplicateTasksImplement.py
