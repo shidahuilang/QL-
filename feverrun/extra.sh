@@ -8,7 +8,7 @@
 ql repo https://github.com/feverrun/my_scripts.git "jd_|jx_|jddj|getCookie|getJDCookie" "backUp" "^(jd|JD|JS)[^_]|USER|sendNotify|utils"
 ql repo https://github.com/smiek2121/scripts.git "jd_|gua_" "" "ZooFaker_Necklace.js|JDJRValidator_Pure.js|sign_graphics_validate.js|cleancart_activity.js|jdCookie.js|sendNotify.js"
 #腾讯自选股
-ql repo https://raw.githubusercontent.com/leafxcy/JavaScript/main/txstockV2.js 
+ql raw https://raw.githubusercontent.com/leafxcy/JavaScript/main/txstockV2.js 
 #快手极速版
-ql repo https://raw.githubusercontent.com/leafxcy/JavaScript/main/ksjsb.js
+ql raw https://raw.githubusercontent.com/leafxcy/JavaScript/main/ksjsb.js
 task disableDuplicateTasksImplement.py
