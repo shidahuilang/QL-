@@ -722,3 +722,18 @@ esac
 #清空购物车
 export gua_cleancart_products="true"
 export gua_cleancart_Run="true"
+
+## 13.0 跨容器工作功能变量
+## 13.0.1 工作模式
+### 赋值要求：填 0 表示读取当前容器 wskey 管理目标容器的 Cookie；
+###           填 1 表示读取目标容器 wskey 管理目标容器的 Cookie；
+###           空值或填其他内容表示读取当前容器的wskey管理当前容器的Cookie。
+ckck_mode="0"
+## 13.0.2 目标容器参数变量
+### 当 ckck_mode 赋值 0 或 1 时生效。目标容器需启用 OpenAPI 并授权环境变量
+## 目标青龙容器的访问地址及端口
+QL_URL_PORT="http://192.168.2.4:5700"
+## 目标青龙容器的 OpenAPI 的 Client ID
+QL_client_id="gBx3tFMLdcX-"
+## 目标青龙容器的 OpenAPI 的 Client Secret
+QL_client_secret="XbXxD8kdHZeXIGL4J2g_-0Fe"
