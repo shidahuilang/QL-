@@ -136,37 +136,46 @@ NOTIFY_SKIP_SAME_CONTENT=""
 ###           填 2 表示只预测不通知账号剩余有效期；
 ###           空值或填其他内容表示不启用该功能。
 NOTIFY_VALID_TIME=""
+## 13.2 如果本次检测的失效、有效账号与上次结果一致，则不通知
+### 赋值要求：填 1 表示如果失效账号未变化，则不通知。空值或填其他内容表示不启用该功能。
+NOTIFY_SKIP_SAME_CONTENT=""
+## 13.3 预测和通知账号剩余有效期
+## 13.3.1 预测和通知账号剩余有效期的检测和通知类型
+### 赋值要求：填 1 表示预测和通知账号剩余有效期；
+###           填 2 表示只预测不通知账号剩余有效期；
+###           空值或填其他内容表示不启用该功能。
+NOTIFY_VALID_TIME="1"
 ## 13.3.2 临期通知
 ### 自定义账号有效期不足N天时发出一对一通知
 ### 赋值要求：正整数数字，（单位：天）;
 ###           空值表示不启用该功能。
-NOTIFY_VALID_DAY=""
+NOTIFY_VALID_DAY="2"
 ## 13.4 JD_WSCK(wskey)相关
 ## 13.4.1 (失效)检测到失效账号后是否搜索并运行 WSKEY 转换 Cookie 的脚本(需要 /ql/scripts 或其子路径已存在 wskey 转换脚本)
 ### 赋值要求：填 1 表示启用 WSKEY 转换 Cookie 功能。空值或其他值表示不启用该功能。
-### WSKEY_TO_CK=""
+WSKEY_TO_CK="1"
 ## 13.4.2 (失效)自定义调用的 wskey 转换脚本
 ### 赋值要求：例如 wskey_scr="hyzaw_scripts/ql_refreshCK.py"。空值或其他值表示自动搜索文件名中包含 wskey 的 py 文件。
 ### diy_wskey_scr=""
 ## 13.4.3 (失效)当未搜索到 wskey 脚本时下载 wskey 转换脚本，下载路径 /ql/scripts/
 ### 赋值要求：填 1 表示启用下载 wskey 转换脚本功能。空值或其他值表示不启用该功能。
-### DOWNLOAD_WSKEY_SCR=""
+DOWNLOAD_WSKEY_SCR="1"
 ## 13.4.4 (失效)下载 wskey 转换脚本的 URL 链接
 ### 赋值要求：空值，则默认下载 ZL143L 的脚本。非必要留空即可。也可自定义其他链接。
 ### WSKEY_SCR_URL=""
 ## 13.4.5 (失效)当检索到下载路径 /ql/scripts/ 存在 wskey 转换脚本时，先行检测更新脚本后再进行 wskey 转换
 ### 赋值要求：填 1 表示启用功能。空值或其他值表示不启用该功能。
-### CHECK_UPDATE_WSKEY_SCR=""
+CHECK_UPDATE_WSKEY_SCR="1"
 ## 13.4.6 JD_WSCK(wskey) 未录入情况的检测和通知类型
 ### 赋值要求：填 1 表示检测和通知 JD_WSCK(wskey) 未录入情况；
 ###           填 2 表示只检测不通知 JD_WSCK(wskey) 未录入情况；
 ###           空值或填其他内容表示不启用该功能。
-NOTIFY_WSKEY_NO_EXIST=""
+NOTIFY_WSKEY_NO_EXIST="1"
 ## 13.4.7 JD_WSCK(wskey) 提前转换 JD_COOKIE
 ### 当 JD_COOKIE 剩余有效期不足 N 小时，强制 JD_WSCK(wskey) 转换 JD_COOKIE
 ### 赋值要求：正整数数字，（单位：小时）；
 ###           空值表示检测到 JD_COOKIE 过期失效后才启动转换。
-WSKEY_UPDATE_VALIDITY_HOUR=""
+WSKEY_UPDATE_VALIDITY_HOUR="2"
 ### 13.5 是否自动重启生效 Cookie/是否自动禁用失效 Cookie
 ### 13.5.1 是否禁用失效 Cookie
 ### 赋值要求：任意赋值表示不自动禁用，空值表示自动禁用
@@ -189,7 +198,7 @@ CK_WxPusherUid="2"
 ## 说明：当 CK_WxPusherUid.json 文件，中存在账号的 UID 且面板环境变量备注中缺少时间戳或 UID 时生效
 ### 赋值要求：填 1 表示补全；
 ###           空值或填其他内容表示不启用该功能。
-SCANF_WXPusher_Remarks=""
+SCANF_WXPusher_Remarks="1"
 ### 13.7.3 WxPusher App Token，用于一对一推送账号失效通知(同 ccwav 一对一通知环境变量，只可保留一个)。
 ### 格式为 AT_xxxx；查看地址：https://wxpusher.zjiecode.com/admin/main/app/appToken
 export WP_APP_TOKEN_ONE=""
