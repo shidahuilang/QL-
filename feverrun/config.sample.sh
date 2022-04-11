@@ -121,29 +121,29 @@ export GOTIFY_TOKEN="";
 export GOTIFY_PRIORITY=0;
 
 ###wskey变量强制转换
-变量名: JD_WSCK 参数: pin=xxxx;wskey=xxxx;
+#变量名: JD_WSCK 参数: pin=xxxx;wskey=xxxx;
 # 注意分号 不要用中文分号!
 
-变量名: QL_PORT 参数: 端口号(int) 
+#变量名: QL_PORT 参数: 端口号(int) 
 # 修改过面板端口的人才需要填写 默认 5700 
 # 是本地的端口 不是 Docker 映射出去的端口! 如果你映射参数是 8888:5700 仍然填写5700
 
-变量名: WSKEY_DISCHECK 参数: 任意(str)
+#变量名: WSKEY_DISCHECK 参数: 任意(str)
 # 设置 QL_WSCK变量后变量后 不检查有效性 直接更新 不使用请删除 而不是禁用
 export WSKEY_DISCHECK="true"
-变量名: WSKEY_AUTO_DISABLE 参数: 任意(str)  
+#变量名: WSKEY_AUTO_DISABLE 参数: 任意(str)  
 # 设置 WSKEY_AUTO_DISABLE变量后 不会自动禁用变量
 
 export WSKEY_AUTO_DISABLE="true"
 
-变量名: WSKEY_UPDATE_HOUR 参数: 整数(int) 单位：小时
+#变量名: WSKEY_UPDATE_HOUR 参数: 整数(int) 单位：小时
 # 设置 WSKEY_UPDATE_HOUR 变量后 会按设定的间隔时间更新 CK
 # 注意：使用此参数后，即使 CK 过期也不会更新，请不要设置过大的间隔
 
-变量名: WSKEY_TRY_COUNT 参数: 整数(int)
+#变量名: WSKEY_TRY_COUNT 参数: 整数(int)
 # 设置 WSKEY_TRY_COUNT 变量后 获取 Token 失败会自动重试
 
-变量名: WSKEY_SLEEP 参数: 整数(int)
+#变量名: WSKEY_SLEEP 参数: 整数(int)
 # 设置 WSKEY_SLEEP 可自定义间隔时间
 
 ## 其他需要的变量，脚本中需要的变量使用 export 变量名= 声明即可
