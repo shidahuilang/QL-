@@ -1,3 +1,12 @@
+- 使用root用户登录ubuntu或者debian系统，后执行以下命令安装curl
+```sh
+apt -y update && apt -y install curl
+```
+
+- 使用root用户登录centos系统，后执行以下命令安装curl
+```sh
+yum install -y curl wget
+```
 #### 🚩 一键安装青龙面板命令
 
 ![img.png](image/img.png)
