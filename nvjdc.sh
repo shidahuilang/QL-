@@ -157,7 +157,7 @@ elif [[ "$(. /etc/os-release && echo "$ID")" == "debian" ]]; then
    apt install git -y > /dev/null
 fi
 rm -rf /root/nvjdc > /dev/null
-git clone https://ghproxy.com/https://github.com/shidahuilang/nvjdc.git /root/nvjdc
+git clone https://github.com/Mofan1379/nvjdcdocker.git /root/nvjdc
 if [ ! -d "/root/nvjdc/.local-chromium/Linux-884014" ]; then
 cd /root/nvjdc
 echo -e "${green}正在拉取chromium-browser-snapshots等依赖,体积100多M，请耐心等待下一步命令提示···${plain}"
@@ -283,7 +283,7 @@ echo -e "${green}安装完毕,面板访问地址：http://${baseip}:${portinfo}$
 
 update_nvjdc(){
 mv /root/nvjdc /root/nvjdc1
-git clone https://ghproxy.com/https://github.com/shidahuilang/nvjdc.git /root/nvjdc
+git clone https://github.com/Mofan1379/nvjdcdocker.git /root/nvjdc
 cd /root/nvjdc &&  mkdir -p  Config &&  mv /root/nvjdc1/Config.json /root/nvjdc/Config/Config.json
 cd /root/nvjdc &&    mv /root/nvjdc1/.local-chromium /root/nvjdc/.local-chromium
 cd /root/nvjdc
