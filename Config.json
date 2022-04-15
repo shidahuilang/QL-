@@ -1,13 +1,15 @@
 {
   // 注释行必须为"// "，空格必须有，否则解析失败，同理，非注释行不要有"// "否则会被注释掉
   // 最多同时登陆人数
-  "MaxTab": "4",
+  "MaxTab": "10",
   // 标题
-  "Title": "Rabbit",
+  "Title": "大灰狼京东面板",
   // 浏览器回收时间
   "Closetime": "5",
   // 公告
   "Announcement": "为提高账户的安全性，请关闭免密支付。",
+  // 是否开启debug模式，默认关闭，开启设置为true
+  "debug": false,
   // 自动过验证码的次数
   "AutoCaptchaCount": "5",
   // 无密码认证的http代理或socks代理
@@ -16,6 +18,10 @@
   "XDD_URL": "",
   // XDD_TOKEN
   "XDD_TOKEN": "",
+  // 是否开启log计算服务，默认不开启
+  "LOG_SIGN": false,
+  // log计算请求需要携带的token
+  "LOG_TOKEN": "",
   // 账号过期预警定时
   "ExpirationCron": "30 17 * * *",
   // 账号资产推送定时
@@ -26,11 +32,12 @@
   "MY_WP_UID": "",
   // 青龙配置，必须要有，不同青龙配置用,隔开
   "Config": [
+    // 配置xdd则全部删除，配置留空
     {
-      // 不要重复的数字
+      // 大于1的不重复数字
       "QLkey": 1,
       // 服务器昵称
-      "QLName": "腾讯云",
+      "QLName": "青龙面板",
       // 青龙访问地址
       "QLurl": "",
       // 青龙的应用ID
@@ -38,22 +45,12 @@
       // 青龙的应用SECRET
       "QL_SECRET": "",
       // CK最大容量
-      "QL_CAPACITY": 50,
+      "QL_CAPACITY": 350,
       // WSCK最大容量
       "QL_WSCK": 40,
       // WXPUSHER的应用token，不推送留空
       "APP_TOKEN": ""
-    },
-    // 注意不同青龙配置之间用“,”隔开，单个青龙删除下面配置和上面的“,”
-    {
-      "QLkey": 2,
-      "QLName": "阿里云",
-      "QLurl": "",
-      "QL_CLIENTID": "",
-      "QL_SECRET": "",
-      "QL_CAPACITY": 50,
-      "QL_WSCK": 40,
-      "APP_TOKEN": ""
     }
   ]
 }
+
