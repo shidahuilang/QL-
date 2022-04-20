@@ -201,27 +201,27 @@ EOF
 
 #拉取Rabbit镜像
 echo -e  "${green}开始拉取rabbit镜像文件，rabbit镜像比较大，请耐心等待${plain}"
-#docker pull ht944/rabbit:latest
-docker pull shidahuilang/rabbit:2.24
+docker pull ht944/rabbit:latest
+
 
 
 #创建并启动rabbit容器
 #cd /root/rabbit
 echo -e "${green}开始创建rabbit容器${plain}"
-#cd /root/Rabbit && docker run --name rabbit -d  -v "$(pwd)"/Config:/usr/src/Project/Config -p 5701:1234 ht944/rabbit:latest
-cd /root/Rabbit && docker run --name rabbit -d -v "$(pwd)"/Config:/usr/src/Project/Config -p 5701:1234 shidahuilang/rabbit:2.24
+cd /root/Rabbit && docker run --name rabbit -d  -v "$(pwd)"/Config:/usr/src/Project/Config -p 5701:1234 ht944/rabbit:latest
+
 baseip=$(curl -s ipip.ooo)  > /dev/null
 
 echo -e "${green}安装完毕,面板访问地址：http://${baseip}:5701"
 }
 
 update_rabbit(){
-docker pull shidahuilang/rabbit:2.24 && cd /root/Rabbit && docker run --name rabbit -d  -v "$(pwd)"/Config:/usr/src/Project/Config -p 5701:1234 shidahuilang/rabbit:2.24
+docker pull ht944/rabbit:latest && cd /root/Rabbit && docker run --name rabbit -d  -v "$(pwd)"/Config:/usr/src/Project/Config -p 5701:1234 ht944/rabbit:latest
 baseip=$(curl -s ipip.ooo)  > /dev/null
 docker rm -f rabbit
-docker pull shidahuilang/rabbit:2.24
-#docker run --name rabbit -d  -v --restart unless-stopped "$(pwd)"/Config:/usr/src/Project/Config -p 5701:1234 ht944/rabbit:latest
-docker run --name rabbit -d  -v --restart unless-stopped "$(pwd)"/Config:/usr/src/Project/Config -p 5701:1234 shidahuilang/rabbit:2.24
+docker pull ht944/rabbit:latest
+docker run --name rabbit -d  -v --restart unless-stopped "$(pwd)"/Config:/usr/src/Project/Config -p 5701:1234 ht944/rabbit:latest
+
 docker update --restart=always rabbit
 echo -e "${green}rabbit更新完毕，脚本自动退出。${plain}"
 exit 0
