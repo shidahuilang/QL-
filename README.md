@@ -31,6 +31,11 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/la
 bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/lang1.sh)"
 ```
 #
+-单独安装ark诺兰
+```sudo docker run   --name nark -p 5701:80  -d  -v  "$(pwd)"/Config:/app/Config \
+-v  "$(pwd)"/logfile:/app/logfile  \
+-it --privileged=true  nolanhzy/nark:latest  
+```
 - 单独安装rabbit一键脚本
 ```sh
 bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/rabbit.sh)"
