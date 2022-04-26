@@ -33,7 +33,7 @@ bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shid
 #
 - 单独安装ark诺兰
 ```
-sudo docker run   --name nark -p 5701:80  -d  -v  /opt/nark/Config:/app/Config \
+sudo docker run -d --restart=always   --name nark -p 5701:80  -d  -v  /opt/nark/Config:/app/Config \
 -v  /opt/nark//logfile:/app/logfile  \
 -it --privileged=true  nolanhzy/nark:latest 
 ```
