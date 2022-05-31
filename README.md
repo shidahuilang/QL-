@@ -42,8 +42,8 @@ wget -N --no-check-certificate https://github.com/shidahuilang/QL-/raw/main/MaiA
 ```
 - 后台运行
 ```
-./MaiARKx86 &
-./MaiARKarm &
+nohup ./MaiARKx86 &
+nohup ./MaiARKarm &
 ```
 - 单独安装rabbit一键脚本
 ```sh
@@ -53,10 +53,7 @@ bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shid
 ```sh
 docker run -d --restart always -p 5705:80 -v /root/jdx/config:/jdx/config --name jdx aaron8/jdx
 ```
-- 单独安装NVJDC一键脚本（懒得升级修改，凑合用）
-```sh
-bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/nvjdc.sh)"
-```
+
 - 单独安装阿东一键脚本（免费有限制，一天扫码2次，低调使用，如有批量需求，请捐赠原作者）
 ```sh
 bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/adong/adong.sh)"
