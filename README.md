@@ -31,7 +31,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/la
 bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/lang1.sh)"
 ```
 #
-- 单独安装Maiark诺兰
+- 单独安装Maiark
 - X86
 ```
 wget -N --no-check-certificate https://github.com/shidahuilang/QL-/raw/main/MaiARKx86 && chmod 777 MaiARKx86 && ./MaiARKx86
