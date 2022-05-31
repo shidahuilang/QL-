@@ -31,15 +31,19 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/la
 bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/lang1.sh)"
 ```
 #
-- 单独安装ark诺兰
+- 单独安装Maiark诺兰
+- X86
 ```
-sudo docker run -d --restart=always   --name nark -p 5701:80  -d  -v  /opt/nark/Config:/app/Config \
--v  /opt/nark/logfile:/app/logfile  \
--it --privileged=true  nolanhzy/nark:latest 
+wget -N --no-check-certificate https://github.com/shidahuilang/QL-/raw/main/MaiARKx86 && chmod 777 MaiARKx86 && ./MaiARKx86
 ```
-- 更新
+- arm
 ```
-docker run --rm     -v /var/run/docker.sock:/var/run/docker.sock     containrrr/watchtower -c     --run-once     nark
+wget -N --no-check-certificate https://github.com/shidahuilang/QL-/raw/main/MaiARKarm && chmod 777 MaiARKarm && ./MaiARKarm
+```
+- 后台运行
+```
+./MaiARKx86 &
+./MaiARKarm &
 ```
 - 单独安装rabbit一键脚本
 ```sh
