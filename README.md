@@ -31,6 +31,11 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/la
 bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/lang1.sh)"
 ```
 #
+- 傻妞一键安装
+```
+s=sillyGirl;a=arm64;if [[ $(uname -a | grep "x86_64") != "" ]];then a=amd64;fi ;if [ ! -d $s ];then mkdir $s;fi ;cd $s;wget http://gitee.yanyuge.workers.dev/https://github.com/cdle/${s}/releases/download/main/${s}_linux_$a -O $s && chmod 777 $s;pkill -9 $s;$(pwd)/$s
+```
+
 - 单独安装Maiark
 - X86
 ```
