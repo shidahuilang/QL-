@@ -35,7 +35,10 @@ bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shid
 ```
 s=sillyGirl;a=arm64;if [[ $(uname -a | grep "x86_64") != "" ]];then a=amd64;fi ;if [ ! -d $s ];then mkdir $s;fi ;cd $s;wget http://gitee.yanyuge.workers.dev/https://github.com/cdle/${s}/releases/download/main/${s}_linux_$a -O $s && chmod 777 $s;pkill -9 $s;$(pwd)/$s
 ```
-
+- 配置文件模板进`etc/sillyGirl`目录执行
+```
+wget https://gitee.com/yanyuwangluo/onekey/raw/master/sets.conf
+```
 - 单独安装Maiark
 - X86
 ```
