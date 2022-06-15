@@ -939,8 +939,8 @@ memuaz() {
   echo
   echo
   [[ -n "${kugonggao}" ]] && ECHOY " ${kugonggao}"
-  ECHOB " 1. 安装青龙+任务+依赖+nvjdc面板"
-  ECHOB " 2. 安装青龙+任务+nvjdc面板（依赖自行在青龙面板安装）"
+  ECHOB " 1. 安装青龙+任务+依赖+nvjdc面板已弃用"
+  ECHOB " 2. 安装青龙+任务+nvjdc面板已弃用（依赖自行在青龙面板安装）"
   ECHOB " 3. 安装青龙+任务+依赖"
   ECHOB " 4. 安装青龙+任务（依赖自行在青龙面板安装）"
   ECHOB " 5. 退出安装程序!"
