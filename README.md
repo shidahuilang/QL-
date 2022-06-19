@@ -48,7 +48,7 @@ s=sillyGirl;a=arm64;if [[ $(uname -a | grep "x86_64") != "" ]];then a=amd64;fi ;
 ```
 wget https://gitee.com/yanyuwangluo/onekey/raw/master/sets.conf
 ```
-- 傻妞docker版交互模式 docker attach sillygirl
+- 傻妞docker版交互模式 ```docker attach sillygirl```
 ```
 docker run \
     -itd \
