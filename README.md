@@ -48,6 +48,15 @@ s=sillyGirl;a=arm64;if [[ $(uname -a | grep "x86_64") != "" ]];then a=amd64;fi ;
 ```
 wget https://gitee.com/yanyuwangluo/onekey/raw/master/sets.conf
 ```
+- 傻妞docker版
+```
+docker run \
+    -itd \
+    --name sillygirl \
+    --restart always \
+    -v  "$(pwd)"/sillyGirl:/etc/sillyGirl \
+    mzzsfy/sillygirl:latest
+```    
 - 单独安装Maiark
 - X86
 ```
