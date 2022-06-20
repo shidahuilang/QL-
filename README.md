@@ -71,7 +71,7 @@ nohup ./MaiARKx86 &
  docker run -d \
     --name MaiARK \
     --hostname MaiARK \
-    --restart unless-stopped \
+    --restart=always \
     -v /opt/maiark:/MaiARK \
     -p 5701:8082 \
     kissyouhunter/maiark
