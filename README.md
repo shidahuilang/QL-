@@ -62,14 +62,19 @@ docker run \
 ```
 wget -N --no-check-certificate https://github.com/shidahuilang/QL-/raw/main/MaiARKx86 && chmod 777 MaiARKx86 && ./MaiARKx86
 ```
-- arm
+- docker版
 ```
-wget -N --no-check-certificate https://github.com/shidahuilang/QL-/raw/main/MaiARKarm && chmod 777 MaiARKarm && ./MaiARKarm
+ docker run -d \
+    --name MaiARK \
+    --hostname MaiARK \
+    --restart unless-stopped \
+    -v /docker/maiark:/MaiARK \
+    -p 5701:8082 \
+    kissyouhunter/maiark
 ```
 - 后台运行
 ```
 nohup ./MaiARKx86 &
-nohup ./MaiARKarm &
 ```
 - 单独安装rabbit一键脚本
 ```sh
