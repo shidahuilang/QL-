@@ -72,7 +72,7 @@ nohup ./MaiARKx86 &
     --name MaiARK \
     --hostname MaiARK \
     --restart unless-stopped \
-    -v /docker/maiark:/MaiARK \
+    -v /opt/maiark:/MaiARK \
     -p 5701:8082 \
     kissyouhunter/maiark
 ```
