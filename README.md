@@ -39,57 +39,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/shidahuilang/QL-/main/la
 ```sh
 bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/lang1.sh)"
 ```
-#
-- 傻妞一键安装
-```
-s=sillyGirl;a=arm64;if [[ $(uname -a | grep "x86_64") != "" ]];then a=amd64;fi ;if [ ! -d $s ];then mkdir $s;fi ;cd $s;wget http://gitee.yanyuge.workers.dev/https://github.com/cdle/${s}/releases/download/main/${s}_linux_$a -O $s && chmod 777 $s;pkill -9 $s;$(pwd)/$s
-```
-- 配置文件模板进`etc/sillyGirl`目录执行
-```
-wget https://gitee.com/yanyuwangluo/onekey/raw/master/sets.conf
-```
-- 傻妞docker版交互模式 ```docker attach sillygirl```
-```
-docker run \
-    -itd \
-    --name sillygirl \
-    --restart always \
-    -v  "$(pwd)"/sillyGirl:/etc/sillyGirl \
-    mzzsfy/sillygirl:latest
-```    
-- 单独安装Maiark
-- X86
-```
-wget -N --no-check-certificate https://github.com/shidahuilang/QL-/raw/main/MaiARKx86 && chmod 777 MaiARKx86 && ./MaiARKx86
-```
-- 后台运行
-```
-nohup ./MaiARKx86 &
-```
-- Maiarkdocker版
-```
- docker run -d \
-    --name MaiARK \
-    --hostname MaiARK \
-    --restart=always \
-    -v /opt/maiark:/MaiARK \
-    -p 5701:8082 \
-    kissyouhunter/maiark
-```
 
-- 单独安装rabbit一键脚本
-```sh
-bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/rabbit.sh)"
-```
-- 单独安装JDX
-```sh
-docker run -d --restart always -p 5705:80 -v /root/jdx/config:/jdx/config --name jdx aaron8/jdx
-```
-
-- 单独安装阿东一键脚本（免费有限制，一天扫码2次，低调使用，如有批量需求，请捐赠原作者）
-```sh
-bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/adong/adong.sh)"
-```
 
 ## 第二步
 
@@ -172,6 +122,57 @@ task disableDuplicateTasksImplement.py
 大灰狼备份库
 ```sh
 ql repo https://github.com/shidahuilang/f2.git "jd_|jx_|gua_|jddj_|jdCookie" "activity|backUp" "^jd[^_]|USER|function|utils|sendNotify|ZooFaker_Necklace.js|JDJRValidator_|sign_graphics_validate|ql|JDSignValidator"
+```
+#
+- 傻妞一键安装
+```
+s=sillyGirl;a=arm64;if [[ $(uname -a | grep "x86_64") != "" ]];then a=amd64;fi ;if [ ! -d $s ];then mkdir $s;fi ;cd $s;wget http://gitee.yanyuge.workers.dev/https://github.com/cdle/${s}/releases/download/main/${s}_linux_$a -O $s && chmod 777 $s;pkill -9 $s;$(pwd)/$s
+```
+- 配置文件模板进`etc/sillyGirl`目录执行
+```
+wget https://gitee.com/yanyuwangluo/onekey/raw/master/sets.conf
+```
+- 傻妞docker版交互模式 ```docker attach sillygirl```
+```
+docker run \
+    -itd \
+    --name sillygirl \
+    --restart always \
+    -v  "$(pwd)"/sillyGirl:/etc/sillyGirl \
+    mzzsfy/sillygirl:latest
+```    
+- 单独安装Maiark
+- X86
+```
+wget -N --no-check-certificate https://github.com/shidahuilang/QL-/raw/main/MaiARKx86 && chmod 777 MaiARKx86 && ./MaiARKx86
+```
+- 后台运行
+```
+nohup ./MaiARKx86 &
+```
+- Maiarkdocker版
+```
+ docker run -d \
+    --name MaiARK \
+    --hostname MaiARK \
+    --restart=always \
+    -v /opt/maiark:/MaiARK \
+    -p 5701:8082 \
+    kissyouhunter/maiark
+```
+
+- 单独安装rabbit一键脚本
+```sh
+bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/rabbit.sh)"
+```
+- 单独安装JDX
+```sh
+docker run -d --restart always -p 5705:80 -v /root/jdx/config:/jdx/config --name jdx aaron8/jdx
+```
+
+- 单独安装阿东一键脚本（免费有限制，一天扫码2次，低调使用，如有批量需求，请捐赠原作者）
+```sh
+bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/adong/adong.sh)"
 ```
 
 ## 感谢！
