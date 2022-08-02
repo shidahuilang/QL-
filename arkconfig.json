@@ -1,0 +1,35 @@
+{
+    # 服务端口
+    "Port": 8082,
+    # 鉴权Token
+    "Token": "",
+    # 短信登陆是否使用代理
+    "useProxy": 0,
+    # 代理api地址
+    "ProxyUrl": "",
+    # 青龙服务器配置
+    "servers": [
+        {
+            # 服务器ID
+            "ServerID": 1,
+            # 服务器名称
+            "ServerName": "服务器1",
+            # 服务器地址
+            "ServerUrl": "",
+            # 青龙客户端ID
+            "ServerClientId": "",
+            # 青龙客户端密钥
+            "ServerSecret": "",
+            # 服务器最大CK数量
+            "ServerMAXck": 99
+        },
+        # {
+        #     "ServerID": 2,
+        #     "ServerName": "",
+        #     "ServerUrl": "",
+        #     "ServerClientId": "",
+        #     "ServerSecret": "",
+        #     "ServerMAXck": 99
+        # }
+    ]
+}
