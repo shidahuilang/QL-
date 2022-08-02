@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 #====================================================
 #	System Request:Ubuntu 18.04+/20.04+
 #	Author:	dahuilang
