@@ -824,7 +824,7 @@ memuaz() {
   4)
     export Api_Client="false"
     export Npm_yilai="false"
-    export Sys_kj="5"
+    export Sys_kj="4"
     export Ql_nvjdc=""
     ECHOG " 安装青龙+任务（依赖自行在青龙面板安装）"
     azqinglong
