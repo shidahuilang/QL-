@@ -174,7 +174,10 @@ docker run -d --restart always -p 5705:80 -v /root/jdx/config:/jdx/config --name
 ```sh
 bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/adong/adong.sh)"
 ```
-
+```sh
+- 人形bot Docker 一键安装：
+wget https://raw.githubusercontent.com/TeamPGM/PagerMaid-Pyro/development/utils/docker.sh -O docker.sh && chmod +x docker.sh && bash docker.sh
+```
 ## 感谢！
 
 
