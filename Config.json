@@ -1,56 +1,66 @@
 {
-  // 注释行必须为"// "，空格必须有，否则解析失败，同理，非注释行不要有"// "否则会被注释掉
-  // 最多同时登陆人数
-  "MaxTab": "10",
-  // 标题
-  "Title": "大灰狼京东面板",
-  // 浏览器回收时间
+  ///浏览器最多几个网页
+  "MaxTab": "4",
+  //网站标题
+  "Title": "NARK",
+  //回收时间分钟 不填默认3分钟
   "Closetime": "5",
-  // 公告
-  "Announcement": "为提高账户的安全性，请关闭免密支付。",
-  // 是否开启debug模式，默认关闭，开启设置为true
-  "debug": false,
-  // 自动过验证码的次数
+  //不要修改
+  "Captchaurl": "http://127.0.0.1:5000",
+  //网站公告 参考写法：https://www.aobacore.com/archives/nolanjdc-notice-code.html
+  "Announcement": "请关闭免密支付",
+  //Proxy 支持不带密码的socks5 以及http 
+  ///http  Proxy 只需要填写 ip:端
+  /// Socks5 需要填写socks5://ip:端口 不能填写下方账户密码
+  "Proxy": "",
+  //Proxy帐号
+  "ProxyUser": "",
+  //Proxy密码
+  "ProxyPass": "",
+  ///开启打印等待日志卡短信验证登陆 可开启 拿到日志群里回复 默认不要填写
+  "Debug": "",
+  ///自动滑块次数5次 5次后手动滑块 可设置为0默认手动滑块
   "AutoCaptchaCount": "5",
-  // 无密码认证的http代理或socks代理
-  "proxy": "",
-  // XDD_URL地址
-  "XDD_URL": "",
-  // XDD_TOKEN
-  "XDD_TOKEN": "",
-  // 是否开启log计算服务，默认不开启
-  "LOG_SIGN": false,
-  // log计算请求需要携带的token
-  "LOG_TOKEN": "",
-  // 账号过期预警定时
-  "ExpirationCron": "30 17 * * *",
-  // 账号资产推送定时
-  "BeanCron": "0 20 * * *",
-  // WXPUSHER的APP_TOKEN
-  "APP_TOKEN": "",
-  // WXPUSHER你自己的UID
-  "MY_WP_UID": "",
-  // 青龙配置，必须要有，不同青龙配置用,隔开
+  ///XDD PLUS Url  http://IP地址:端口/api/login/smslogin
+  "XDDurl": "",
+  ///xddToken
+  "XDDToken": "",
+  ///登陆预警 0 0 12 * * ?  每天中午十二点 https://www.bejson.com/othertools/cron/ 表达式在线生成网址
+  "ExpirationCron": "0 00 19 * * ?",
+  ///个人资产 0 0 10,20 * * ?  早十点晚上八点
+  "BeanCron": "0 0 08,20, * * ?",
+  // ======================================= WxPusher 通知设置区域 ===========================================
+  // 此处填你申请的 appToken. 官方文档：https://wxpusher.zjiecode.com/docs
+  // WP_APP_TOKEN 可在管理台查看: https://wxpusher.zjiecode.com/admin/main/app/appToken
+  // MainWP_UID 填你自己uid
+  ///这里的通知只用于用户登陆 删除 是给你的通知
+ ///需要推送的参考：https://www.kejiwanjia.com/jiaocheng/58178.html 
+   "WP_APP_TOKEN": "换成你的",
+   "MainWP_UID": "换成你的",
+  // ======================================= pushplus 通知设置区域 ===========================================
+  ///Push Plus官方网站：http" //www.pushplus.plus  只有青龙模式有用
+  ///下方填写您的Token，微信扫码登录后一对一推送或一对多推送下面的token，只填" "PUSH_PLUS_TOKEN",
+  "PUSH_PLUS_TOKEN": "",
+  //下方填写您的一对多推送的 "群组编码" ，（一对多推送下面->您的群组(如无则新建)->群组编码）
+  "PUSH_PLUS_USER": "",
+  ///青龙配置  注意：对接XDD或对接傻妞 设置为"Config":[]  网页和机器人二选一 否则报错出现选择服务器
   "Config": [
-    // 配置xdd则全部删除，配置留空
     {
-      // 大于1的不重复数字
+      //序号必填从1 开始
       "QLkey": 1,
-      // 服务器昵称
-      "QLName": "青龙面板",
-      // 青龙访问地址
-      "QLurl": "",
-      // 青龙的应用ID
-      "QL_CLIENTID": "",
-      // 青龙的应用SECRET
-      "QL_SECRET": "",
-      // CK最大容量
-      "QL_CAPACITY": 350,
-      // WSCK最大容量
-      "QL_WSCK": 40,
-      // WXPUSHER的应用token，不推送留空
-      "APP_TOKEN": ""
+      //服务器名称
+      "QLName": "腾讯云",
+      //青龙地址
+      "QLurl": "换成你的",
+      //青龙2,9 OpenApi Client ID
+      "QL_CLIENTID": "换成你的",
+      //青龙2,9 OpenApi Client Secret
+      "QL_SECRET": "换成你的",
+      //CK最大数量
+      "QL_CAPACITY": 999,
+      ///建议一个青龙一个WxPusher 应用
+      "WP_APP_TOKEN": "换成你的"
     }
   ]
-}
 
+}
