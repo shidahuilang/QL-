@@ -11,7 +11,7 @@ fi
 #判断new_ip是否获取
 
 if [ ! -n "$new_ip" ]; then
-    echo "$datetime 公网IP获取失败，检查'curl icanhazip.com' " >> $log
+    echo "$datetime 公网IP获取失败，检查'curl ip.3322.net' " >> $log
     exit 1
 fi
 old_ip=`cat $dirfile`     #查看旧ip
@@ -23,4 +23,4 @@ else
   echo "$datetime IP已经发生变化 - error 新IP ：$new_ip    IP： $old_ip " >> $log
 fi
 
-curl "http://43.1XX.XX.XX:20086/push?token=dahuilang&message=ip变化重启nark"
+curl "http://43.1XX.XX.XX:20086/push?token=dahuilang&message=IP变动检测,新IP：$new_ip,旧IP:$old_ip""
