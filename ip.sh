@@ -23,4 +23,4 @@ else
   echo "$datetime IP已经发生变化 - error 新IP ：$new_ip    IP： $old_ip " >> $log
 fi
 
-curl "http://43.1XX.XX.XX:20086/push?token=dahuilang&message=IP变动检测,新IP：$new_ip,旧IP:$old_ip""
+curl "http://43.1XX.XX.XX:20086/push?token=dahuilang&message=IP变动检测,新IP：$new_ip，旧IP：$old_ip"
