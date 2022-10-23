@@ -101,7 +101,7 @@ function qinglong_port() {
   ;;
   esac
   done
-  export local_ip="$(curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/getIpAddress)"
+  export local_ip="$(curl -sS --connect-timeout 10 -m 60 https://ip.3322.net)"
   export YUMING="请输入您当前服务器的IP[比如：${local_ip}]"
   echo
   echo
