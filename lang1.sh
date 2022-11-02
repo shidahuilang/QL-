@@ -356,7 +356,7 @@ docker run -dit \
   --name qinglong \
   --hostname qinglong \
   --restart unless-stopped \
-  whyour/qinglong:2.10.13
+  whyour/qinglong:2.11.3
   
   docker restart qinglong > /dev/null 2>&1
   sleep 2
