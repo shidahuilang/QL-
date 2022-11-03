@@ -510,7 +510,10 @@ ECHOY "maiark安装中，请稍后..."
   #docker restart maiark
   ECHOYY "请前往opt/maiark/arkconfig.json对接青龙!"
 }
-
+function up_nvjdc() {
+docker run --rm     -v /var/run/docker.sock:/var/run/docker.sock     containrrr/watchtower -c     --run-once     maiark
+  exit 0
+}
 
 function OpenApi_Client() {
   export MANEID="$(grep 'name' ${QL_PATH}/ql/db/app.db |awk 'END{print}' |sed -r 's/.*name\":\"(.*)\"/\1/' |cut -d "\"" -f1)"
