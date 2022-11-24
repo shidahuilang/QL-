@@ -23,7 +23,7 @@ docker exec -it qinglong bash -c "task /ql/jd/6-10.sh && python3 /ql/jd/6-10.py"
 
 - 使用root用户登录ubuntu或者debian系统，后执行以下命令安装curl
 ```sh
-apt -y update && apt -y install curl
+apt -y update && apt -y install curl wget
 ```
 
 - 使用root用户登录centos系统，后执行以下命令安装curl
