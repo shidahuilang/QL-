@@ -107,7 +107,9 @@ canvas
 ```sh
 bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/docker.sh)"
 ```
-
+```
+wget -qO- https://get.docker.com/ | sh
+```
 - 一键安装单独青龙的依赖
 ```sh
 docker exec -it qinglong bash -c  "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/npm.sh)"
