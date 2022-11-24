@@ -164,7 +164,7 @@ function uninstall_ubuntu_dk() {
 
 function install_debian_dk() {
   ECHOY "正在安装docker，请耐心等候..."
-  sudo apt install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
+  apt install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
   curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg | sudo apt-key add -
   if [[ $? -ne 0 ]];then
     curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/debian/gpg | sudo apt-key add -
