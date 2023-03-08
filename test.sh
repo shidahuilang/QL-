@@ -184,7 +184,7 @@ function system_check() {
     ECHOG "正在安装宿主机所需要的依赖，请稍后..."
     export QL_PATH="/opt"
     apk update
-    apk add sudo wget git unzip net-tools subversion
+    apk add sudo wget git unzip net-tools subversion curl bash
   elif [[ -f /etc/openwrt_release ]] && [[ -f /rom/etc/openwrt_release ]]; then
     ECHOG "正在安装宿主机所需要的依赖，请稍后..."
     export QL_PATH="/opt"
