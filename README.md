@@ -163,9 +163,9 @@ nohup ./MaiARKx86 &
     kissyouhunter/maiark
 ```
 
-- 单独安装rabbit一键脚本
+- 单独安装Pro一键脚本
 ```sh
-bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/rabbit.sh)"
+bash -c "$(curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/shidahuilang/QL-/main/pro.sh)"
 ```
 - 单独安装JDX
 ```sh
