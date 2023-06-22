@@ -356,6 +356,7 @@ docker run -dit \
   --name qinglong \
   --hostname qinglong \
   --restart always \
+  --security-opt apparmor=unconfined \
   whyour/qinglong:2.10.13
   
   docker restart qinglong > /dev/null 2>&1
